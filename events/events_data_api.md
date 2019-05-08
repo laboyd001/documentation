@@ -1,15 +1,8 @@
-Note: This documentation is currently internal only! We'll most likely post this on a public Git repo once we [dogfood](https://en.wikipedia.org/wiki/Eating_your_own_dog_food) it on the Platform.
-
 ### General API Info
-The Data API is currently designed to only return data by GET calls to a Rest formatted Urls. All data is returned in JSON format. The platform must oauth into a SF org before making calls to the API. This API can also be called from a SF Site that's setup correctly. The Data API supports getting multiple records in one call and is mainly segregated by SF object. The call to get `Event` records also returns `Event Settings` and `Event Items` data as a convenience since the data is tightly coupled.
+The Events Data API is designed to return data by GET calls from Rest formatted Urls. All data is returned in JSON format. The platform must oauth into a SF org before making calls to the API. This API can also be called from a SF Site that's setup correctly. The Data API supports getting multiple records in one call and is mainly segregated by SF object. The call to get `Event` records also returns `Event Settings` and `Event Items` data as a convenience since the data is tightly coupled.
 
 ### Rest Url Format
-- Namespaced = `<sf_domain>/services/apexrest/bt_stripe/data/v1/`
-- Non-Namespaced (for dev only) = `<sf_domain>/services/apexrest/data/v1/`
-In the documentation below, the Rest Url will all start with `/data/v1/` but when calling the API be sure to use the full Url depending on if you're calling the API in a namespaced org or not.
-
-### SF Site for Testing
-A SF Site that exposes the Events Data Rest API has been setup in Quentin's dev org which is not namespaced. Feel free make API calls to see the data format returned. If an API call does not return data, ask Quentin to create test data for it. Examples for the calls below will point to this SF Site.
+`<sf_domain>/services/apexrest/bt_stripe/data/v1/`
 
 ### Errors
 Any API calls that result in an error return a Status Code = 500 and a response body of:
