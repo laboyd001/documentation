@@ -221,6 +221,41 @@ pretty | No | set to `true` to output pretty JSON
 
 ***
 
+### GET Ads
+Get Event Ads for one or more Events.
+
+**endpoint** `data/v1/ads`
+
+Parameter | Required? | Value
+--------- | --------- | -----
+eventId | Yes | value is Event__c on Event Ad. can pass multiple separated by commas
+pretty | No | set to `true` to output pretty JSON
+
+**example**
+
+[https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/ads?eventId=a12f4000003vFaa](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/ads?eventId=a12f4000003vFaa&pretty=true)
+
+
+***
+
+
+### GET Notifications
+Get Event Notifications for one or more Events.
+
+**endpoint** `data/v1/notifications`
+
+Parameter | Required? | Value
+--------- | --------- | -----
+eventId | Yes | value is Event__c on Event Ad. can pass multiple separated by commas
+pretty | No | set to `true` to output pretty JSON
+
+**example**
+
+[https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/notifications?eventId=a12f4000003vFaa](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/notifications?eventId=a12f4000003vFaa&pretty=true)
+
+
+***
+
 
 ### GET Tracks
 Get Track and the related Track Sessions in one call for one or more Events.
