@@ -23,9 +23,9 @@ pretty | No | set to `true` to output pretty JSON
 
 **examples**
 
-[https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/events](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/events)
+[https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/events](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/events?pretty=true)
 
-[https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/events?key=67yd9G08EP](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/events?key=67yd9G08EP)
+[https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/events?key=67yd9G08EP](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/events?key=67yd9G08EP&pretty=true)
 
 
 ***
@@ -43,9 +43,9 @@ pretty | No | set to `true` to output pretty JSON
 
 **examples**
 
-[https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/events/lite](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/events/lite)
+[https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/events/lite](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/events/lite?pretty=true)
 
-[https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/events/lite?key=67yd9G08EP](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/events/lite?key=67yd9G08EP)
+[https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/events/lite?key=67yd9G08EP](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/events/lite?key=67yd9G08EP&pretty=true)
 
 
 ***
@@ -64,14 +64,9 @@ pretty | No | set to `true` to output pretty JSON
 
 **examples**
 
-https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/events/group?key=3MM1sP47b8
-https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/events/group
+[https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/events/group](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/events/lite?pretty=true)
 
-
-
-[https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/events/lite](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/events/lite)
-
-[https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/events/lite?key=67yd9G08EP](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/events/lite?key=67yd9G08EP)
+[https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/events/group?key=3MM1sP47b8](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/events/group?key=3MM1sP47b8&pretty=true)
 
 
 ***
@@ -84,15 +79,15 @@ Get Attendee records by key(s) or all records for an Event by eventId(s). The ke
 
 Parameter | Required? | Value
 --------- | --------- | -----
-key | No | value to use is Key__c field on Attendee. can pass multiple separated by commas
-eventId | No | value is Event__c on Attendee. can pass multiple separated by commas
+key | Yes (or eventId) | value to use is Key__c field on Attendee. can pass multiple separated by commas
+eventId | Yes (or key) | value is Event__c on Attendee. can pass multiple separated by commas
 pretty | No | set to `true` to output pretty JSON
 
 **examples**
 
-[https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/attendees?eventId=a12f4000003vFaa](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/attendees?eventId=a12f4000003vFaa)
+[https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/attendees?eventId=a12f4000003vFaa](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/attendees?eventId=a12f4000003vFaa?pretty=true)
 
-[https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/attendees?key=qeZgrsYqBa](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/attendees?key=qeZgrsYqBa)
+[https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/attendees?key=qeZgrsYqBa](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/attendees?key=qeZgrsYqBa&pretty=true)
 
 
 ***
@@ -111,16 +106,34 @@ pretty | No | set to `true` to output pretty JSON
 
 **examples**
 
-[https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/forms](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/forms)
+[https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/forms](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/forms?pretty=true)
 
-[https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/forms?id=a1Uf4000001Yoj4EAC](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/forms?id=a1Uf4000001Yoj4EAC)
+[https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/forms?id=a1Uf4000001Yoj4EAC](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/forms?id=a1Uf4000001Yoj4EAC&pretty=true)
+
+
+***
+
+
+### GET Sessions
+Get Sessions for one or more Events.
+
+**endpoint** `data/v1/sessions`
+
+Parameter | Required? | Value
+--------- | --------- | -----
+eventId | Yes | value is Event__c on Session. can pass multiple separated by commas
+pretty | No | set to `true` to output pretty JSON
+
+**examples**
+
+[https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/sessions?eventId=a12f4000003vFaa](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/sessions?eventId=a12f4000003vFaa&pretty=true)
 
 
 ***
 
 
 ### GET Tracks
-Get Track and the related Track Sessions in one call by Event Id. Multiple Tracks can be retrieved in the same call by passing in multiple Event Id values separated by commas. If no Event Id values are passed in, no data is.
+Get Track and the related Track Sessions in one call for one or more Events.
 
 **endpoint** `data/v1/tracks`
 
@@ -129,7 +142,7 @@ Parameter | Required? | Value
 eventId | Yes | value is Event__c on Track. can pass multiple separated by commas
 pretty | No | set to `true` to output pretty JSON
 
-**examples**
+**example**
 
 [https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/tracks?eventId=a12f4000003vFaaAAE](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/tracks?eventId=a12f4000003vFaaAAE&pretty=true)
 
