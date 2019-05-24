@@ -126,12 +126,12 @@ Get Track and the related Track Sessions in one call by Event Id. Multiple Track
 
 Parameter | Required? | Value
 --------- | --------- | -----
-eventId | No | value is Event__c on Track. can pass multiple separated by commas
+eventId | Yes | value is Event__c on Track. can pass multiple separated by commas
 pretty | No | set to `true` to output pretty JSON
 
 **examples**
 
-[https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/tracks?eventId=a12f4000003vFaaAAE](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/tracks?eventId=a12f4000003vFaaAAE)
+[https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/tracks?eventId=a12f4000003vFaaAAE](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/tracks?eventId=a12f4000003vFaaAAE&pretty=true)
 
 
 ***
@@ -148,5 +148,5 @@ pretty | No | set to `true` to output pretty JSON
 
 **example**
 
-[https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/picklists](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/picklists)
+[https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/picklists](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/picklists?pretty=true)
 
