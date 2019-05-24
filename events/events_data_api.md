@@ -17,6 +17,7 @@ Get Event and the related Event Settings and Event Items in one call by key (not
 **endpoint** `data/v1/events`
 
 **parameters**
+Parameter    | Value
 ------------ | -------------
 key | field is Key__c on Event, not required, can pass multiple separated by commas
 pretty | set = true to output pretty JSON
@@ -37,6 +38,7 @@ This call works the same as the Get Events but a limited number of fields are re
 **endpoint** `data/v1/events/lite`
 
 **parameters**
+Parameter    | Value
 ------------ | -------------
 key | field is Key__c on Event, not required, can pass multiple separated by commas
 pretty | set = true to output pretty JSON
@@ -57,9 +59,11 @@ Get Event Group records by key(s) or all Event Group records. Event Groups are u
 **endpoint** `data/v1/groups`
 
 **parameters**
+Parameter    | Value
 ------------ | -------------
 key | field is Key__c on Event Group, not required, can pass multiple separated by commas
 pretty | set = true to output pretty JSON
+
 
 **examples**
 
