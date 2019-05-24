@@ -168,6 +168,61 @@ pretty | No | set to `true` to output pretty JSON
 ***
 
 
+### GET FAQs
+Get Event FAQs for one or more Events.
+
+**endpoint** `data/v1/sessions`
+
+Parameter | Required? | Value
+--------- | --------- | -----
+eventId | Yes | value is Event__c on Event FAQ. can pass multiple separated by commas
+pretty | No | set to `true` to output pretty JSON
+
+**example**
+
+[https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/faqs?eventId=a12f4000003vFaa](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/faqs?eventId=a12f4000003vFaa&pretty=true)
+
+
+***
+
+
+### GET Tabs
+Get Custom Event Tabs for one or more Events.
+
+**endpoint** `data/v1/sessions`
+
+Parameter | Required? | Value
+--------- | --------- | -----
+eventId | Yes | value is Event__c on Custom Event Tab. can pass multiple separated by commas
+pretty | No | set to `true` to output pretty JSON
+
+**example**
+
+[https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/tabs?eventId=a12f4000003vFaa](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/tabs?eventId=a12f4000003vFaa
+&pretty=true)
+
+
+***
+
+
+### GET Content
+Get Event Content for one or more Events.
+
+**endpoint** `data/v1/sessions`
+
+Parameter | Required? | Value
+--------- | --------- | -----
+eventId | Yes | value is Event__c on Event Content. can pass multiple separated by commas
+pretty | No | set to `true` to output pretty JSON
+
+**example**
+
+[https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/content?eventId=a12f4000003vFaa](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/content?eventId=a12f4000003vFaa&pretty=true)
+
+
+***
+
+
 ### GET Tracks
 Get Track and the related Track Sessions in one call for one or more Events.
 
