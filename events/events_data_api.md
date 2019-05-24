@@ -14,9 +14,11 @@ Any API calls that result in an error return a Status Code = 500 and a response 
 ### GET Events
 Get Event and the related Event Settings and Event Items in one call by key (not Id). Multiple Events can be retrieved in the same call by passing in multiple key values separated by commas. If no key values are passed in, all future Events with a Status of `Draft` or `Active` are returned - up to the 500 Events sorted by `Event Start Date`.
 
-**endpoint**: `data/v1/events`
+**endpoint** `data/v1/events`
 
-**parameters**: key (field is Key__c on Event, not required, can pass multiple separated by commas), pretty=true (outputs pretty JSON)
+**parameters**
+key | field is Key__c on Event, not required, can pass multiple separated by commas
+pretty | set = true to output pretty JSON
 
 **examples**
 
@@ -31,9 +33,11 @@ Get Event and the related Event Settings and Event Items in one call by key (not
 ### GET Events Lite
 This call works the same as the Get Events but a limited number of fields are returned. This can be called for a listing page or to get capacity or sales date data for validations.
 
-**endpoint**: `data/v1/events/lite`
+**endpoint** `data/v1/events/lite`
 
-**parameters**: key (field is Key__c on Event, not required, can pass multiple separated by commas), pretty=true (outputs pretty JSON)
+**parameters**
+key | field is Key__c on Event, not required, can pass multiple separated by commas
+pretty | set = true to output pretty JSON
 
 **examples**
 
@@ -48,9 +52,11 @@ This call works the same as the Get Events but a limited number of fields are re
 ### GET Groups
 Get Event Group records by key(s) or all Event Group records. Event Groups are used to group similiar Events together for a listing page. Basic Event information is also returned for each Event Group.
 
-**endpoint**: `data/v1/groups`
+**endpoint** `data/v1/groups`
 
-**parameters**: key (field is Key__c on Event, not required, can pass multiple separated by commas), pretty=true (outputs pretty JSON)
+**parameters**
+key | field is Key__c on Event Group, not required, can pass multiple separated by commas
+pretty | set = true to output pretty JSON
 
 **examples**
 
