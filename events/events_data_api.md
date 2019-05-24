@@ -12,11 +12,9 @@ Any API calls that result in an error return a Status Code = 500 and a response 
 ## API Calls
 
 ### GET Events
-Get Event and the related Event Settings and Event Items in one call by key (not Id). Multiple Events can be retrieved in the same call by passing in multiple key values separated by commas. If no key values are passed in, all future Events with a Status of `Draft` or `Active` are returned - up to the 500 Events sorted by `Event Start Date`.
+Get Event and the related Event Settings and Event Items in one call by key(s) (not Id). Multiple Events can be retrieved in the same call by passing in multiple key values separated by commas. If no key values are passed in, all future Events with a Status of `Draft` or `Active` are returned - up to the 500 Events sorted by `Event Start Date`.
 
 **endpoint** `data/v1/events`
-
-**parameters**
 
 Parameter | Required? | Value
 --------- | --------- | -----
@@ -38,8 +36,6 @@ This call works the same as the Get Events but a limited number of fields are re
 
 **endpoint** `data/v1/events/lite`
 
-**parameters**
-
 Parameter | Required? | Value
 --------- | --------- | -----
 key | No | value to use is Key__c field on Event. can pass multiple separated by commas
@@ -59,8 +55,6 @@ pretty | No | set to `true` to output pretty JSON
 Get Event Group records by key(s) or all Event Group records. Event Groups are used to group similiar Events together for a listing page. Basic Event information is also returned for each Event Group.
 
 **endpoint** `data/v1/groups`
-
-**parameters**
 
 Parameter | Required? | Value
 --------- | --------- | -----
@@ -84,11 +78,15 @@ https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/events/
 
 
 ### GET Attendees
-Get Attendee records by key(s) or all records for an Event by eventId(s)
+Get Attendee records by key(s) or all records for an Event by eventId(s). The key OR eventId parameter must be set to retrieve data.
 
-**endpoint**: `data/v1/attendees`
+**endpoint** `data/v1/attendees`
 
-**parameters**: key (field is Key__c on Attendee can pass multiple separated by commas) OR eventId (field is Event__c on Attendee can pass multiple separated by commas) - one is required, pretty=true (outputs pretty JSON)
+Parameter | Required? | Value
+--------- | --------- | -----
+key | No | value to use is Key__c field on Attendee. can pass multiple separated by commas
+eventId | No | value is Event__c on Attendee. can pass multiple separated by commas
+pretty | No | set to `true` to output pretty JSON
 
 **examples**
 
@@ -103,9 +101,13 @@ Get Attendee records by key(s) or all records for an Event by eventId(s)
 ### GET Forms
 Get Form and the related Form Elements in one call by Id. Multiple Forms can be retrieved in the same call by passing in multiple Id values separated by commas. If no Id values are passed in, all Forms are returned - up to the 500 Events sorted by `Name`. Form Elements are sorted by the `Sort Order` field.
 
-**endpoint** = `data/v1/forms`
+**endpoint** `data/v1/forms`
 
-**parameters** = id (field is Id on Form, not required, can pass multiple separated by commas)
+Parameter | Required? | Value
+--------- | --------- | -----
+id | No | value is Id on Form. can pass multiple separated by commas
+pretty | No | set to `true` to output pretty JSON
+
 
 **examples**
 
@@ -120,24 +122,29 @@ Get Form and the related Form Elements in one call by Id. Multiple Forms can be 
 ### GET Tracks
 Get Track and the related Track Sessions in one call by Event Id. Multiple Tracks can be retrieved in the same call by passing in multiple Event Id values separated by commas. If no Event Id values are passed in, no data is.
 
-**endpoint** = `data/v1/tracks`
+**endpoint** `data/v1/tracks`
 
-**parameters** = eventId (required, can pass multiple separated by commas)
+Parameter | Required? | Value
+--------- | --------- | -----
+eventId | No | value is Event__c on Track. can pass multiple separated by commas
+pretty | No | set to `true` to output pretty JSON
 
 **examples**
 
 [https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/tracks?eventId=a12f4000003vFaaAAE](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/tracks?eventId=a12f4000003vFaaAAE)
 
 
-
 ***
+
 
 ### GET Picklist Values
 Get picklist values from the customer's org. This allows the customer to change picklist values to meet their needs and have their values reflected on the Events platform. The value for `label` should be displayed to the user in the picklist and the value for the `value` should be the value for the picklist. When submitting data to the checkout API, always pass the value for the `value` attribute.
 
 **endpoint** = `/data/v1/picklists`
 
-**parameters** = none
+Parameter | Required? | Value
+--------- | --------- | -----
+pretty | No | set to `true` to output pretty JSON
 
 **example**
 
