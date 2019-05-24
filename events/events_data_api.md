@@ -1,5 +1,5 @@
 ### Events Data Rest API
-The Events Data API is designed to return data by GET calls from Rest formatted Urls. All data is returned in JSON format. The platform must oauth into a SF org before making calls to the API. This API can also be called from a SF Site that's setup correctly. The Data API supports getting multiple records in one call and is mainly segregated by SF object. The call to get `Event` records also returns `Event Settings` and `Event Items` data as a convenience since the data is tightly coupled.
+The Events Data API is designed to return data by GET calls from Rest formatted Urls. All data is returned in JSON format. The platform must oauth into a SF org before making calls to the API. This API can also be called from a SF Site that's setup correctly. The Data API supports getting multiple records in one call and is mainly segregated by SF object.
 
 ### Rest Url Format
 `<sf_domain>/services/apexrest/conference360/data/v1/`
@@ -64,9 +64,9 @@ pretty | No | set to `true` to output pretty JSON
 
 **examples**
 
-[https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/events/group](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/events/lite?pretty=true)
+[https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/groups](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/groups?pretty=true)
 
-[https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/events/group?key=3MM1sP47b8](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/events/group?key=3MM1sP47b8&pretty=true)
+[https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/groups?key=3MM1sP47b8](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/groups?key=3MM1sP47b8&pretty=true)
 
 
 ***
