@@ -135,7 +135,7 @@ pretty | No | set to `true` to output pretty JSON
 ### GET Speakers
 Get Speakers for one or more Events.
 
-**endpoint** `data/v1/sessions`
+**endpoint** `data/v1/speakers`
 
 Parameter | Required? | Value
 --------- | --------- | -----
@@ -153,7 +153,7 @@ pretty | No | set to `true` to output pretty JSON
 ### GET Sponsors
 Get Sponsors for one or more Events.
 
-**endpoint** `data/v1/sessions`
+**endpoint** `data/v1/sponsors`
 
 Parameter | Required? | Value
 --------- | --------- | -----
@@ -171,7 +171,7 @@ pretty | No | set to `true` to output pretty JSON
 ### GET FAQs
 Get Event FAQs for one or more Events.
 
-**endpoint** `data/v1/sessions`
+**endpoint** `data/v1/faqs`
 
 Parameter | Required? | Value
 --------- | --------- | -----
@@ -189,7 +189,7 @@ pretty | No | set to `true` to output pretty JSON
 ### GET Tabs
 Get Custom Event Tabs for one or more Events.
 
-**endpoint** `data/v1/sessions`
+**endpoint** `data/v1/tabs`
 
 Parameter | Required? | Value
 --------- | --------- | -----
@@ -207,7 +207,7 @@ pretty | No | set to `true` to output pretty JSON
 ### GET Content
 Get Event Content for one or more Events.
 
-**endpoint** `data/v1/sessions`
+**endpoint** `data/v1/content`
 
 Parameter | Required? | Value
 --------- | --------- | -----
