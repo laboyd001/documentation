@@ -18,10 +18,10 @@ Get Event and the related Event Settings and Event Items in one call by key (not
 
 **parameters**
 
-Parameter    | Value
------------- | -------------
-key | field is Key__c on Event, not required, can pass multiple separated by commas
-pretty | set = true to output pretty JSON
+Parameter | Required? | Value
+--------- | --------- | -----
+key | No | value to use is Key__c field on Event. can pass multiple separated by commas
+pretty | No | set to `true` to output pretty JSON
 
 **examples**
 
@@ -40,10 +40,10 @@ This call works the same as the Get Events but a limited number of fields are re
 
 **parameters**
 
-Parameter    | Value
------------- | -------------
-key | field is Key__c on Event, not required, can pass multiple separated by commas
-pretty | set = true to output pretty JSON
+Parameter | Required? | Value
+--------- | --------- | -----
+key | No | value to use is Key__c field on Event. can pass multiple separated by commas
+pretty | No | set to `true` to output pretty JSON
 
 **examples**
 
@@ -62,10 +62,10 @@ Get Event Group records by key(s) or all Event Group records. Event Groups are u
 
 **parameters**
 
-Parameter    | Value
------------- | -------------
-key | field is Key__c on Event Group, not required, can pass multiple separated by commas
-pretty | set = true to output pretty JSON
+Parameter | Required? | Value
+--------- | --------- | -----
+key | No | value to use is Key__c field on Event Group. can pass multiple separated by commas
+pretty | No | set to `true` to output pretty JSON
 
 
 **examples**
