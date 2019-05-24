@@ -124,9 +124,45 @@ Parameter | Required? | Value
 eventId | Yes | value is Event__c on Session. can pass multiple separated by commas
 pretty | No | set to `true` to output pretty JSON
 
-**examples**
+**example**
 
 [https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/sessions?eventId=a12f4000003vFaa](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/sessions?eventId=a12f4000003vFaa&pretty=true)
+
+
+***
+
+
+### GET Speakers
+Get Speakers for one or more Events.
+
+**endpoint** `data/v1/sessions`
+
+Parameter | Required? | Value
+--------- | --------- | -----
+eventId | Yes | value is Event__c on Speaker. can pass multiple separated by commas
+pretty | No | set to `true` to output pretty JSON
+
+**example**
+
+[https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/speakers?eventId=a12f4000003vFaa](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/speakers?eventId=a12f4000003vFaa&pretty=true)
+
+
+***
+
+
+### GET Sponsors
+Get Sponsors for one or more Events.
+
+**endpoint** `data/v1/sessions`
+
+Parameter | Required? | Value
+--------- | --------- | -----
+eventId | Yes | value is Event__c on Sponsor. can pass multiple separated by commas
+pretty | No | set to `true` to output pretty JSON
+
+**example**
+
+[https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/sponsors?eventId=a12f4000003vFaa](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/sponsors?eventId=a12f4000003vFaa&pretty=true)
 
 
 ***
