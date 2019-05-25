@@ -14,7 +14,7 @@ Any API calls that result in an error return a Status Code = 500 and a response 
 ### Waitlist Attendees for a Ticket Event Item
 Post Attendees that want to get added to a waitlist for a ticket Event Item. If there is waitlist capacity remaining, all Attendees will be added to the waitlist for the Event Item ticket.
 
-**endpoint** = `waitlist/v1/eventitem`
+**Endpoint** = `waitlist/v1/eventitem`
 
 
 JSON Attribute | Required? | Type | Details
@@ -26,7 +26,7 @@ waitlistAttendees | Yes | Array of WaitlistAttendee | Array of Attendees to Wait
 
 
 **Sample Body**
-This example will add 2 Attendees to the waitlist for a ticket event item. Setting the optional contactId, accountId or leadId will associate the Attendees to those parent records.
+This example will add 2 Attendees to the waitlist for a ticket event item. Setting the optional contactId, accountId or leadId will associate the Attendees to those parent records. If the email of the MainContact is set, it will be saved in the Attendee - Primary Email field. All Attendees created will have a their Registration Status field set to `Waitlisted - Pending` and if more than one Attendee is pass in at a time, all the Attendees will be added to a new Attendee Group.
 ```
 {
   "eventItemId" : "a0zf4000003CfQiAAK",
