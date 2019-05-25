@@ -20,13 +20,13 @@ Post Attendees that want to get added to a waitlist for a ticket Event Item. If 
 JSON Attribute | Required? | Type | Details
 ----- | ----- | ----- | -----
 eventItemId | Yes | String |The Id of the ticket Event Item for which the Attendees will be waitlisted.
-mainContact | No | MainContact node | Name and Email of the main contact. Attributes of MainContact are: firstName, lastName and email.
+mainContact | No | MainContact | Name and Email of the main contact. Attributes of MainContact are: firstName, lastName and email.
 waitlistAttendees | Yes | Array of WaitlistAttendee | Array of Attendees to Waitlist. Attributes of WaitlistAttendee are: firstName (required), lastName (required), email (required), accountId, contactId and leadId.
 
 
-**sample body**
-This example will add 2 Attendees to the waitlist for a ticket event item. Setting the optional contactId, accountId or leadId will associate the Attendees to those parent records.
 
+**Sample Body**
+This example will add 2 Attendees to the waitlist for a ticket event item. Setting the optional contactId, accountId or leadId will associate the Attendees to those parent records.
 ```
 {
   "eventItemId" : "a0zf4000003CfQiAAK",
