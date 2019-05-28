@@ -21,12 +21,12 @@ JSON Attribute | Required? | Type | Details
 ----- | ----- | ----- | -----
 eventItemId | Yes | String |The Id of the ticket Event Item for which the Attendees will be waitlisted.
 mainContact | No | MainContact | Name and Email of the main contact. Attributes of MainContact are: firstName, lastName and email.
-waitlistAttendees | Yes | Array of WaitlistAttendee | Array of Attendees to Waitlist. Attributes of WaitlistAttendee are: firstName (required), lastName (required), email (required), accountId, contactId and leadId.
+waitlistAttendees | Yes | Array of WaitlistAttendees | Array of Attendees to Waitlist. Attributes of WaitlistAttendee are: firstName (required), lastName (required), email (required), accountId, contactId and leadId.
 
 
 
 **Sample Body**
-This example will add 2 Attendees to the waitlist for a ticket event item. Setting the optional contactId, accountId or leadId will associate the Attendees to those parent records. If the email of the MainContact is set, it will be saved in the Attendee - Primary Email field. All Attendees created will have a their Registration Status field set to `Waitlisted - Pending` and if more than one Attendee is pass in at a time, all the Attendees will be added to a new Attendee Group.
+This example will add 2 Attendees to the waitlist for a ticket event item. Setting the optional contactId, accountId or leadId will associate the Attendees to those parent records. If the email of the MainContact is set, it will be saved in the Attendee - Primary Email field. All Attendees created will have their Registration Status field set to `Waitlisted - Pending` and if more than one Attendee is pass in at a time, all the Attendees will be added to a new Attendee Group.
 ```
 {
   "eventItemId" : "a0zf4000003CfQiAAK",
@@ -55,38 +55,29 @@ This example will add 2 Attendees to the waitlist for a ticket event item. Setti
 
 
 ### Waitlist an Authenticated Attendee for Event Sessions
-This call works the same as the Get Events but a limited number of fields are returned. This can be called for a listing page or to get capacity or sales date data for validations.
+Post an Authenticated Attendee (has a known Attendee Id) that want to get added to a waitlist for one or more Event Sessions. If there is waitlist capacity remaining for a Session, the Attendees will be added to the waitlist.
 
 **Endpoint** = `waitlist/v1/eventsessions`
 
 
 JSON Attribute | Required? | Type | Details
 ----- | ----- | ----- | -----
-eventItemId | Yes | String |The Id of the ticket Event Item for which the Attendees will be waitlisted.
-mainContact | No | MainContact | Name and Email of the main contact. Attributes of MainContact are: firstName, lastName and email.
-waitlistAttendees | Yes | Array of WaitlistAttendee | Array of Attendees to Waitlist. Attributes of WaitlistAttendee are: firstName (required), lastName (required), email (required), accountId, contactId and leadId.
+sessionIds | Yes | Array of Strings |The Id of the Session(s) for which the Attendees will be waitlisted. If multiple Session Ids are set the Attendee will be waitlisted for all.
+waitlistAttendees | Yes | Array of WaitlistAttendees | Array of Attendees to Waitlist. We currently only support 1 Attendee to be set for Event Session Waitlisting and the Attendee Id must be set. Attributes of WaitlistAttendee are: attendeeId (required), accountId, contactId and leadId.
+
+
 
 **Sample Body**
-This example will add 2 Attendees to the waitlist for a ticket event item. Setting the optional contactId, accountId or leadId will associate the Attendees to those parent records. If the email of the MainContact is set, it will be saved in the Attendee - Primary Email field. All Attendees created will have a their Registration Status field set to `Waitlisted - Pending` and if more than one Attendee is pass in at a time, all the Attendees will be added to a new Attendee Group.
+This example will add 1 Attendee to the waitlist for 2 Event Sessions by creating 2 Session Attendee records. Each Session Attendee record will have The Session and Attendee set to the Ids passed in along with the optional contactId, accountId or leadId fields. All Session Attendees created will have their Registration Status field set to `Waitlisted - Pending`.
 ```
 {
+  "sesionIds" : [ {
+  	"",
+  	""
+  } ],
   "eventItemId" : "a0zf4000003CfQiAAK",
   "waitlistAttendees" : [ {
-    "firstName" : "Tom",
-    "lastName" : "Smith",
-    "email" : "tom@blackthorn.io",
-    "contactId" : "003f400000PLfd2AAD",
-    "accountId" : "001f400000QepmMAAR"
-  }, {
-    "firstName" : "Sally",
-    "lastName" : "Thomas",
-    "email" : "sally@blackthorn.io",
-    "leadId" : "00Qf4000007tVCMEA2"
-  } ],
-  "mainContact" : {
-    "lastName" : "Contact",
-    "firstName" : "Main",
-    "email" : "someone@blackthorn.io"
-  }
+    "attendeeId" : ""
+  } ]
 }
 ```
