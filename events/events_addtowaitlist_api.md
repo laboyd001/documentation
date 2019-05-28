@@ -71,13 +71,10 @@ waitlistAttendees | Yes | Array of WaitlistAttendees | Array of Attendees to Wai
 This example will add 1 Attendee to the waitlist for 2 Event Sessions by creating 2 Session Attendee records. Each Session Attendee record will have The Session and Attendee set to the Ids passed in along with the optional contactId, accountId or leadId fields. All Session Attendees created will have their Registration Status field set to `Waitlisted - Pending`.
 ```
 {
-  "sesionIds" : [ {
-  	"",
-  	""
-  } ],
-  "eventItemId" : "a0zf4000003CfQiAAK",
+  "sessionIds" : [ "a1Bf4000001PH2zEAG", "a1Bf4000004Pv0tEAC" ],
   "waitlistAttendees" : [ {
-    "attendeeId" : ""
+    "contactId" : "003f400000PLfd2AAD",
+    "attendeeId" : "a0wf40000026ZbEAAU",
   } ]
 }
 ```
