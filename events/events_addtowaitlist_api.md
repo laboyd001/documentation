@@ -11,7 +11,7 @@ Any API calls that result in an error return a Status Code = 500 and a response 
 
 ## API Calls
 
-### Waitlist Attendees for a Ticket Event Item
+### Waitlist Unauthenticated Attendees for a Ticket Event Item
 Post Attendees that want to get added to a waitlist for a ticket Event Item. If there is waitlist capacity remaining, all Attendees will be added to the waitlist for the Event Item ticket.
 
 **Endpoint** = `waitlist/v1/eventitem`
@@ -54,16 +54,39 @@ This example will add 2 Attendees to the waitlist for a ticket event item. Setti
 ***
 
 
-### GET Events Lite
+### Waitlist an Authenticated Attendee for Event Sessions
 This call works the same as the Get Events but a limited number of fields are returned. This can be called for a listing page or to get capacity or sales date data for validations.
 
-**endpoint** = `data/v1/events/lite`
+**Endpoint** = `waitlist/v1/eventsessions`
 
-**parameters** = key (field is Key__c on Event, not required, can pass multiple separated by commas)
 
-**examples**
+JSON Attribute | Required? | Type | Details
+----- | ----- | ----- | -----
+eventItemId | Yes | String |The Id of the ticket Event Item for which the Attendees will be waitlisted.
+mainContact | No | MainContact | Name and Email of the main contact. Attributes of MainContact are: firstName, lastName and email.
+waitlistAttendees | Yes | Array of WaitlistAttendee | Array of Attendees to Waitlist. Attributes of WaitlistAttendee are: firstName (required), lastName (required), email (required), accountId, contactId and leadId.
 
-[https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/events/lite](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/events/lite)
-
-[https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/events/lite?key=67yd9G08EP](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/events/lite?key=67yd9G08EP)
-
+**Sample Body**
+This example will add 2 Attendees to the waitlist for a ticket event item. Setting the optional contactId, accountId or leadId will associate the Attendees to those parent records. If the email of the MainContact is set, it will be saved in the Attendee - Primary Email field. All Attendees created will have a their Registration Status field set to `Waitlisted - Pending` and if more than one Attendee is pass in at a time, all the Attendees will be added to a new Attendee Group.
+```
+{
+  "eventItemId" : "a0zf4000003CfQiAAK",
+  "waitlistAttendees" : [ {
+    "firstName" : "Tom",
+    "lastName" : "Smith",
+    "email" : "tom@blackthorn.io",
+    "contactId" : "003f400000PLfd2AAD",
+    "accountId" : "001f400000QepmMAAR"
+  }, {
+    "firstName" : "Sally",
+    "lastName" : "Thomas",
+    "email" : "sally@blackthorn.io",
+    "leadId" : "00Qf4000007tVCMEA2"
+  } ],
+  "mainContact" : {
+    "lastName" : "Contact",
+    "firstName" : "Main",
+    "email" : "someone@blackthorn.io"
+  }
+}
+```
