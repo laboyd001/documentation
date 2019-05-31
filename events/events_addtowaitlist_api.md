@@ -3,8 +3,8 @@ The Events Add To Waitlist API is designed to accept data by POST calls from Res
 
 ### Errors
 The API will return a Status Code = 400 or 500 depending on the error type:
-400 - Returned if error is caused by invalid or missing attributes or from validation checks.
-500 - Returned if error is caused by an unexpected server error such as null pointer or database exception.
+- 400 - Returned if error is caused by invalid or missing attributes or from validation checks.
+- 500 - Returned if error is caused by an unexpected server error such as null pointer or database exception.
 
 For either of these codes, the response body will contain an error attribute:
 `{"error" : "This is what went wrong."}`
