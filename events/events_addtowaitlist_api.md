@@ -9,6 +9,8 @@ The API will return a Status Code = 400 or 500 depending on the error type:
 For either of these codes, the response body will contain an error attribute:
 `{"error" : "This is what went wrong."}`
 
+If ther are any errors in a request, no records will get created in Salesforce.
+
 ## API Calls
 
 ### Waitlist Unauthenticated Attendees for Ticket Event Items
@@ -24,8 +26,7 @@ waitlistAttendees | Yes | Array of WaitlistAttendees | Array of Attendees to Wai
 
 
 
-**Sample Body**
-This example will add 2 Attendees to the waitlist for two different ticket event item. Setting the optional contactId, accountId or leadId will associate the Attendees to those parent records. If the email of the MainContact is set, it will be saved in the Attendee - Primary Email field. All Attendees created will have their Registration Status field set to `Waitlisted - Pending` and if more than one Attendee is pass in at a time, all the Attendees will be added to a new Attendee Group.
+**Sample Body:** This example will add 2 Attendees to the waitlist for two different ticket event item. Setting the optional contactId, accountId or leadId will associate the Attendees to those parent records. If the email of the MainContact is set, it will be saved in the Attendee - Primary Email field. All Attendees created will have their Registration Status field set to `Waitlisted - Pending` and if more than one Attendee is pass in at a time, all the Attendees will be added to a new Attendee Group.
 ```
 {
   "waitlistAttendees" : [ {
@@ -64,15 +65,15 @@ This example will add 2 Attendees to the waitlist for two different ticket event
 ***
 
 
-### Waitlist an Authenticated Attendee for Event Sessions
-Post an Authenticated Attendee (has a known Attendee Id) that want to get added to a waitlist for one or more Event Sessions. If there is waitlist capacity remaining for a Session, the Attendees will be added to the waitlist.
+### Waitlist Authenticated Attendees for Event Sessions
+Post Authenticated Attendees (has a known Attendee Id) that want to get added to a waitlist for one or more Event Sessions. If there is waitlist capacity remaining for a Session, the Attendees will be added to the waitlist.
 
 **Endpoint:** `<sf_domain>/services/apexrest/conference360/waitlist/v1/eventsessions`
 
 
 JSON Attribute | Required? | Type | Details
 ----- | ----- | ----- | -----
-waitlistAttendees | Yes | Array of WaitlistAttendees | Array of Attendees to Waitlist. Attributes of WaitlistAttendee are: sessionIds(required - Array of Strings), attendeeId (required), contactId and leadId.
+waitlistAttendees | Yes | Array of WaitlistAttendees | Array of Attendees to Waitlist. Attributes of WaitlistAttendee are: sessionIds (required - Array of Strings), attendeeId (required), contactId and leadId.
 
 
 **Sample Body:** This example will add the submitted Attendee to the waitlist for 2 Event Sessions by creating 2 Session Attendee records. Each Session Attendee record will have The Session and Attendee set to the Ids passed in along with the optional contactId, accountId or leadId fields. All Session Attendees created will have their Registration Status field set to `Waitlisted - Pending`.
