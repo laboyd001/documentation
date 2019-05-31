@@ -72,18 +72,24 @@ Post an Authenticated Attendee (has a known Attendee Id) that want to get added 
 
 JSON Attribute | Required? | Type | Details
 ----- | ----- | ----- | -----
- | Yes | Array of Strings |The Id of the Session(s) for which the Attendees will be waitlisted. If multiple Session Ids are set the Attendee will be waitlisted for all.
-waitlistAttendees | Yes | Array of WaitlistAttendees | Array of Attendees to Waitlist. We currently only support 1 Attendee to be set for Event Session Waitlisting and the Attendee Id must be set. Attributes of WaitlistAttendee are: attendeeId (required), accountId, contactId and leadId.
+waitlistAttendees | Yes | Array of WaitlistAttendees | Array of Attendees to Waitlist. Attributes of WaitlistAttendee are: sessionIds(required - Array of Strings), attendeeId (required), contactId and leadId.
 
 
-
-**Sample Body:** This example will add 1 Attendee to the waitlist for 2 Event Sessions by creating 2 Session Attendee records. Each Session Attendee record will have The Session and Attendee set to the Ids passed in along with the optional contactId, accountId or leadId fields. All Session Attendees created will have their Registration Status field set to `Waitlisted - Pending`.
+**Sample Body:** This example will add the submitted Attendee to the waitlist for 2 Event Sessions by creating 2 Session Attendee records. Each Session Attendee record will have The Session and Attendee set to the Ids passed in along with the optional contactId, accountId or leadId fields. All Session Attendees created will have their Registration Status field set to `Waitlisted - Pending`.
 ```
 {
-  "sessionIds" : [ "a1Bf4000001PH2zEAG", "a1Bf4000004Pv0tEAC" ],
   "waitlistAttendees" : [ {
+    "sessionIds" : [ "a1Bf4000001PH2zEAG", "a1Bf4000004Pv0tEAC" ],
     "contactId" : "003f400000PLfd2AAD",
     "attendeeId" : "a0wf40000026ZbEAAU",
   } ]
+}
+```
+
+**Success Message:** If the API request was successful, the following response message will be returned:
+```
+{
+  "sessionAttendeeIds" : [ "a18f4000002ZOsRAAW", "a18f4000002ZOsSAAW" ],
+  "message" : "All Sessions were successfully waitlisted for the Attendee."
 }
 ```
