@@ -1,45 +1,47 @@
 ### Events Add To Waitlist Rest API
 The Events Add To Waitlist API is designed to accept data by POST calls from Rest formatted Urls. All data is accepted and returned in JSON format. The platform must oauth into a SF org before making calls to the API. This API can also be called from a SF Site that's setup correctly.
 
-### Rest Url Format
-`<sf_domain>/services/apexrest/conference360/waitlist/v1/`
-
 ### Errors
-Any API calls that result in an error return a Status Code = 500 and a response body of:
+The API will return a Status Code = 400 or 500 depending on the error type:
+400 - Returned if error is caused by invalid or missing attributes or from validation checks.
+500 - Returned if error is caused by an unexpected server error such as null pointer or database exception.
 
+For either of these codes, the response body will contain an error attribute:
 `{"error" : "This is what went wrong."}`
 
 ## API Calls
 
-### Waitlist Unauthenticated Attendees for a Ticket Event Item
-Post Attendees that want to get added to a waitlist for a ticket Event Item. If there is waitlist capacity remaining, all Attendees will be added to the waitlist for the Event Item ticket.
+### Waitlist Unauthenticated Attendees for Ticket Event Items
+Post Attendees that want to get added to a waitlist for a ticket Event Item. Multiple Attendees and multiple Event Item tickets are supported. If there is waitlist capacity remaining, each Attendee will be added to the waitlist for the submitted Event Item ticket.
 
-**Endpoint** = `waitlist/v1/eventitem`
+**Endpoint** = `<sf_domain>/services/apexrest/conference360/waitlist/v1/eventitem`
 
 
 JSON Attribute | Required? | Type | Details
 ----- | ----- | ----- | -----
-eventItemId | Yes | String |The Id of the ticket Event Item for which the Attendees will be waitlisted.
 mainContact | No | MainContact | Name and Email of the main contact. Attributes of MainContact are: firstName, lastName and email.
-waitlistAttendees | Yes | Array of WaitlistAttendees | Array of Attendees to Waitlist. Attributes of WaitlistAttendee are: firstName (required), lastName (required), email (required), accountId, contactId and leadId.
+waitlistAttendees | Yes | Array of WaitlistAttendees | Array of Attendees to Waitlist. Attributes of WaitlistAttendee are: eventItemId (required), firstName (required), lastName (required), email (required), phone (required), accountId, contactId and leadId.
 
 
 
 **Sample Body**
-This example will add 2 Attendees to the waitlist for a ticket event item. Setting the optional contactId, accountId or leadId will associate the Attendees to those parent records. If the email of the MainContact is set, it will be saved in the Attendee - Primary Email field. All Attendees created will have their Registration Status field set to `Waitlisted - Pending` and if more than one Attendee is pass in at a time, all the Attendees will be added to a new Attendee Group.
+This example will add 2 Attendees to the waitlist for two different ticket event item. Setting the optional contactId, accountId or leadId will associate the Attendees to those parent records. If the email of the MainContact is set, it will be saved in the Attendee - Primary Email field. All Attendees created will have their Registration Status field set to `Waitlisted - Pending` and if more than one Attendee is pass in at a time, all the Attendees will be added to a new Attendee Group.
 ```
 {
-  "eventItemId" : "a0zf4000003CfQiAAK",
   "waitlistAttendees" : [ {
+    "eventItemId" : "a0zf4000003CfQiAAK",
     "firstName" : "Tom",
     "lastName" : "Smith",
     "email" : "tom@blackthorn.io",
+    "phone" : "808-555-1234",
     "contactId" : "003f400000PLfd2AAD",
     "accountId" : "001f400000QepmMAAR"
   }, {
+    "eventItemId" : "a0zf4000003qR4IAAU",
     "firstName" : "Sally",
     "lastName" : "Thomas",
     "email" : "sally@blackthorn.io",
+    "phone" : "303-555-6789",
     "leadId" : "00Qf4000007tVCMEA2"
   } ],
   "mainContact" : {
@@ -57,12 +59,12 @@ This example will add 2 Attendees to the waitlist for a ticket event item. Setti
 ### Waitlist an Authenticated Attendee for Event Sessions
 Post an Authenticated Attendee (has a known Attendee Id) that want to get added to a waitlist for one or more Event Sessions. If there is waitlist capacity remaining for a Session, the Attendees will be added to the waitlist.
 
-**Endpoint** = `waitlist/v1/eventsessions`
+**Endpoint** = `<sf_domain>/services/apexrest/conference360/waitlist/v1/eventsessions`
 
 
 JSON Attribute | Required? | Type | Details
 ----- | ----- | ----- | -----
-sessionIds | Yes | Array of Strings |The Id of the Session(s) for which the Attendees will be waitlisted. If multiple Session Ids are set the Attendee will be waitlisted for all.
+ | Yes | Array of Strings |The Id of the Session(s) for which the Attendees will be waitlisted. If multiple Session Ids are set the Attendee will be waitlisted for all.
 waitlistAttendees | Yes | Array of WaitlistAttendees | Array of Attendees to Waitlist. We currently only support 1 Attendee to be set for Event Session Waitlisting and the Attendee Id must be set. Attributes of WaitlistAttendee are: attendeeId (required), accountId, contactId and leadId.
 
 
