@@ -56,8 +56,8 @@ waitlistAttendees | Yes | Array of WaitlistAttendees | Array of Attendees to Wai
 **Success Message:** If the API request was successful, the following response message will be returned:
 ```
 {
-  "attendeeIds" : [ "a0wf4000005ElWQAA0", "a0wf4000005ElWRAA0" ],
-  "message" : "The Attendees were successfully added to the ticket waitlist."
+  "message" : "The Attendees were successfully added to the ticket waitlist.",
+  "attendeeIds" : [ "a0wf4000005ElWQAA0", "a0wf4000005ElWRAA0" ]
 }
 ```
 
@@ -81,8 +81,8 @@ waitlistAttendees | Yes | Array of WaitlistAttendees | Array of Attendees to Wai
 {
   "waitlistAttendees" : [ {
     "sessionIds" : [ "a1Bf4000001PH2zEAG", "a1Bf4000004Pv0tEAC" ],
-    "contactId" : "003f400000PLfd2AAD",
     "attendeeId" : "a0wf40000026ZbEAAU",
+    "contactId" : "003f400000PLfd2AAD"
   } ]
 }
 ```
@@ -90,7 +90,7 @@ waitlistAttendees | Yes | Array of WaitlistAttendees | Array of Attendees to Wai
 **Success Message:** If the API request was successful, the following response message will be returned:
 ```
 {
-  "sessionAttendeeIds" : [ "a18f4000002ZOsRAAW", "a18f4000002ZOsSAAW" ],
-  "message" : "All Sessions were successfully waitlisted for the Attendee."
+  "message" : "All Sessions were successfully waitlisted for the Attendee.",
+  "sessionAttendeeIds" : [ "a18f4000002ZOsRAAW", "a18f4000002ZOsSAAW" ]
 }
 ```
