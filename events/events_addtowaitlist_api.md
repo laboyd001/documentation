@@ -22,7 +22,7 @@ Post Attendees that want to get added to a waitlist for a ticket Event Item. Mul
 JSON Attribute | Required? | Type | Details
 ----- | ----- | ----- | -----
 mainContact | No | MainContact | Name and Email of the main contact. Attributes of MainContact are: firstName, lastName and email.
-waitlistAttendees | Yes | Array of WaitlistAttendees | Array of Attendees to Waitlist. Attributes of WaitlistAttendee are: eventItemId (required), firstName (required), lastName (required), email (required), phone (required), accountId, contactId and leadId.
+waitlistAttendees | Yes | Array of WaitlistAttendees | Array of Attendees to Waitlist. Attributes of WaitlistAttendee are: eventItemId (required), firstName (required), lastName (required), email (required), phone, accountId, contactId and leadId.
 
 
 
