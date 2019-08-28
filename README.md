@@ -1,5 +1,4 @@
-# documentation
-documentation for all apps
+# API Documentation
 
 * [Checkout Rest API](/payments/checkout_api.md)
 
