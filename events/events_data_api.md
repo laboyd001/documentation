@@ -1,4 +1,4 @@
-### Events Data Rest API
+## Events Data Rest API
 The Events Data API is designed to return data by GET calls from Rest formatted Urls. All data is returned in JSON format. The platform must oauth into a SF org before making calls to the API. This API can also be called from a SF Site that's setup correctly. The Data API supports getting multiple records in one call and is mainly segregated by SF object.
 
 ### Rest Url Format

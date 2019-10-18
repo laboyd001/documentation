@@ -1,15 +1,5 @@
-## Checkout Rest API
-The Checkout API can be used to create a shopping cart that integrates directly into Salesforce. It has also been designed to work with our [Events package for Attendee Registration](../events/events_checkout_api.md). The API is designed to accept data by POST calls from Rest formatted Urls. All data is accepted and returned in JSON format. The platform must oauth into a SF org before making calls to the API. This API can also be called from a SF Site that's setup correctly.
-
-
-## Features
-- Build a shopping cart with application to capture item quantities for Products and Pricebook Entries in Salesforce
-- Persist the shopping cart as a Salesforce record so it can be retrieved by a unique key
-- Accept and validate Discount Codes for the entire order
-- Capture and save Bill to and Ship to information for the Sales Document
-- Relate an authorized or captured Transaction as payment for the shopping cart
-- Submit the shopping cart to create a Sales Document with related Line Items and Transaction in Salesforce
-
+## Events Add To Waitlist Rest API
+The Events Add To Waitlist API is designed to accept data by POST calls from Rest formatted Urls. All data is accepted and returned in JSON format. The platform must oauth into a SF org before making calls to the API. This API can also be called from a SF Site that's setup correctly.
 
 ### Errors
 The API will return a Status Code = 400 or 500 depending on the error type:
@@ -19,10 +9,10 @@ The API will return a Status Code = 400 or 500 depending on the error type:
 For either of these codes, the response body will contain an error attribute:
 `{"error" : "This is what went wrong."}`
 
-If ther are any errors in a request, no records will get created or updated in Salesforce.
+If ther are any errors in a request, no records will get created in Salesforce.
 
 ## API Calls
---------------TODO: FINISH BELOW
+
 ### Waitlist Unauthenticated Attendees for Ticket Event Items
 Post Attendees that want to get added to a waitlist for a ticket Event Item. Multiple Attendees and multiple Event Item tickets are supported. If there is waitlist capacity remaining, each Attendee will be added to the waitlist for the submitted Event Item ticket.
 
@@ -39,53 +29,28 @@ waitlistAttendees | Yes | Array of WaitlistAttendees | Array of Attendees to Wai
 **Sample Body:** This example will add 2 Attendees to the waitlist for two different ticket event item. Setting the optional contactId, accountId or leadId will associate the Attendees to those parent records. If the email of the MainContact is set, it will be saved in the Attendee - Primary Email field. All Attendees created will have their Registration Status field set to `Waitlisted - Pending` and if more than one Attendee is pass in at a time, all the Attendees will be added to a new Attendee Group.
 ```
 {
-  "transactionIds" : null,
-  "authenticatedAccountId" : null,
-  "salesDocument" : {
-    "promoCode" : "1_OFF",
-    "currencyCode" : "USD",
-    "paymentTerm" : "Net 30",
-    "paymentGatewayId" : "a0C0b00000UbO5FEAV",
-    "billTo" : {
-      "title" : "VP of Sales",
-      "street" : "1060 W Addison Ave",
-      "state" : "IL",
-      "relatedId" : null,
-      "postalCode" : "62626",
-      "phone" : "808-555-1234",
-      "lastName" : "lastName",
-      "firstName" : "firstName",
-      "email" : "email@blackthorn.io",
-      "country" : "USA",
-      "company" : "McDonalds",
-      "city" : "Chicago"
-    },
-    "shipTo" : {
-      "title" : "VP of Sales",
-      "street" : "1060 W Addison Ave",
-      "state" : "IL",
-      "relatedId" : null,
-      "postalCode" : "62626",
-      "phone" : "808-555-1234",
-      "lastName" : "lastName",
-      "firstName" : "firstName",
-      "email" : "email@blackthorn.io",
-      "country" : "USA",
-      "company" : "McDonalds",
-      "city" : "Chicago"
-    },
-    "items" : [ {
-      "quantity" : 1,
-      "priceBookId" : "01s0b000002sibWAAQ",
-      "productId" : "01t0b00000HQxv5AAD"
-    }, {
-      "quantity" : 1,
-      "priceBookId" : "01s0b000002sibWAAQ",
-      "productId" : "01t0b00000HQxv0AAD"
-    } ]
+  "waitlistAttendees" : [ {
+    "eventItemId" : "a0zf4000003CfQiAAK",
+    "firstName" : "Tom",
+    "lastName" : "Smith",
+    "email" : "tom@blackthorn.io",
+    "phone" : "808-555-1234",
+    "contactId" : "003f400000PLfd2AAD",
+    "accountId" : "001f400000QepmMAAR"
+  }, {
+    "eventItemId" : "a0zf4000003qR4IAAU",
+    "firstName" : "Sally",
+    "lastName" : "Thomas",
+    "email" : "sally@blackthorn.io",
+    "phone" : "303-555-6789",
+    "leadId" : "00Qf4000007tVCMEA2"
+  } ],
+  "mainContact" : {
+    "lastName" : "Contact",
+    "firstName" : "Main",
+    "email" : "someone@blackthorn.io"
   }
 }
-
 ```
 
 **Success Message:** If the API request was successful, the following response message will be returned:

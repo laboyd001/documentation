@@ -46,28 +46,83 @@ waitlistAttendees | Yes | Array of WaitlistAttendees | Array of Attendees to Wai
 **Sample Body:** This example will add 2 Attendees to the waitlist for two different ticket event item. Setting the optional contactId, accountId or leadId will associate the Attendees to those parent records. If the email of the MainContact is set, it will be saved in the Attendee - Primary Email field. All Attendees created will have their Registration Status field set to `Waitlisted - Pending` and if more than one Attendee is pass in at a time, all the Attendees will be added to a new Attendee Group.
 ```
 {
-  "waitlistAttendees" : [ {
-    "eventItemId" : "a0zf4000003CfQiAAK",
-    "firstName" : "Tom",
-    "lastName" : "Smith",
-    "email" : "tom@blackthorn.io",
-    "phone" : "808-555-1234",
-    "contactId" : "003f400000PLfd2AAD",
-    "accountId" : "001f400000QepmMAAR"
-  }, {
-    "eventItemId" : "a0zf4000003qR4IAAU",
-    "firstName" : "Sally",
-    "lastName" : "Thomas",
-    "email" : "sally@blackthorn.io",
-    "phone" : "303-555-6789",
-    "leadId" : "00Qf4000007tVCMEA2"
-  } ],
-  "mainContact" : {
-    "lastName" : "Contact",
-    "firstName" : "Main",
-    "email" : "someone@blackthorn.io"
+  "cartKey" : "u_can_set_this_or_it_will_be_generated",
+  "eventId" : "a1Q0b0000084YgiEAE",
+  "transactionIds" : null,
+  "authenticatedAccountId" : null,
+  "salesDocument" : {
+    "promoCode" : "NERD_25_DOL_OFF",
+    "currencyCode" : "USD",
+    "paymentTerm" : "Net 30",
+    "paymentGatewayId" : "a0C0b00000UbO5FEAV",
+    "billTo" : {
+      "title" : "VP of Sales",
+      "street" : "1060 W Addison Ave",
+      "state" : "IL",
+      "relatedId" : null,
+      "postalCode" : "62626",
+      "phone" : "808-555-1234",
+      "lastName" : "lastName",
+      "firstName" : "firstName",
+      "email" : "email@blackthorn.io",
+      "country" : "USA",
+      "company" : "McDonalds",
+      "city" : "Chicago"
+    },
+    "items" : [ {
+      "quantity" : 1,
+      "eventItemId" : "a1N0b000009YwGtEAK",
+      "attendee" : {
+        "attendeeKey" : "u_can_set_this_to_track_on_platform",
+        "firstName" : "Sally",
+        "lastName" : "Uno",
+        "salutation" : "Ms",
+        "company" : "Burger King",
+        "title" : "Chef",
+        "email" : "sally@yahoo.com",
+        "emailOptIn" : true,
+        "phone" : "808-456-7890",
+        "dietaryPreference" : null,
+        "relatedId" : null,
+        "street" : "100 Main St",
+        "city" : "Denver",
+        "state" : "CO",
+        "postalCode" : "80214",
+        "country" : "USA",
+        "sessionIds" : [
+          "a1c0b0000061PEUAA2",
+          "a1c0b0000061PEZAA2"
+        ]
+      }
+    }, {
+      "quantity" : 1,
+      "eventItemId" : "a1N0b000009YwH3EAK",
+      "attendee" : {
+        "attendeeKey" : null,
+        "firstName" : "John",
+        "lastName" : "Dos",
+        "salutation" : "Mr",
+        "company" : "Chipotle",
+        "title" : "Owner",
+        "email" : null,
+        "emailOptIn" : false,
+        "phone" : null,
+        "dietaryPreference" : "Vegan",
+        "relatedId" : null,
+        "street" : "2800 Gray St",
+        "city" : "Wheat Ridge",
+        "state" : "FL",
+        "postalCode" : "20202",
+        "country" : "USA",
+        "sessionIds" : [
+          "a1c0b0000061PEUAA2",
+          "a1c0b0000061PEZAA2"
+        ]
+      }
+    } ]
   }
 }
+
 ```
 
 **Success Message:** If the API request was successful, the following response message will be returned:
