@@ -1,6 +1,6 @@
 # Events Checkout Rest API
-The Event Checkout API can be used to create a shopping cart and capture relevant data for a custom Event checkout experience.
-The Checkout API accepts cart data posted to Rest formatted url and saves data in Salesforce as a Checkout Submission record. Cart data can also be retrieve from the api by cart key. All data is accepted and returned in JSON format. Your application must [oauth to a Salesforce org](https://help.salesforce.com/articleView?id=connected_app_create_api_integration.htm&type=5) that contains our Payments and Events packages before making calls to the API. This API can also be called from a SF Site that's setup correctly.
+The Event Checkout API can be used to create a shopping cart to capture relevant data for a custom Event checkout experience.
+The Checkout API accepts cart data posted to a Rest formatted url and saves data in Salesforce as a Checkout Submission record. Cart data can also be retrieve from the api by cart key. All data is accepted and returned in JSON format. Your application must [oauth to a Salesforce org](https://help.salesforce.com/articleView?id=connected_app_create_api_integration.htm&type=5) that contains our Payments and Events packages before making calls to the API. This API can also be called from a SF Site that's setup correctly.
 
 
 
@@ -9,7 +9,7 @@ The Checkout API accepts cart data posted to Rest formatted url and saves data i
 - Persist (save) the shopping cart as a Salesforce record so it can be retrieved by a unique key
 - Accept and validate Discount Codes for the entire order
 - Restrict Access to checkout based on a valid Access Code
-- Capture and save Bill to and Ship to information for the Sales Document
+- Capture and save Bill To and Ship To information for the Sales Document
 - Pass in a Salesforce Id for Account, Contact or Lead to set on the Sales Document record for Bill To or Ship To lookups
 - Relate an authorized or captured Transaction as payment for the shopping cart
 - Submit the shopping cart to create a Sales Document with related Line Items and Transaction in Salesforce
