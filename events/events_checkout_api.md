@@ -11,8 +11,8 @@ The Checkout API accepts cart data posted to a Rest formatted url and saves data
 - Restrict Access to checkout based on a valid Access Code
 - Capture and save Bill To and Ship To information for the Sales Document
 - Pass in a Salesforce Id for Account, Contact or Lead to set on the Sales Document record for Bill To or Ship To lookups
-- Relate an authorized or captured Transaction as payment for the shopping cart
-- Submit the shopping cart to create a Sales Document with related Line Items and Transaction in Salesforce
+- Relate authorized or captured Transactions as payment for the shopping cart
+- Submit the shopping cart to create a Sales Document with related Line Items and Transactions in Salesforce
 
 
 
@@ -20,7 +20,7 @@ The Checkout API accepts cart data posted to a Rest formatted url and saves data
 - Build a shopping cart application to capture item quantities for Event Items (tickets) in Salesforce
 - Validate Event Registration Status (on sale) upon cart submit
 - Validate Event Item capacity (quantity available) upon cart submit
-- Save standard Attendee information on the cart that's validated (required field) upon cart submit
+- Save standard Attendee information on the cart that's validated (required fields) upon cart submit
 - Pass in a Salesforce Id for Account, Contact or Lead to set on the Attendee record lookups
 - Save customer Attendee information on the cart that will get saved on the Attendee record upon cart submit
 - Save multiple Event Session Ids for Attendees that are saved on the cart
@@ -32,7 +32,7 @@ The Checkout API accepts cart data posted to a Rest formatted url and saves data
 Here are the supported Checkout API calls.
 
 ### Save Cart
-Call this endpoint to save cart data as a Checkout Submission record in Salesforce. The `cartKey` attribute in the request body determines what happens in Salesforce. If `cartKey` is blank, a values will be generated and a new record will be inserted. If `cartKey` is populated, we query for an existing Checkout Submission record, if a record is found it is updated. If not found, a new Checkout Submission record is created with the `cartKey` set as the 
+Call this endpoint to save cart data as a Checkout Submission record in Salesforce. The `cartKey` attribute in the request body determines what happens in Salesforce. If `cartKey` is blank, a values will be generated and a new record will be inserted. If `cartKey` is populated, we query for an existing Checkout Submission record and update it if found. If the record is not found, a new Checkout Submission record is created with the `cartKey` set as the 
 record Key.
 
 The save cart does not really require any data and does not do a lot of validations so you can submit as little or as much data as you want. Once the cart is saved, Item Names, Prices and Totals are calculated and returned in the response. Discount Codes are also validated if set.
