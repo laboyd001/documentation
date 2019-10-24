@@ -1,33 +1,50 @@
 ## Checkout Rest API
 The Checkout API can be used to create a shopping cart that integrates directly into Salesforce. It has also been designed to work with our [Events package for Attendee Registration](../events/events_checkout_api.md). The API is designed to accept data by POST calls from Rest formatted Urls. All data is accepted and returned in JSON format. The platform must oauth into a SF org before making calls to the API. This API can also be called from a SF Site that's setup correctly.
 
-
 ## Features
 - Build a shopping cart with application to capture item quantities for Products and Pricebook Entries in Salesforce
-- Persist the shopping cart as a Salesforce record so it can be retrieved by a unique key
+- Persist (save) the shopping cart as a Salesforce record so it can be retrieved by a unique key
 - Accept and validate Discount Codes for the entire order
 - Capture and save Bill to and Ship to information for the Sales Document
 - Relate an authorized or captured Transaction as payment for the shopping cart
-- Submit the shopping cart to create a Sales Document with related Line Items and Transaction in Salesforce
-
+- Submit the shopping cart to create a Sales Document with related Line Items and a Transaction in Salesforce
 
 ### Errors
 The API will return a Status Code = 400 or 500 depending on the error type:
 - 400 - Returned if error is caused by invalid or missing attributes or from validation checks.
 - 500 - Returned if error is caused by an unexpected server error such as null pointer or database exception.
 
-For either of these codes, the response body will contain an error attribute:
+For either of these codes, the response body will contain only an error attribute:
 `{"error" : "This is what went wrong."}`
 
-If ther are any errors in a request, no records will get created or updated in Salesforce.
+If there are any errors in a request, no records will get created or updated in Salesforce.
 
 ## API Calls
---------------TODO: FINISH BELOW
-### Waitlist Unauthenticated Attendees for Ticket Event Items
+Here are the supported Checkout API calls.
+
+### Save Cart
+
+
 Post Attendees that want to get added to a waitlist for a ticket Event Item. Multiple Attendees and multiple Event Item tickets are supported. If there is waitlist capacity remaining, each Attendee will be added to the waitlist for the submitted Event Item ticket.
 
-**Endpoint:** `<sf_domain>/services/apexrest/conference360/waitlist/v1/eventitem`
+**Method:** POST
+**Endpoint:** `<sf_domain>/services/apexrest/bt_stripe/checkout/v1/cart/save`
 
+
+### Retrieve Cart
+
+**Method:** GET
+**Endpoint:** `<sf_domain>/services/apexrest/bt_stripe/checkout/v1/cart/retrieve?key=cartKey`
+
+
+### Submit Cart
+
+**Method:** POST
+**Endpoint:** `<sf_domain>/services/apexrest/bt_stripe/checkout/v1/cart/submit`
+
+
+
+## API Request and Response Payload
 
 JSON Attribute | Required? | Type | Details
 ----- | ----- | ----- | -----
