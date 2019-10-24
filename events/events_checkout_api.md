@@ -1,6 +1,6 @@
 # Events Checkout Rest API
-The Event Checkout API can be used to create a shopping cart and capture data for a custom Event checkout experience.
-The Events Checkout API is designed to accept data by POST calls from Rest formatted Urls and saves data directly into Salesforce. All data is accepted and returned in JSON format. Your application must [oauth in a Salesforce org](https://help.salesforce.com/articleView?id=connected_app_create_api_integration.htm&type=5) before making calls to the API. This API can also be called from a SF Site that's setup correctly.
+The Event Checkout API can be used to create a shopping cart and capture relevant data for a custom Event checkout experience.
+The Checkout API accepts cart data posted to Rest formatted url and saves data in Salesforce as a Checkout Submission record. Cart data can also be retrieve from the api by cart key. All data is accepted and returned in JSON format. Your application must [oauth in a Salesforce org](https://help.salesforce.com/articleView?id=connected_app_create_api_integration.htm&type=5) before making calls to the API. This API can also be called from a SF Site that's setup correctly.
 
 
 
