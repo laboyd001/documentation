@@ -1,17 +1,54 @@
-## Checkout Rest API
+# Checkout Rest API
 The Checkout API can be used to create a shopping cart and capture data for a custom checkout experience. If you want to do an Event specific shopping cart, you'll want to use our [Event Checkout Rest API](../events/events_checkout_api.md). The API is designed to accept data by POST calls from Rest formatted Urls and saves data directly into Salesforce. All data is accepted and returned in JSON format. Your application must [oauth in a Salesforce org](https://help.salesforce.com/articleView?id=connected_app_create_api_integration.htm&type=5) before making calls to the API. This API can also be called from a SF Site that's setup correctly.
 
 
+
 ## Features
-- Build a shopping cart with application to capture item quantities for Products and Pricebook Entries in Salesforce
+- Build a shopping cart application to capture item quantities for Products and Pricebook Entries in Salesforce
 - Persist (save) the shopping cart as a Salesforce record so it can be retrieved by a unique key
 - Accept and validate Discount Codes for the entire order
-- Capture and save Bill to and Ship to information for the Sales Document
+- Restrict Access to checkout based on a valid Access Code
+- Capture and save Bill To and Ship To information for the Sales Document
+- Pass in a Salesforce Id for Account, Contact or Lead to associate the Bill To or Ship To lookups on Sales Document to existing records
 - Relate an authorized or captured Transaction as payment for the shopping cart
-- Submit the shopping cart to create a Sales Document with related Line Items and a Transaction in Salesforce
+- Submit the shopping cart to create a Sales Document with related Line Items and Transaction in Salesforce
 
 
-### Errors
+
+## API Calls
+Here are the supported Checkout API calls.
+
+### Save Cart
+Call this endpoint to save cart data as a Checkout Submission record in Salesforce. The `cartKey` attribute in the request body determines what happens in Salesforce. If `cartKey` is blank, a values will be generated and a new record will be inserted. If `cartKey` is populated, we query for an existing Checkout Submission record, if a record is found it is updated. If not found, a new Checkout Submission record is created with the `cartKey` set as the 
+record Key.
+
+The save cart does not really require any data and does not do a lot of validations so you can submit as little or as much data as you want. Once the cart is saved, Item Names, Prices and Totals are calculated and returned in the response. Discount Codes are also validated if set.
+
+**Method:** POST
+**Endpoint:** `{sf_domain}/services/apexrest/bt_stripe/checkout/v1/cart/save`
+**Request Body Payload:** See the API Request and Response Payload section below
+**Response Body Payload:** See the API Request and Response Payload section below
+
+
+### Retrieve Cart
+Call this endpoint to retrieve an existing Cart (Checkout Submission) record from Salesforce by cart key. The response returned is the output of the last valid cart save or final submit. If a record is not found for the key, an error is returned.
+
+**Method:** GET
+**Endpoint:** `{sf_domain}/services/apexrest/bt_stripe/checkout/v1/cart/retrieve?key={cartKey}`
+**Request Body Payload:** None - just set the `key` parameter on the request url
+**Response Body Payload:** See the API Request and Response Payload section below
+
+
+### Submit Cart
+Call this endpoint to do a final submit of cart data to generate a new Sales Document (Blackthorn Invoice) record, Line Item records and update the Checkout Submission record as Complete in Salesforce. Once the Checkout Submission record is complete, it cannot be saved or submitted again. If Transaction Id(s) are submitted on the cart, the Transactions are associated to the Sales Document to update the Payment Status and determine the Balance Due. There is additional logic to process Transaction(s) that are only authorized and not yet captured.
+
+**Method:** POST
+**Endpoint:** `{sf_domain}/services/apexrest/bt_stripe/checkout/v1/cart/submit`
+**Request Body Payload:** See the API Request and Response Payload section below
+**Response Body Payload:** See the API Request and Response Payload section below
+
+
+## Errors
 The API will return a Status Code = 400 or 500 depending on the error type:
 - 400 - Returned if error is caused by invalid or missing attributes or from validation checks.
 - 500 - Returned if error is caused by an unexpected server error such as null pointer or database exception.
@@ -19,31 +56,7 @@ The API will return a Status Code = 400 or 500 depending on the error type:
 For either of these codes, the response body will contain only an error attribute:
 `{"error" : "This is what went wrong."}`
 
-If there are any errors in a request, no records will get created or updated in Salesforce.
-
-## API Calls
-Here are the supported Checkout API calls.
-
-### Save Cart
-
-
-Post Attendees that want to get added to a waitlist for a ticket Event Item. Multiple Attendees and multiple Event Item tickets are supported. If there is waitlist capacity remaining, each Attendee will be added to the waitlist for the submitted Event Item ticket.
-
-**Method:** POST
-**Endpoint:** `<sf_domain>/services/apexrest/bt_stripe/checkout/v1/cart/save`
-
-
-### Retrieve Cart
-
-**Method:** GET
-**Endpoint:** `<sf_domain>/services/apexrest/bt_stripe/checkout/v1/cart/retrieve?key=cartKey`
-
-
-### Submit Cart
-
-**Method:** POST
-**Endpoint:** `<sf_domain>/services/apexrest/bt_stripe/checkout/v1/cart/submit`
-
+If there is an error in a request for the `Save Cart` or `Retrieve Cart` api call, we do not created or updated records in Salesforce. If there is a validation error for the `Submit Cart` api call, we also do not create or update records in Salesforce. But if there is an unexpected error in the request for the `Submit Cart` api call while trying to create a Sales Document and Line Item records, we update the Checkout Submission record in Salesforce with the request Input Payload along with the error. But we roll back any inserts or updates around the Sales Document, Line Items and Transaction.
 
 
 ## API Request and Response Payload

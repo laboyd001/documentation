@@ -16,7 +16,7 @@ If ther are any errors in a request, no records will get created in Salesforce.
 ### Waitlist Unauthenticated Attendees for Ticket Event Items
 Post Attendees that want to get added to a waitlist for a ticket Event Item. Multiple Attendees and multiple Event Item tickets are supported. If there is waitlist capacity remaining, each Attendee will be added to the waitlist for the submitted Event Item ticket.
 
-**Endpoint:** `<sf_domain>/services/apexrest/conference360/waitlist/v1/eventitem`
+**Endpoint:** `{sf_domain}/services/apexrest/conference360/waitlist/v1/eventitem`
 
 
 JSON Attribute | Required? | Type | Details
@@ -68,7 +68,7 @@ waitlistAttendees | Yes | Array of WaitlistAttendees | Array of Attendees to Wai
 ### Waitlist Authenticated Attendees for Event Sessions
 Post Authenticated Attendees (has a known Attendee Id) that want to get added to a waitlist for one or more Event Sessions. If there is waitlist capacity remaining for a Session, the Attendees will be added to the waitlist.
 
-**Endpoint:** `<sf_domain>/services/apexrest/conference360/waitlist/v1/eventsessions`
+**Endpoint:** `{sf_domain}/services/apexrest/conference360/waitlist/v1/eventsessions`
 
 
 JSON Attribute | Required? | Type | Details

@@ -2,7 +2,7 @@
 The Events Data API is designed to return data by GET calls from Rest formatted Urls. All data is returned in JSON format. The platform must oauth into a SF org before making calls to the API. This API can also be called from a SF Site that's setup correctly. The Data API supports getting multiple records in one call and is mainly segregated by SF object.
 
 ### Rest Url Format
-`<sf_domain>/services/apexrest/conference360/data/v1/`
+`{sf_domain}/services/apexrest/conference360/data/v1/`
 
 ### Errors
 Any API calls that result in an error return a Status Code = 500 and a response body of:
