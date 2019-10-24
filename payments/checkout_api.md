@@ -1,5 +1,6 @@
 ## Checkout Rest API
-The Checkout API can be used to create a shopping cart that integrates directly into Salesforce. It has also been designed to work with our [Events package for Attendee Registration](../events/events_checkout_api.md). The API is designed to accept data by POST calls from Rest formatted Urls. All data is accepted and returned in JSON format. The platform must oauth into a SF org before making calls to the API. This API can also be called from a SF Site that's setup correctly.
+The Checkout API can be used to create a shopping cart and capture data for a custom checkout experience. If you want to do an Event specific shopping cart, you'll want to use our [Event Checkout Rest API](../events/events_checkout_api.md). The API is designed to accept data by POST calls from Rest formatted Urls and saves data directly into Salesforce. All data is accepted and returned in JSON format. Your application must [oauth in a Salesforce org](https://help.salesforce.com/articleView?id=connected_app_create_api_integration.htm&type=5) before making calls to the API. This API can also be called from a SF Site that's setup correctly.
+
 
 ## Features
 - Build a shopping cart with application to capture item quantities for Products and Pricebook Entries in Salesforce
@@ -8,6 +9,7 @@ The Checkout API can be used to create a shopping cart that integrates directly 
 - Capture and save Bill to and Ship to information for the Sales Document
 - Relate an authorized or captured Transaction as payment for the shopping cart
 - Submit the shopping cart to create a Sales Document with related Line Items and a Transaction in Salesforce
+
 
 ### Errors
 The API will return a Status Code = 400 or 500 depending on the error type:

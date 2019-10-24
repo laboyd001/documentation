@@ -1,5 +1,6 @@
-## Events Checkout Rest API
-The Events Checkout API is designed to accept data by POST calls from Rest formatted Urls. All data is accepted and returned in JSON format. The platform must oauth into a SF org before making calls to the API. This API can also be called from a SF Site that's setup correctly.
+# Events Checkout Rest API
+The Event Checkout API can be used to create a shopping cart and capture data for a custom Event checkout experience.
+The Events Checkout API is designed to accept data by POST calls from Rest formatted Urls and saves data directly into Salesforce. All data is accepted and returned in JSON format. Your application must [oauth in a Salesforce org](https://help.salesforce.com/articleView?id=connected_app_create_api_integration.htm&type=5) before making calls to the API. This API can also be called from a SF Site that's setup correctly.
 
 
 ## Features
@@ -15,10 +16,9 @@ The Events Checkout API is designed to accept data by POST calls from Rest forma
 The 
 - 
 
-## Use Cases
 
 
-### Errors
+## Errors
 The API will return a Status Code = 400 or 500 depending on the error type:
 - 400 - Returned if error is caused by invalid or missing attributes or from validation checks.
 - 500 - Returned if error is caused by an unexpected server error such as null pointer or database exception.
@@ -30,6 +30,7 @@ If ther are any errors in a request, no records will get created or updated in S
 
 ## API Calls
 --------------TODO: FINISH BELOW
+
 ### Waitlist Unauthenticated Attendees for Ticket Event Items
 Post Attendees that want to get added to a waitlist for a ticket Event Item. Multiple Attendees and multiple Event Item tickets are supported. If there is waitlist capacity remaining, each Attendee will be added to the waitlist for the submitted Event Item ticket.
 
@@ -135,34 +136,3 @@ waitlistAttendees | Yes | Array of WaitlistAttendees | Array of Attendees to Wai
 
 
 ***
-
-
-### Waitlist Authenticated Attendees for Event Sessions
-Post Authenticated Attendees (has a known Attendee Id) that want to get added to a waitlist for one or more Event Sessions. If there is waitlist capacity remaining for a Session, the Attendees will be added to the waitlist.
-
-**Endpoint:** `<sf_domain>/services/apexrest/conference360/waitlist/v1/eventsessions`
-
-
-JSON Attribute | Required? | Type | Details
------ | ----- | ----- | -----
-waitlistAttendees | Yes | Array of WaitlistAttendees | Array of Attendees to Waitlist. Attributes of WaitlistAttendee are: sessionIds (required - Array of Strings), attendeeId (required), contactId and leadId.
-
-
-**Sample Body:** This example will add the submitted Attendee to the waitlist for 2 Event Sessions by creating 2 Session Attendee records. Each Session Attendee record will have The Session and Attendee set to the Ids passed in along with the optional contactId, accountId or leadId fields. All Session Attendees created will have their Registration Status field set to `Waitlisted - Pending`.
-```
-{
-  "waitlistAttendees" : [ {
-    "sessionIds" : [ "a1Bf4000001PH2zEAG", "a1Bf4000004Pv0tEAC" ],
-    "attendeeId" : "a0wf40000026ZbEAAU",
-    "contactId" : "003f400000PLfd2AAD"
-  } ]
-}
-```
-
-**Success Message:** If the API request was successful, the following response message will be returned:
-```
-{
-  "message" : "All Sessions were successfully waitlisted for the Attendee.",
-  "sessionAttendeeIds" : [ "a18f4000002ZOsRAAW", "a18f4000002ZOsSAAW" ]
-}
-```
