@@ -2,7 +2,9 @@
 If you want to build a custom app that uses Salesforce data and functionality, you'll first need to authenticate to Salesforce. The simpliest and safest way to accomplish this is with a Salesforce Connected App. Here are some instructions on how to setup a Connected App.
 -
 -
--
+- https://help.salesforce.com/articleView?id=connected_app_create_api_integration.htm&type=5
+
+
 
 
 ### Oauth in Postman
