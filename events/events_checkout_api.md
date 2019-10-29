@@ -74,20 +74,21 @@ If there is an error in a request for the `Save Cart` or `Retrieve Cart` api cal
 
 ## API Request and Response Payload
 
-JSON Attribute | Required? | Type | Details
------ | ----- | ----- | -----
-cartKey | On Submit | String | 
-eventId | On Submit | String | 
-transactionIds | No | String Array | 
-authenticatedAccountId | No | String | 
-salesDocument | No | Sales Document | 
-promoCode | No | String | 
-currencyCode | No | String | 
-paymentTerm | No | String | 
-paymentGatewayId | No | String | 
-billTo | No | Bill To | 
-shipTo | No | Ship To | 
-items | No | Item Array | 
+JSON Attribute | Section | Required? | Type | Details
+----- | ----- | ----- | ----- | -----
+
+cartKey | root | On Submit | String | 
+eventId | root | On Submit | String | 
+transactionIds | root | No | String Array | 
+authenticatedAccountId | root | No | String | 
+salesDocument | root | No | Sales Document | 
+promoCode | salesDocument | | No | String | 
+currencyCode | salesDocument | No | String | 
+paymentTerm | salesDocument | No | String | 
+paymentGatewayId | salesDocument | No | String | 
+billTo | salesDocument | No | Bill To | 
+shipTo | salesDocument | No | Ship To | 
+items | salesDocument | No | Item Array | 
 
 
 
