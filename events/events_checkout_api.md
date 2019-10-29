@@ -82,7 +82,7 @@ eventId | root | On Submit | String |
 transactionIds | root | No | String Array | 
 authenticatedAccountId | root | No | String | 
 salesDocument | root | No | Sales Document | 
-promoCode | salesDocument | | No | String | 
+promoCode | salesDocument | No | String | 
 currencyCode | salesDocument | No | String | 
 paymentTerm | salesDocument | No | String | 
 paymentGatewayId | salesDocument | No | String | 
