@@ -76,7 +76,6 @@ If there is an error in a request for the `Save Cart` or `Retrieve Cart` api cal
 
 JSON Attribute | Section | Required? | Type | Details
 ----- | ----- | ----- | ----- | -----
-
 cartKey | root | On Submit | String | 
 eventId | root | On Submit | String | 
 transactionIds | root | No | String Array | 
