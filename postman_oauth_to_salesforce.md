@@ -1,14 +1,21 @@
-## Oauth to Salesforce
+# Oauth to Salesforce
 If you want to build a custom app that uses Salesforce data and functionality, you'll first need to authenticate to Salesforce. The simpliest and safest way to accomplish this is with a Salesforce Connected App. Here are some instructions on how to setup a Connected App.
--
--
-- https://help.salesforce.com/articleView?id=connected_app_create_api_integration.htm&type=5
+
+- [https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_defining_remote_access_applications.htm](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_defining_remote_access_applications.htm)
+- [https://help.salesforce.com/articleView?id=connected_app_create_api_integration.htm](https://help.salesforce.com/articleView?id=connected_app_create_api_integration.htm)
 
 
-
-
-### Oauth in Postman
+## Oauth in Postman
 If you want to try out our API calls in Postman, you'll need to authenticate to Salesforce first.
+
+1. Postman needs the following fields set on the Connected App you create in Salesforce.
+![Connected App for Postman](images/new_connected_app_postman.PNG "Connected App for Postman")
+
+2. 
+
+
+
+
 
 
 Postman Field | Value
@@ -37,8 +44,4 @@ Client Secret = (the consumer secret from your connected app)
 Scope = (leave empty)
 State = (leave empty)
 Client Authentication = Send as Basic Auth Header
-
-
-
-***
 
