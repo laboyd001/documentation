@@ -1,5 +1,5 @@
 ## Events Add To Waitlist Rest API
-The Events Add To Waitlist API is designed to accept data by POST calls from Rest formatted Urls. All data is accepted and returned in JSON format. The platform must oauth into a SF org before making calls to the API. This API can also be called from a SF Site that's setup correctly.
+The Events Add To Waitlist API is designed to accept data by POST calls from Rest formatted Urls. All data is accepted and returned in JSON format. Your application must [oauth to a Salesforce org](https://help.salesforce.com/articleView?id=connected_app_create_api_integration.htm&type=5) that contains our Events package before making calls to the API. This API can also be called from a SF Site that's setup correctly.
 
 ### Errors
 The API will return a Status Code = 400 or 500 depending on the error type:
