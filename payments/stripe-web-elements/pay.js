@@ -233,6 +233,10 @@ function registerElements(elements, exampleName) {
 				// here's where we call the Blackthorn Payments Rest API
 				sendTokenBlackthornPaymentsAPI(result.token, example);
 			} else {
+				// Stop loading!
+				example.classList.remove('submitting');
+				example.classList.add('submitted');
+
 				// Otherwise, un-disable inputs.
 				enableInputs();
 			}
