@@ -120,44 +120,8 @@ waitlistAttendees | Yes | Array of WaitlistAttendees | Array of Attendees to Wai
 
 ```
 
-**Success Message:** If the API request was successful, the following response message will be returned:
-```
-{
-  "message" : "The Attendees were successfully added to the ticket waitlist.",
-  "attendeeIds" : [ "a0wf4000005ElWQAA0", "a0wf4000005ElWRAA0" ]
-}
-```
 
 
 ***
 
 
-### Waitlist Authenticated Attendees for Event Sessions
-Post Authenticated Attendees (has a known Attendee Id) that want to get added to a waitlist for one or more Event Sessions. If there is waitlist capacity remaining for a Session, the Attendees will be added to the waitlist.
-
-**Endpoint:** `<sf_domain>/services/apexrest/conference360/waitlist/v1/eventsessions`
-
-
-JSON Attribute | Required? | Type | Details
------ | ----- | ----- | -----
-waitlistAttendees | Yes | Array of WaitlistAttendees | Array of Attendees to Waitlist. Attributes of WaitlistAttendee are: sessionIds (required - Array of Strings), attendeeId (required), contactId and leadId.
-
-
-**Sample Body:** This example will add the submitted Attendee to the waitlist for 2 Event Sessions by creating 2 Session Attendee records. Each Session Attendee record will have The Session and Attendee set to the Ids passed in along with the optional contactId, accountId or leadId fields. All Session Attendees created will have their Registration Status field set to `Waitlisted - Pending`.
-```
-{
-  "waitlistAttendees" : [ {
-    "sessionIds" : [ "a1Bf4000001PH2zEAG", "a1Bf4000004Pv0tEAC" ],
-    "attendeeId" : "a0wf40000026ZbEAAU",
-    "contactId" : "003f400000PLfd2AAD"
-  } ]
-}
-```
-
-**Success Message:** If the API request was successful, the following response message will be returned:
-```
-{
-  "message" : "All Sessions were successfully waitlisted for the Attendee.",
-  "sessionAttendeeIds" : [ "a18f4000002ZOsRAAW", "a18f4000002ZOsSAAW" ]
-}
-```

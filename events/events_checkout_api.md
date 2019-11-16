@@ -80,12 +80,12 @@ cartKey | root | On Submit | String |
 eventId | root | On Submit | String | 
 transactionIds | root | No | String Array | 
 authenticatedAccountId | root | No | String | 
-salesDocument | root | No | Sales Document | 
+salesDocument | root | On Submit | Sales Document | 
 promoCode | salesDocument | No | String | 
 currencyCode | salesDocument | No | String | 
 paymentTerm | salesDocument | No | String | 
 paymentGatewayId | salesDocument | No | String | 
-billTo | salesDocument | No | Bill To | 
+billTo | salesDocument | On Submit | Bill To | 
 shipTo | salesDocument | No | Ship To | 
 items | salesDocument | No | Item Array | 
 
@@ -94,15 +94,15 @@ items | salesDocument | No | Item Array |
 ## Sample Cart Save Request Payload
 ```
 {
-  "cartKey" : "u_can_set_this_or_it_will_be_generated",
+  "cartKey" : "bt_na1expakpbBJVxq1",
   "eventId" : "a1Q0b0000084YgiEAE",
-  "transactionIds" : null,
   "authenticatedAccountId" : null,
+  "transactionIds" : null,
   "salesDocument" : {
-    "promoCode" : "25_DOL_OFF",
     "currencyCode" : "USD",
     "paymentTerm" : "Net 30",
     "paymentGatewayId" : "a0C0b00000UbO5FEAV",
+    "promoCode" : "25_DOL_OFF",
     "billTo" : {
       "firstName" : "Cui",
       "lastName" : "John",
@@ -184,4 +184,9 @@ items | salesDocument | No | Item Array |
     } ]
   }
 }
+```
+
+## Sample Cart Save Response Payload
+```
+
 ```
