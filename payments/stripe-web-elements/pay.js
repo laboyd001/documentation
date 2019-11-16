@@ -7,6 +7,9 @@ var stripe = Stripe(publishableKey);
 
 var amountToCharge = 19.75;
 
+// changing button to show amount to charge
+document.getElementById('pay_button').innerHTML = 'Pay $' + amountToCharge;
+
 /*
 This is setup to submit to a Salesforce Site. The recommended approach is to oauth to Salesforce
 and call our Payments Rest API as an authenticated user. It adds an extra layer of security to
@@ -87,9 +90,6 @@ var paymentsRestEndpoint = 'https://fieldservicemobilepay.secure.force.com/webho
 	cardCvc.mount('#example2-card-cvc');
 
 	registerElements([cardNumber, cardExpiry, cardCvc], 'example2');
-
-	// changing button to show amount to charge
-	document.getElementById('pay_button').innerHTML = 'Pay $' + amountToCharge;
 })();
 
 
@@ -233,10 +233,6 @@ function registerElements(elements, exampleName) {
 				// here's where we call the Blackthorn Payments Rest API
 				sendTokenBlackthornPaymentsAPI(result.token, example);
 			} else {
-				// Stop loading!
-				example.classList.remove('submitting');
-				example.classList.add('submitted');
-
 				// Otherwise, un-disable inputs.
 				enableInputs();
 			}
