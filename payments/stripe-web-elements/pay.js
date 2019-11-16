@@ -17,7 +17,7 @@ your checkout.
 If you oauth to Salesforce, your endpoint will be: <SF_DOMAIN>/services/apexrest/bt_stripe/v1
 */
 //var paymentsRestEndpoint = 'https://fieldservicemobilepay.secure.force.com/webhooks/services/apexrest/bt_stripe/v1';
-var paymentsRestEndpoint = 'http://qfbtpay-developer-edition.na122.force.com/stripe/services/apexrest/v1';
+var paymentsRestEndpoint = 'https://qfbtpay-developer-edition.na122.force.com/stripe/services/apexrest/v1';
 
 (function() {
 	'use strict';
