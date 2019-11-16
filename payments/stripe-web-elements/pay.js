@@ -248,10 +248,10 @@ function registerElements(elements, exampleName) {
 }
 
 function sendTokenBlackthornPaymentsAPI(stripeToken) {
-	console.log("stripeToken", stripeToken);
-	console.log("stripeToken JSON", JSON.stringify(stripeToken));
+	console.log('stripeToken: ' + JSON.stringify(stripeToken));
 
-	// build the payload for the Payments Rest API
+	// build the payload for the Payments Rest API - lots of attributes can be set here
+	// TODO: document some other sample payload for passing in additional data
 	var payload = {
 		stripePayload : JSON.stringify(stripeToken),
 		action : "createPaymentMethod",
@@ -266,12 +266,12 @@ function sendTokenBlackthornPaymentsAPI(stripeToken) {
 
 	// this makes a rest call to our Payments API - feel free to use JQuery to make this call
 	var xhr = new XMLHttpRequest();
-	xhr.open('PUT', paymentsRestEndpoint);
+	xhr.open('POST', paymentsRestEndpoint);
 	xhr.setRequestHeader('Content-Type', 'application/json');
 	xhr.onload = function() {
 		if (xhr.status === 200) {
 			//	var userInfo = JSON.parse(xhr.responseText);
-			console.log('PAYMENTS REST API RESPONSE: ', xhr.responseText);
+			console.log('PAYMENTS REST API RESPONSE: ' + xhr.responseText);
 		//	document.getElementById('salesforce_message').innerText = '';
 		}
 	};
