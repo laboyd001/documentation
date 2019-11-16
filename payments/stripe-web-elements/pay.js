@@ -2,7 +2,8 @@
 get this value from the Payment Gateway - Gateway Public Key field.
 It will be different for test and live Payment Gateways.
 */
-var publishableKey = 'pk_test_NsB4y3ep7KUYehaGgz6R9T13';
+//var publishableKey = 'pk_test_NsB4y3ep7KUYehaGgz6R9T13';
+var publishableKey = 'pk_test_92VtLitzTNkmzlbC7wJyRSoA';
 var stripe = Stripe(publishableKey);
 
 var amountToCharge = 19.75;
@@ -15,8 +16,8 @@ your checkout.
 
 If you oauth to Salesforce, your endpoint will be: <SF_DOMAIN>/services/apexrest/bt_stripe/v1
 */
-var paymentsRestEndpoint = 'https://fieldservicemobilepay.secure.force.com/webhooks/services/apexrest/bt_stripe/v1';
-
+//var paymentsRestEndpoint = 'https://fieldservicemobilepay.secure.force.com/webhooks/services/apexrest/bt_stripe/v1';
+var paymentsRestEndpoint = 'http://qfbtpay-developer-edition.na122.force.com/stripe/services/apexrest/v1';
 
 (function() {
 	'use strict';
