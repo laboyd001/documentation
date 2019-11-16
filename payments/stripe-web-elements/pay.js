@@ -258,14 +258,18 @@ function sendTokenBlackthornPaymentsAPI(stripeToken) {
 	};
 
 	// this makes a rest call to our Payments API - feel free to use JQuery to make this call
-	var xhr = new XMLHttpRequest();
+	var xhr = new XMLHttpRequest(); // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
 	xhr.open('POST', paymentsRestEndpoint);
 	xhr.setRequestHeader('Content-Type', 'application/json');
 	xhr.onload = function() {
 		if (xhr.status === 200) {
 			console.log('paymentsRestAPIResponse: ' + xhr.responseText);
 			var msg = 'Blackthorn Payments API charged $' + amountToCharge + ' on the card and created Transaction: ';
-			msg += xhr.response.transactionList[0].transactionId;
+			console.log('xhr.response.success: ' + xhr.response.success);
+			console.log('xhr.response.paymentMethodList: ' + xhr.response.paymentMethodList);
+			console.log('xhr.response.transactionList: ' + xhr.response.transactionList);
+
+//			msg += xhr.response.transactionList[0].transactionId;
 			document.getElementById('salesforce_message').innerText = msg;
 
 			// Stop loading!
