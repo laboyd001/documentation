@@ -259,8 +259,8 @@ function sendTokenBlackthornPaymentsAPI(stripeToken) {
 
 	// this makes a rest call to our Payments API - feel free to use JQuery to make this call
 	var xhr = new XMLHttpRequest(); // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
-	xhr.setRequestHeader('Content-Type', 'application/json');
 	xhr.open('POST', paymentsRestEndpoint);
+	xhr.setRequestHeader('Content-Type', 'application/json');
 	xhr.onload = function() {
 		if (xhr.status === 200) {
 			console.log('xhr.responseType: ' + xhr.responseType);
