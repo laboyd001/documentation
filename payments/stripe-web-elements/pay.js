@@ -231,7 +231,7 @@ function registerElements(elements, exampleName) {
 				example.querySelector('.token').innerText = result.token.id;
 
 				// here's where we call the Blackthorn Payments Rest API
-				sendTokenBlackthornPaymentsAPI(result.token);
+				sendTokenBlackthornPaymentsAPI(result.token, example);
 			} else {
 				// Otherwise, un-disable inputs.
 				enableInputs();
@@ -240,7 +240,7 @@ function registerElements(elements, exampleName) {
 	});
 }
 
-function sendTokenBlackthornPaymentsAPI(stripeToken) {
+function sendTokenBlackthornPaymentsAPI(stripeToken, example) {
 	console.log('stripeToken: ' + JSON.stringify(stripeToken));
 
 	// build the payload for the Payments Rest API - lots of attributes can be set here
@@ -273,7 +273,8 @@ function sendTokenBlackthornPaymentsAPI(stripeToken) {
 				console.log('xhr.response.paymentMethodList: ' + response.paymentMethodList);
 				console.log('xhr.response.transactionList: ' + response.transactionList);
 				msg = 'Blackthorn Payments API charged $' + amountToCharge + ' on the card and created Transaction: ';
-	//			msg += response.transactionList[0].transactionId;
+				msg += response.transactionList[0].transactionId + ' and Payment Method: ';
+				msg += response.transactionList[0].a0D3s00000888uGEAQ;
 			} else {
 				msg = 'Error from Blackthorn Payments Rest API: ' + response.errorMessage;
 			}
