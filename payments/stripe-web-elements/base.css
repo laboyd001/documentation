@@ -322,7 +322,7 @@ main > .container-lg {
   flex-wrap: wrap;
   position: relative;
   max-width: 750px;
-  padding: 110px 20px 110px;
+  padding: 50px 20px 110px;
 }
 
 main > .container-lg .cell {
@@ -341,7 +341,7 @@ main > .container-lg .cell {
 }
 
 main > .container-lg .cell + .cell {
-  margin-top: 30px;
+  margin-top: 70px;
 }
 
 main > .container-lg .cell.intro {
