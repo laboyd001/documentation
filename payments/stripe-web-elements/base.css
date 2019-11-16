@@ -341,7 +341,7 @@ main > .container-lg .cell {
 }
 
 main > .container-lg .cell + .cell {
-  margin-top: 70px;
+  margin-top: 30px;
 }
 
 main > .container-lg .cell.intro {
