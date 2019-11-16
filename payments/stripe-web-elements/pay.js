@@ -274,7 +274,7 @@ function sendTokenBlackthornPaymentsAPI(stripeToken, example) {
 				console.log('xhr.response.transactionList: ' + response.transactionList);
 				msg = 'Blackthorn Payments API charged $' + amountToCharge + ' on the card and created Transaction: ';
 				msg += response.transactionList[0].transactionId + ' and Payment Method: ';
-				msg += response.transactionList[0].a0D3s00000888uGEAQ;
+				msg += response.transactionList[0].paymentMethodId;
 			} else {
 				msg = 'Error from Blackthorn Payments Rest API: ' + response.errorMessage;
 			}
