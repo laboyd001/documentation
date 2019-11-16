@@ -269,7 +269,7 @@ function sendTokenBlackthornPaymentsAPI(stripeToken) {
 			example.classList.add('submitted');
 
 			console.log('paymentsRestAPIResponse: ' + xhr.responseText);
-			var msg 'Blackthorn Payments API charged $' + amountToCharge + ' on the card and created Transaction: ';
+			var msg = 'Blackthorn Payments API charged $' + amountToCharge + ' on the card and created Transaction: ';
 			msg += xhr.responseText.transactionList[0].transactionId;
 			document.getElementById('salesforce_message').innerText = msg;
 		}
