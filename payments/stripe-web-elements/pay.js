@@ -9,7 +9,7 @@ var stripe = Stripe(publishableKey);
 var amountToCharge = 19.75;
 
 // changing button to show amount to charge
-//document.getElementById('pay_button').innerHTML = 'Pay $' + amountToCharge;
+document.getElementById('pay_button').innerHTML = 'Pay $' + amountToCharge;
 
 /*
 This is setup to submit to a Salesforce Site. The recommended approach is to oauth to Salesforce
@@ -191,15 +191,12 @@ function sendTokenBlackthornPaymentsAPI(stripeToken, example) {
 	xhr.setRequestHeader('Content-Type', 'application/json');
 	xhr.onload = function() {
 		if (xhr.status === 200) {
-			console.log('xhr.responseType: ' + xhr.responseType);
 			console.log('paymentsRestAPIResponse: ' + xhr.responseText);
-			var response = JSON.parse(xhr.responseText);
 
+			var response = JSON.parse(xhr.responseText);
 			console.log('response.success: ' + response.success);
 			var msg;
 			if (response.success == true) { // see if success
-				console.log('xhr.response.paymentMethodList: ' + response.paymentMethodList);
-				console.log('xhr.response.transactionList: ' + response.transactionList);
 				msg = 'Blackthorn Payments API charged $' + amountToCharge + ' on the card and created Transaction: ';
 				msg += response.transactionList[0].transactionId + ' and Payment Method: ';
 				msg += response.transactionList[0].paymentMethodId;
@@ -211,6 +208,8 @@ function sendTokenBlackthornPaymentsAPI(stripeToken, example) {
 
 			// Stop loading!
 			example.classList.remove('submitting');
+
+			// todo: figure out how to show error below form instead of on success page
 			example.classList.add('submitted');
 		}
 	};
