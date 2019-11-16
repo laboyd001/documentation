@@ -265,15 +265,17 @@ function sendTokenBlackthornPaymentsAPI(stripeToken) {
 		if (xhr.status === 200) {
 			console.log('xhr.responseType: ' + xhr.responseType);
 			console.log('paymentsRestAPIResponse: ' + xhr.responseText);
-			console.log('xhr.response.success: ' + xhr.response.success);
+			var response = JSON.parse(xhr.responseText);
+
+			console.log('response.success: ' + response.success);
 			var msg;
-			if (xhr.response.success == true) { // see if success
-				console.log('xhr.response.paymentMethodList: ' + xhr.response.paymentMethodList);
-				console.log('xhr.response.transactionList: ' + xhr.response.transactionList);
+			if (response.success == true) { // see if success
+				console.log('xhr.response.paymentMethodList: ' + response.paymentMethodList);
+				console.log('xhr.response.transactionList: ' + response.transactionList);
 				msg = 'Blackthorn Payments API charged $' + amountToCharge + ' on the card and created Transaction: ';
-	//			msg += xhr.response.transactionList[0].transactionId;
+	//			msg += response.transactionList[0].transactionId;
 			} else {
-				msg = 'Error from Blackthorn Payments Rest API: ' + xhr.response.errorMessage;
+				msg = 'Error from Blackthorn Payments Rest API: ' + response.errorMessage;
 			}
 
 			document.getElementById('salesforce_message').innerText = msg;
