@@ -160,6 +160,7 @@ function registerElements(elements, exampleName) {
 				// here's where we call the Blackthorn Payments Rest API
 				sendTokenBlackthornPaymentsAPI(result.token, example);
 			} else {
+				example.classList.remove('submitting');
 				// Otherwise, un-disable inputs.
 				enableInputs();
 			}
@@ -216,7 +217,7 @@ function sendTokenBlackthornPaymentsAPI(stripeToken, example) {
 	xhr.send(JSON.stringify(payload));
 }
 
-// put this last
+
 (function() {
 	'use strict';
 
