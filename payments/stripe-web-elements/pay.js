@@ -232,7 +232,6 @@ function registerElements(elements, exampleName) {
 				// If we received a token, show the token ID
 				example.querySelector('.token').innerText = result.token.id;
 
-
 				// here's where we call the Blackthorn Payments Rest API
 				sendTokenBlackthornPaymentsAPI(result.token);
 
@@ -250,7 +249,7 @@ function registerElements(elements, exampleName) {
 
 function sendTokenBlackthornPaymentsAPI(stripeToken) {
 	console.log("stripeToken", stripeToken);
-	console.log("stripeToken JSON", JSON.stringify(r));
+	console.log("stripeToken JSON", JSON.stringify(stripeToken));
 
 	// build the payload for the Payments Rest API
 	var payload = {
