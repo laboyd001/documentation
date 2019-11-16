@@ -234,7 +234,7 @@ function registerElements(elements, exampleName) {
 
 
 				// here's where we call the Blackthorn Payments Rest API
-				sendTokenBlackthornPaymentsAPI(r.token);
+				sendTokenBlackthornPaymentsAPI(result.token);
 
 				// Stop loading!
 				example.classList.remove('submitting');
