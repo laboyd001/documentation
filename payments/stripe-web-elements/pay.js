@@ -8,7 +8,7 @@ var stripe = Stripe(publishableKey);
 var amountToCharge = 19.75;
 
 // changing button to show amount to charge
-document.getElementById('pay_button').innerHTML = 'Pay $' + amountToCharge;
+//document.getElementById('pay_button').innerHTML = 'Pay $' + amountToCharge;
 
 /*
 This is setup to submit to a Salesforce Site. The recommended approach is to oauth to Salesforce
