@@ -5,6 +5,19 @@ It will be different for test and live Payment Gateways.
 var publishableKey = 'pk_test_NsB4y3ep7KUYehaGgz6R9T13';
 var stripe = Stripe(publishableKey);
 
+var amountToCharge = 19.75;
+
+
+/*
+This is setup to submit to a Salesforce Site. The recommended approach is to oauth to Salesforce
+and call our Payments Rest API as an authenticated user. It adds an extra layer of security to
+your checkout.
+
+If you oauth to Salesforce, your endpoint will be: <SF_DOMAIN>/services/apexrest/bt_stripe/v1
+*/
+var paymentsRestEndpoint = 'https://fieldservicemobilepay.secure.force.com/webhooks/services/apexrest/bt_stripe/v1';
+
+
 (function() {
 	'use strict';
 
@@ -76,6 +89,9 @@ var stripe = Stripe(publishableKey);
 	cardCvc.mount('#example2-card-cvc');
 
 	registerElements([cardNumber, cardExpiry, cardCvc], 'example2');
+
+	// changing button to show amount to charge
+	document.getElementById('pay_button').innerHTML = 'Pay $' + amountToCharge;
 })();
 
 
@@ -149,7 +165,26 @@ function registerElements(elements, exampleName) {
 		});
 	});
 
-	// Listen on the form's 'submit' handler...
+	resetButton.addEventListener('click', function(e) {
+		e.preventDefault();
+		// Resetting the form (instead of setting the value to `''` for each input)
+		// helps us clear webkit autofill styles.
+		form.reset();
+
+		// Clear each Element.
+		elements.forEach(function(element) {
+			element.clear();
+		});
+
+		// Reset error state as well.
+		error.classList.remove('visible');
+
+		// Resetting the form does not un-disable inputs, so we need to do it separately:
+		enableInputs();
+		example.classList.remove('submitted');
+	});
+
+	// Listen on the form's 'submit' handler - here's where all the magic happens
 	form.addEventListener('submit', function(e) {
 		e.preventDefault();
 
@@ -192,12 +227,18 @@ function registerElements(elements, exampleName) {
 		// from the Element group in order to create a token. We can also pass
 		// in the additional customer data we collected in our form.
 		stripe.createToken(elements[0], additionalData).then(function(result) {
-			// Stop loading!
-			example.classList.remove('submitting');
 
 			if (result.token) {
-				// If we received a token, show the token ID.
+				// If we received a token, show the token ID
 				example.querySelector('.token').innerText = result.token.id;
+
+
+				// here's where we call the Blackthorn Payments Rest API
+				sendTokenBlackthornPaymentsAPI(r.token);
+
+				// Stop loading!
+				example.classList.remove('submitting');
+
 				example.classList.add('submitted');
 			} else {
 				// Otherwise, un-disable inputs.
@@ -205,23 +246,48 @@ function registerElements(elements, exampleName) {
 			}
 		});
 	});
+}
 
-	resetButton.addEventListener('click', function(e) {
-		e.preventDefault();
-		// Resetting the form (instead of setting the value to `''` for each input)
-		// helps us clear webkit autofill styles.
-		form.reset();
+function sendTokenBlackthornPaymentsAPI(stripeToken) {
+	console.log("stripeToken", stripeToken);
+	console.log("stripeToken JSON", JSON.stringify(r));
 
-		// Clear each Element.
-		elements.forEach(function(element) {
-			element.clear();
-		});
+	// build the payload for the Payments Rest API
+	var payload = {
+		stripePayload : JSON.stringify(stripeToken),
+		action : "createPaymentMethod",
+		isDefault : true,
+		publishableKey : publishableKey,
+		transactionList : [
+			{
+				"amount" : amountToCharge
+			}
+		]
+	};
 
-		// Reset error state as well.
-		error.classList.remove('visible');
+	// this makes a rest call to our Payments API - feel free to use JQuery to make this call
+	var xhr = new XMLHttpRequest();
+	xhr.open('PUT', paymentsRestEndpoint);
+	xhr.setRequestHeader('Content-Type', 'application/json');
+	xhr.onload = function() {
+		if (xhr.status === 200) {
+			//	var userInfo = JSON.parse(xhr.responseText);
+			console.log('PAYMENTS REST API RESPONSE: ', xhr.responseText);
+		//	document.getElementById('salesforce_message').innerText = '';
+		}
+	};
+	xhr.send(JSON.stringify(payload));
 
-		// Resetting the form does not un-disable inputs, so we need to do it separately:
-		enableInputs();
-		example.classList.remove('submitted');
+/*
+	$.ajax({
+		type : 'POST',
+		crossDomain: true,
+		url : endpoint,
+		headers : {
+			'content-type': 'text/plain'
+		},
+		data : JSON.stringify(d),
+		success : salesforceCallback
 	});
+*/
 }
