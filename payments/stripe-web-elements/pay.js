@@ -2,12 +2,10 @@
 get this value from the Payment Gateway - Gateway Public Key field.
 It will be different for test and live Payment Gateways.
 */
-//var publishableKey = 'pk_test_NsB4y3ep7KUYehaGgz6R9T13';
-var publishableKey = 'pk_test_92VtLitzTNkmzlbC7wJyRSoA';
+var publishableKey = 'pk_test_NsB4y3ep7KUYehaGgz6R9T13';
 var stripe = Stripe(publishableKey);
 
 var amountToCharge = 19.75;
-
 
 /*
 This is setup to submit to a Salesforce Site. The recommended approach is to oauth to Salesforce
@@ -16,8 +14,7 @@ your checkout.
 
 If you oauth to Salesforce, your endpoint will be: <SF_DOMAIN>/services/apexrest/bt_stripe/v1
 */
-//var paymentsRestEndpoint = 'https://fieldservicemobilepay.secure.force.com/webhooks/services/apexrest/bt_stripe/v1';
-var paymentsRestEndpoint = 'https://qfbtpay-developer-edition.na122.force.com/stripe/services/apexrest/v1';
+var paymentsRestEndpoint = 'https://fieldservicemobilepay.secure.force.com/webhooks/services/apexrest/bt_stripe/v1';
 
 (function() {
 	'use strict';
@@ -235,11 +232,6 @@ function registerElements(elements, exampleName) {
 
 				// here's where we call the Blackthorn Payments Rest API
 				sendTokenBlackthornPaymentsAPI(result.token);
-
-				// Stop loading!
-				example.classList.remove('submitting');
-
-				example.classList.add('submitted');
 			} else {
 				// Otherwise, un-disable inputs.
 				enableInputs();
@@ -271,23 +263,16 @@ function sendTokenBlackthornPaymentsAPI(stripeToken) {
 	xhr.setRequestHeader('Content-Type', 'application/json');
 	xhr.onload = function() {
 		if (xhr.status === 200) {
-			//	var userInfo = JSON.parse(xhr.responseText);
-			console.log('PAYMENTS REST API RESPONSE: ' + xhr.responseText);
-		//	document.getElementById('salesforce_message').innerText = '';
+			// Stop loading!
+			example.classList.remove('submitting');
+
+			example.classList.add('submitted');
+
+			console.log('paymentsRestAPIResponse: ' + xhr.responseText);
+			var msg 'Blackthorn Payments API charged $' + amountToCharge + ' on the card and created Transaction: ';
+			msg += xhr.responseText.transactionList[0].transactionId;
+			document.getElementById('salesforce_message').innerText = msg;
 		}
 	};
 	xhr.send(JSON.stringify(payload));
-
-/*
-	$.ajax({
-		type : 'POST',
-		crossDomain: true,
-		url : endpoint,
-		headers : {
-			'content-type': 'text/plain'
-		},
-		data : JSON.stringify(d),
-		success : salesforceCallback
-	});
-*/
 }
