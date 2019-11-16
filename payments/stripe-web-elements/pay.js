@@ -2,7 +2,7 @@
 get this value from the Payment Gateway - Gateway Public Key field.
 It will be different for test and live Payment Gateways.
 */
-var publishableKey = 'pk_test_NsB4y3ep7KUYehaGgz6R9T13';
+var publishableKey = 'pk_test_JaW3gRm7yo57hInDNH4mREYR00JgVjOstq';
 var stripe = Stripe(publishableKey);
 
 var amountToCharge = 19.75;
