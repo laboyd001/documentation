@@ -1,3 +1,4 @@
+'use strict';
 /*
 get this value from the Payment Gateway - Gateway Public Key field.
 It will be different for test and live Payment Gateways.
@@ -18,80 +19,6 @@ your checkout.
 If you oauth to Salesforce, your endpoint will be: <SF_DOMAIN>/services/apexrest/bt_stripe/v1
 */
 var paymentsRestEndpoint = 'https://fieldservicemobilepay.secure.force.com/webhooks/services/apexrest/bt_stripe/v1';
-
-(function() {
-	'use strict';
-
-	var elements = stripe.elements();
-
-	// Floating labels
-	var inputs = document.querySelectorAll('.cell.example.example2 .input');
-	Array.prototype.forEach.call(inputs, function(input) {
-		input.addEventListener('focus', function() {
-			input.classList.add('focused');
-		});
-		input.addEventListener('blur', function() {
-			input.classList.remove('focused');
-		});
-		input.addEventListener('keyup', function() {
-			if (input.value.length === 0) {
-				input.classList.add('empty');
-			} else {
-				input.classList.remove('empty');
-			}
-		});
-	});
-
-	var elementStyles = {
-		base: {
-			color: '#32325D',
-			fontWeight: 500,
-			fontFamily: 'monospace, sans-serif',
-			fontSize: '16px',
-			fontSmoothing: 'antialiased',
-
-			'::placeholder': {
-				color: '#CFD7DF',
-			},
-			':-webkit-autofill': {
-				color: '#e39f48',
-			},
-		},
-		invalid: {
-			color: '#E25950',
-			'::placeholder': {
-				color: '#FFCCA5',
-			},
-		},
-	};
-
-	var elementClasses = {
-		focus: 'focused',
-		empty: 'empty',
-		invalid: 'invalid',
-	};
-
-	var cardNumber = elements.create('cardNumber', {
-		style: elementStyles,
-		classes: elementClasses,
-	});
-	cardNumber.mount('#example2-card-number');
-
-	var cardExpiry = elements.create('cardExpiry', {
-		style: elementStyles,
-		classes: elementClasses,
-	});
-	cardExpiry.mount('#example2-card-expiry');
-
-	var cardCvc = elements.create('cardCvc', {
-		style: elementStyles,
-		classes: elementClasses,
-	});
-	cardCvc.mount('#example2-card-cvc');
-
-	registerElements([cardNumber, cardExpiry, cardCvc], 'example2');
-})();
-
 
 function registerElements(elements, exampleName) {
 	var formClass = '.' + exampleName;
@@ -288,3 +215,77 @@ function sendTokenBlackthornPaymentsAPI(stripeToken, example) {
 	};
 	xhr.send(JSON.stringify(payload));
 }
+
+// put this last
+(function() {
+	'use strict';
+
+	var elements = stripe.elements();
+
+	// Floating labels
+	var inputs = document.querySelectorAll('.cell.example.example2 .input');
+	Array.prototype.forEach.call(inputs, function(input) {
+		input.addEventListener('focus', function() {
+			input.classList.add('focused');
+		});
+		input.addEventListener('blur', function() {
+			input.classList.remove('focused');
+		});
+		input.addEventListener('keyup', function() {
+			if (input.value.length === 0) {
+				input.classList.add('empty');
+			} else {
+				input.classList.remove('empty');
+			}
+		});
+	});
+
+	var elementStyles = {
+		base: {
+			color: '#32325D',
+			fontWeight: 500,
+			fontFamily: 'monospace, sans-serif',
+			fontSize: '16px',
+			fontSmoothing: 'antialiased',
+
+			'::placeholder': {
+				color: '#CFD7DF',
+			},
+			':-webkit-autofill': {
+				color: '#e39f48',
+			},
+		},
+		invalid: {
+			color: '#E25950',
+			'::placeholder': {
+				color: '#FFCCA5',
+			},
+		},
+	};
+
+	var elementClasses = {
+		focus: 'focused',
+		empty: 'empty',
+		invalid: 'invalid',
+	};
+
+	var cardNumber = elements.create('cardNumber', {
+		style: elementStyles,
+		classes: elementClasses,
+	});
+	cardNumber.mount('#example2-card-number');
+
+	var cardExpiry = elements.create('cardExpiry', {
+		style: elementStyles,
+		classes: elementClasses,
+	});
+	cardExpiry.mount('#example2-card-expiry');
+
+	var cardCvc = elements.create('cardCvc', {
+		style: elementStyles,
+		classes: elementClasses,
+	});
+	cardCvc.mount('#example2-card-cvc');
+
+	registerElements([cardNumber, cardExpiry, cardCvc], 'example2');
+})();
