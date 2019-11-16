@@ -263,15 +263,14 @@ function sendTokenBlackthornPaymentsAPI(stripeToken) {
 	xhr.setRequestHeader('Content-Type', 'application/json');
 	xhr.onload = function() {
 		if (xhr.status === 200) {
-			// Stop loading!
-			example.classList.remove('submitting');
-
-			example.classList.add('submitted');
-
 			console.log('paymentsRestAPIResponse: ' + xhr.responseText);
 			var msg = 'Blackthorn Payments API charged $' + amountToCharge + ' on the card and created Transaction: ';
 			msg += xhr.responseText.transactionList[0].transactionId;
 			document.getElementById('salesforce_message').innerText = msg;
+
+			// Stop loading!
+			example.classList.remove('submitting');
+			example.classList.add('submitted');
 		}
 	};
 	xhr.send(JSON.stringify(payload));
