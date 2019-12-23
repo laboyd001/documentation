@@ -1,5 +1,6 @@
-**Blackthorn | Payments REST API Documentation**
--------------------------------------
+# Blackthorn | Payments REST API Documentation
+
+
 This is a documentation for the generic usage of the API and the `createPaymentMethod` action (create Payment Methods with or without Transactions).
 
 -------------------------------------

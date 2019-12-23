@@ -1,10 +1,45 @@
 # API Documentation
 
+Blackthorn provides multiple APIs to give you the most flexibility for custom implementations. All of our APIs are documented in this repository along with some working examples.
+
+## Payments
+
+### Stripe Elements + Blackthorn Payments Rest API
+Here are recommended working examples on how to use Stripe Elements with the Blackthorn Payments Rest API to ensure a **SAQ A** PCI Compliance Level.
+
+[Stripe Elements for Card](https://blackthornio.github.io/documentation/payments/stripe-web-elements-card/stripe-elements-blackthorn-payments-card.html)
+
+<!-- uncomment these once they're done
+[Stripe Elements for ACH](https://blackthornio.github.io/documentation/payments/stripe-web-elements-ach/stripe-elements-blackthorn-payments-ach.html)
+
+
+### Authorize.net Accept Hosted + Blackthorn Payments Rest API
+Here are recommended working examples on how to use Accept Hosted with the Blackthorn Payments Rest API to ensure a **SAQ A** PCI Compliance Level.
+
+[Authorize.net Accept Hosted for Card](https://blackthornio.github.io/documentation/payments/authorizenet-accept-hosted-card/TODO-card.html)
+
+
+[Authorize.net Accept Hosted for eCheck](https://blackthornio.github.io/documentation/payments/authorizenet-accept-hosted-echeck/TODO-echeck.html)
+ -->
+
+
+### Rest Payments API
+The Rest Payments API can be used to build custom Card and ACH Payment processing. It works with our supported Payment Gateways to save reusable Payment Methods and authorize or capture Transaction Charges. All data is saved in Salesforce and can also be related to whatever objects you use. [More information is available in the documentation](/payments/payments_rest_api.md)
+
+
+### Apex Payments API
+The Apex Payments API makes it easy to create Customers, Payment Methods, Transactions and Payment Schedules with simple method calls from your Salesforce Apex code. It makes callouts to the Payment Gateway to create Customers, Payment Methods and Charge Transactions as well as creating the corresponding records in Salesforce. [More information is available in the documentation](/payments/payments_apex_api.md)
+
+
+### Checkout Rest API
+The Checkout API can be used to create a shopping cart to capture relevant data for a custom checkout experience. It can be used with our Payments Rest API to capture a payment as a checkout step. [More information is available in the documentation](/payments/checkout_api.md).
+
+
+## Events
+
 * [Events Data Rest API](/events/events_data_api.md). A service for querying Event records from Salesforce.
 
 * [Events Waitlist Rest API](/events/events_addtowaitlist_api.md). A service for checking waitlists and adding attendees to waitlists.
-
-* [Checkout Rest API (for paid checkouts)](/payments/checkout_api.md). A service to tokenize a card during checkout.
 
 * [Events Checkout Rest API](/events/events_checkout_api.md). A service to submit event checkouts.
 
