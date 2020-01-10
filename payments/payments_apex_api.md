@@ -3,16 +3,16 @@
 
 ## Introduction
 
-The purpose of the Apex API is to provide Salesforce developers classes and methods to manipulate Payment Methods, Transactions and Stripe Customers. The API is created in the form of a global Apex class, so it is available in your org when the payments package is installed.
+The purpose of the Apex API is to provide Salesforce developers a global class and methods that allows you to interact with the `Payment Gateway Customer`, `Payment Method` and `Transaction` objects in the Payment package. Our Apex API allows you to make callouts to our supported Payment Gateways to create records in their system and then create the corresponding records in Salesforce. This makes it easy to work with the Salesforce requirement that all callouts must be done before any database commits are made.
 
 ## Structure
-All of the classes are part of the `bt_stripe.P360_API_v1` class.
+All of the classes are part of the global `bt_stripe.P360_API_v1` class.
 
 The following wrapper classes are available:
 
-* `bt_stripe.Customer` represents a Customer in Stripe's database. Corresponds to the **bt_stripe__Stripe_Customer__c** object
-* `bt_stripe.PM` represents Payment Method in Stripe's database. Corresponds to the **bt_stripe__Payment_Method__c** object
-* `bt_stripe.Tra` represents Transaction in Stripe's database. Corresponds to the **bt_stripe__Transaction__c** object
+* `bt_stripe.Customer` represents a Payment Gateway Customer in the Payment Gateway provider's database. Corresponds to the **bt_stripe__Stripe_Customer__c** object
+* `bt_stripe.PM` represents Payment Method in Payment Gateway provider's database. Corresponds to the **bt_stripe__Payment_Method__c** object
+* `bt_stripe.Tra` represents Transaction in Payment Gateway provider's database. Corresponds to the **bt_stripe__Transaction__c** object
 
 Create these objects using factory methods below because the API class should register them in the background:
 
@@ -28,13 +28,13 @@ This call saves your work in existing or new SOQL recods. This is a DML operatio
 
 ## Basic example
 
-This code snippet creates a new Customer and adds a new Payment Method. Once the Payment Method is registered to Stripe, a new Transaction is created and captured. If you copy this code and execute it in the Salesforce Developer Console, it will create 3 records in Salesforce: Stripe Customer, Payment Method and Transaction.
+This code snippet creates a new Payment Gateway Customer and adds a new Payment Method. Once the Payment Method is registered with the Payment Gateway, a new Transaction is created and captured. If you copy this code and execute it in the Salesforce Developer Console, it will create 3 records in Salesforce: Payment Gateway Customer, Payment Method and Transaction.
 
 Note that all the entities are created using the factory methods. You need to set all the required properties. After they are set, you can call action methods on them. For example `c.registerCustomer()` or `t.capture()`.
 
 Also note that `bt_stripe.P360_API_v1.commitWork()` is happening as the very last action.
 
-It is very important to catch any errors. If an error happens (for example, a Payment Method can't be registered for some reason), the API is throwing a `bt_stripe.P360_API_v1.P360_Exception`. Catching the error can let you decide about the further flow of your business logic. 
+It is very important to catch any errors. If an error happens (for example, a Payment Method can't be registered for some reason), the API is throwing a `bt_stripe.P360_API_v1.P360_Exception`. Catching the error can let you decide about the further flow of your business logic.
 
 
 ```
@@ -42,8 +42,8 @@ It is very important to catch any errors. If an error happens (for example, a Pa
 bt_stripe__Payment_Gateway__c[] pgList = [SELECT Id FROM bt_stripe__Payment_Gateway__c
 	WHERE bt_stripe__Default__c = true];
 
-// pass in a bt_stripe__Stripe_Customer__c Id - if set, we'll use that bt_stripe__Stripe_Customer__c, if null we'll create a new record
-Id stripeCustomerId = null;
+// pass in a bt_stripe__Stripe_Customer__c.Id - if set, we'll use that bt_stripe__Stripe_Customer__c, if null we'll create a new record
+Id customerId = null;
 
 // create these outside the try block so we can reference them outsize the try/catch block if necessary
 bt_stripe.P360_API_v1.Customer customer;
@@ -53,18 +53,20 @@ bt_stripe.P360_API_v1.Tra tran;
 // It is good practice to put your p360 action in a try block. If something goes wrong,
 // the API throws a bt_stripe.P360_API_v1.P360_Exception exception
 try {
-	/* initialize a new Stripe Customer object using factory methods - if a customerId (bt_stripe__Stripe_Contact__c.Id)
-	is passed in, that Stripe Customer record is used. if the customerId is null, a new bt_stripe__Stripe_Contact__c
+	/* initialize a new Payment Gateway Customer object using factory methods - if a customerId (bt_stripe__Stripe_Customer__c.Id)
+	is passed in, that Payment Gateway Customer record is used. if the customerId is null, a new bt_stripe__Stripe_Customer__c
 	record will be created */
-	customer = bt_stripe.P360_API_v1.customerFactory(stripeCustomerId);
+	customer = bt_stripe.P360_API_v1.customerFactory(customerId);
 
 	if (customer.record == null || customer.record.Id == null) {
-		// did not find a Stripe Customer record for the stripeCustomerId - was probably null)
-		// need to set these required fields since the Stripe Customer was not found and call registerCustomer()
+		// did not find a Payment Gateway Customer record for the customerId - was probably null)
+		// need to set these required fields since the Payment Gateway Customer was not found and call registerCustomer()
 		customer.paymentGatewayId = pgList[0].Id;
 		customer.name = 'New Customer';
 		customer.email = 'someone@blackthorn.io';
-		// this method creates a Customer record in Stripe but does not yet create a Stripe Customer record in SF
+		customer.phone = '303-867-5309';
+
+		// this method creates a Customer record in the Payment Gateway but does not yet create a Payment Gateway Customer record in SF
 		customer.registerCustomer();
 	}
 
@@ -93,19 +95,19 @@ try {
 	pm.country = 'US';
 	pm.defaultpm = true;
 
-	// this method creates a Payment Method in Stripe but does not yet create a Payment Method in SF
+	// this method creates a Payment Method in the Payment Gateway but does not yet create a Payment Method in SF
 	pm.registerPM();
 
-	/* look for error messages on the Payment Method - this field is set if Stripe returns a decline code or if the card fails the 		fraud/cvv/zip check */
+	/* look for error messages on the Payment Method - this field is set if the Payment Gateway returns a decline code or if the card fails the fraud/cvv/zip check */
 	if (String.isNotBlank(pm.record.bt_stripe__Error_Message__c)) {
-		// commit work here will create a Stripe Customer and Payment Method (w Status = Invalid) record
+		// commit work here will create a Payment Gateway Customer and Payment Method (w Status = Invalid) record
 		bt_stripe.P360_API_v1.commitWork();
 		System.debug('pm.record.bt_stripe__Payment_Method_Status__c = ' + pm.record.bt_stripe__Payment_Method_Status__c);
 		System.debug('pm.record.bt_stripe__Error_Message__c = ' + pm.record.bt_stripe__Error_Message__c);
-		/* return the Stripe Customer Id to the Component/Page and store it as an attribute. then pass it in if the customer 			enters a new */
-		// credit card and the new Payment Method will be associated to the existing Stripe Customer
+		/* return the Payment Gateway Customer Id to the Component/Page and store it as an attribute. then pass it in if the customer enters a new */
+		// credit card and the new Payment Method will be associated to the existing Payment Gateway Customer
 		System.debug('customer.record.Id = ' + customer.record.Id);
-		return; // return the Stripe Customer Id and error message to the Component/Page
+		return; // return the Payment Gateway Customer Id and error message to the Component/Page
 	}
 
 	// create a Transaction, set the amount and Payment Method - then capture it
@@ -118,10 +120,10 @@ try {
 }
 bt_stripe.P360_API_v1.commitWork(); // commit work so SF records are created
 
-// get the Stripe Customer record so the Id can be used if you want to ask for another Payment Method from the customer
-bt_stripe__Stripe_Customer__c stripeCustomer = customer.record;
-System.debug('stripeCustomer = ' + stripeCustomer);
-System.debug('stripeCustomer.Id = ' + stripeCustomer.Id);
+// get the Payment Gateway Customer record so the Id can be used if you want to ask for another Payment Method from the customer
+bt_stripe__Stripe_Customer__c paymentGatewayCustomer = customer.record;
+System.debug('paymentGatewayCustomer = ' + paymentGatewayCustomer);
+System.debug('paymentGatewayCustomer.Id = ' + paymentGatewayCustomer.Id);
 
 // this Payment Method will have Payment Method Status = Invalid and a Error Message = Your card has insufficient funds.
 bt_stripe__Payment_Method__c paymentMethod = pm.record;
@@ -138,7 +140,7 @@ System.debug('transactionRecord.Id = ' + transactionRecord.Id);
 
 ### bt_stripe.P360_API_v1.Customer
 
-Represents a Stripe Customer
+Represents a Payment Gateway Customer
 
 #### Initializing
 
@@ -148,7 +150,7 @@ Use the `customerFactory()` method.
 
 Creates an empty Customer class.
 
-* `bt_stripe.P360_API_v1.Customer c = bt_stripe.P360_API_v1.customerFactory(stripeCustomerId);`
+* `bt_stripe.P360_API_v1.Customer c = bt_stripe.P360_API_v1.customerFactory(customerRecordId);`
 
 Creates a Customer class from an existing SOQL **bt_stripe__Stripe_Customer__c** object.
 
@@ -156,23 +158,23 @@ Creates a Customer class from an existing SOQL **bt_stripe__Stripe_Customer__c**
 
 * __name__ Name of the Customer. Required.
 * __email__ Email of the Customer.
-* __paymentGatewayId__ Id of the Payment Gateway associated with the Stripe Customer. Required.
-* __accountId__ Id of the Account associated with the Customer.
-* __contactId__ Id of the Contact associated with the Customer.
+* __phone__ Phone of the Customer.
+* __paymentGatewayId__ Id of the Payment Gateway you want to associate to the Payment Gateway Customer. Required.
+* __accountId__ Id of the Account you want to associate to the Customer.
+* __contactId__ Id of the Contact you want to associate to the Customer.
+* __leadId__ Id of the Lead you want to associate to the Customer.
 * __record__ **bt_stripe__Stripe_Customer__c** record of the Customer. Available after calling the `registerCustomer()` method.
 
 #### Actions
 
-* `registerCustomer()` Registers the Customer in Stripe. After calling the method, __record__ property is available.
-
-* `updateCustomer()` Need to implement.
+* `registerCustomer()` Registers the Payment Gateway Customer in the Payment Gateway. After calling the method, __record__ property is available.
 
 
 
 
 ### bt_stripe.P360_API_v1.PM
 
-Represents a Stripe Payment Method (Works with credit cards only for now)
+Represents a Payment Method (Works with credit cards only for now)
 
 #### Initializing
 
@@ -187,15 +189,15 @@ Creates an empty PM class.
 Creates a PM class from an existing SOQL **bt_stripe__Payment_Method__c** object.
 
 #### Properties
-* __paymentGatewayId__ Id of the Payment Gateway associated with the Stripe Payment Method. Required.
-* __customer__ reference to bt_stripe.P360_API_v1.Customer object for associating Payment Method to Customer. Required.
+* __paymentGatewayId__ Id of the Payment Gateway associated with the Payment Gateway Payment Method. Required.
+* __customer__ reference to bt_stripe.P360_API_v1.Customer object for associating Payment Method to the Payment Gateway Customer. Required.
 * __cardHolderName__ Name on the card. Required.
 * __stripeToken__ Tokenized card or ACH. string represantation (tok_XXXXXXXXX); see Token object on Stripe REST API docs. USE THIS instead of raw card data if possible.
 
 OR
 
 * __cardNumber__ The card number, as a string without any separators. Required.
-* __cardExpYear__ Two or four digit number representing the card's expiration year. Required. 
+* __cardExpYear__ Two or four digit number representing the card's expiration year. Required.
 * __cardExpMonth__ Two digit number representing the card's expiration month. Required.
 * __cvv__ Card security code. Not required, but it is good practice to always pass this property.
 * __record__ **bt_stripe__Payment_Method__c** record of the Payment Method. Available after calling the `registerPM()` method.
@@ -211,14 +213,12 @@ AND
 * __defaultpm__ If set to `true`, the new Payment Method is set as the Customer's default
 #### Actions
 
-* `registerPM()` Registers the Payment Method in Stripe. After calling the method, __record__ property is available.
-
-* `updatePM()` Need to implement.
+* `registerPM()` Registers the Payment Method in the Payment Gateway. After calling the method, __record__ property is available.
 
 
 ### bt_stripe.P360_API_v1.Tra
 
-Represents a Stripe Transaction
+Represents a Transaction
 
 #### Initializing
 
@@ -238,14 +238,14 @@ Creates a Tra class from an existing SOQL **bt_stripe__Transaction__c** object.
 * __amount__ Decimal number representing how much to charge (in dollars). The smallest accepted amount is 0.05. Required.
 * __dueDate__ Used by Payment360 app for auto-processing transactions on scheduled dates. Optional.
 * __authOnly__ Boolean flag for creating authorize-only transactions. Default value is false.
-* __paymentGatewayId__ Id of the Payment Gateway associated with the Stripe Transaction. Required.
+* __paymentGatewayId__ Id of the Payment Gateway associated with the Transaction. Required.
 * __record__ **bt_stripe__Transaction__c** record of the Payment Method. Available after calling the `register()` method.
 * __currencyCode__ 3-letter ISO code of the used currency. If not set, default Payment Gateway currency is used.
-* __description__ Description of the Transaction. Will be displayed on the record and in the Stripe Dashboard.
+* __description__ Description of the Transaction.
 
 #### Actions
 
-* `register()` Registers an open transaction in Salesforce.com database without sending it to Stripe server. After calling the method, __record__ property is available.
+* `register()` Registers an open transaction in Salesforce.com database without sending it to the Payment Gateway. After calling the method, __record__ property is available.
 
 * `authorize()` Authorizes a new or existing open transaction. Throws exception if transaction is already authorized or captured.
 
@@ -259,7 +259,7 @@ Creates a Tra class from an existing SOQL **bt_stripe__Transaction__c** object.
 
 ### Examples
 
-Example 1: Creating a Stripe Customer
+Example 1: Creating a Payment Gateway Customer
 
 	try {
 		bt_stripe.P360_API_v1.Customer c = bt_stripe.P360_API_v1.customerFactory();
@@ -271,8 +271,9 @@ Example 1: Creating a Stripe Customer
 		//optionally set AccountId and/or ContactId for associating new customer with
 		c.accountId = accountId;
 		c.contactId = contactId;
+		// c.leadId = leadId; // you could also associate a Payment Gateway Customer to a Lead if needed
 		
-		//bt_stripe.P360_API_v1.P360_Exception if something goes wrong with creating customer in Stripe
+		//bt_stripe.P360_API_v1.P360_Exception if something goes wrong with creating customer in a Payment Gateway
 		c.registerCustomer();
 		
 		//bt_stripe.P360_API_v1.P360_Exception if something goes wrong with committing records in database
@@ -281,7 +282,7 @@ Example 1: Creating a Stripe Customer
 		//do error handling here
 	}
 
-Example 2: Creating a Stripe Customer and Stripe Payment Method
+Example 2: Creating a Payment Gateway Customer and Payment Method
 
 	try {
 		bt_stripe.P360_API_v1.Customer c = bt_stripe.P360_API_v1.customerFactory();
@@ -306,7 +307,7 @@ Example 2: Creating a Stripe Customer and Stripe Payment Method
 		//bt_stripe.P360_API_v1.P360_Exception if something goes wrong with creating Payment Method in Stripe
 		pm.registerPM();
 
-		/* look for error messages on the Payment Method - this field is set if Stripe returns a decline code or if
+		/* look for error messages on the Payment Method - this field is set if the Payment Gateway returns a decline code or if
 		the card fails the fraud/cvv/zip check */
 		if (String.isNotBlank(pm.record.bt_stripe__Error_Message__c)) {
 			// if you're in this if statement, the Payment Method was declined
@@ -320,7 +321,7 @@ Example 2: Creating a Stripe Customer and Stripe Payment Method
 		//do error handling here
 	}
 
-Example 3: Creating a Stripe Customer, Stripe Payment Method and capture Stripe Transaction
+Example 3: Creating a Payment Gateway Customer, Payment Method and capture Transaction
 
 	try {
 		bt_stripe.P360_API_v1.Customer c = bt_stripe.P360_API_v1.customerFactory();
@@ -331,7 +332,7 @@ Example 3: Creating a Stripe Customer, Stripe Payment Method and capture Stripe 
 		//optionally set AccountId and/or ContactId for associating the new customer with
 		c.accountId = accountId;
 		c.contactId = contactId;
-		//bt_stripe.P360_API_v1.P360_Exception if something goes wrong with creating the customer in Stripe
+		//bt_stripe.P360_API_v1.P360_Exception if something goes wrong with creating the customer in the Payment Gateway
 		c.registerCustomer();
 		
 		bt_stripe.P360_API_v1.PM pm = bt_stripe.P360_API_v1.paymentMethodFactory();
@@ -342,10 +343,10 @@ Example 3: Creating a Stripe Customer, Stripe Payment Method and capture Stripe 
 		pm.cardExpYear = '19';
 		pm.cardExpMonth = '09';
 		pm.cvv = '000';
-		//bt_stripe.P360_API_v1.P360_Exception if something goes wrong with creating the Payment Method in Stripe
+		//bt_stripe.P360_API_v1.P360_Exception if something goes wrong with creating the Payment Method in the Payment Gateway
 		pm.registerPM();
 
-		/* look for error messages on the Payment Method - this field is set if Stripe returns a decline code or if
+		/* look for error messages on the Payment Method - this field is set if the Payment Gateway returns a decline code or if
 		the card fails the fraud/cvv/zip check */
 		if (String.isNotBlank(pm.record.bt_stripe__Error_Message__c)) {
 			// if you're in this if statement, the Payment Method was declined
@@ -379,7 +380,7 @@ Example 4: Creating Payment Method for an existing Customer
 		pm.cardExpYear = '19';
 		pm.cardExpMonth = '09';
 		pm.cvv = '000';
-		//bt_stripe.P360_API_v1.P360_Exception if something goes wrong with creating a Payment Method in Stripe
+		//bt_stripe.P360_API_v1.P360_Exception if something goes wrong with creating a Payment Method in the Payment Gateway
 		pm.registerPM();
 
 		//bt_stripe.P360_API_v1.P360_Exception if something goes wrong with committing records in database
