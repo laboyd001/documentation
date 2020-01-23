@@ -169,7 +169,7 @@ function registerElements(elements, exampleName) {
 }
 
 
-function sendPaymentDataToAnet(example) {
+function sendPaymentDataToAnet(exampleName) {
 	var formClass = '.' + exampleName;
 	var example = document.querySelector(formClass);
 
@@ -352,7 +352,6 @@ function sendPaymentDataToAnet(example) {
 }
 
 function sendTokenBlackthornPaymentsAPI(authnetToken, example) {
-	console.log('authnetToken ==> ' + authnetToken);
 	console.log('authnetToken: ' + JSON.stringify(authnetToken));
 
 	// build the payload for the Payments Rest API - lots of attributes can be set here
