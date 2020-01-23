@@ -404,7 +404,7 @@ function sendTokenBlackthornPaymentsAPI(authnetToken, example) {
 (function() {
 	'use strict';
 
-	var elements = stripe.elements();
+//	var elements = stripe.elements();
 
 	// Floating labels
 	var inputs = document.querySelectorAll('.cell.example.example2 .input');
@@ -453,7 +453,7 @@ function sendTokenBlackthornPaymentsAPI(authnetToken, example) {
 		invalid: 'invalid',
 	};
 
-	var cardNumber = elements.create('cardNumber', {
+/*	var cardNumber = elements.create('cardNumber', {
 		style: elementStyles,
 		classes: elementClasses,
 	});
@@ -469,7 +469,7 @@ function sendTokenBlackthornPaymentsAPI(authnetToken, example) {
 		style: elementStyles,
 		classes: elementClasses,
 	});
-	cardCvc.mount('#example2-card-cvc');
+	cardCvc.mount('#example2-card-cvc');*/
 
 	//registerElements([cardNumber, cardExpiry, cardCvc], 'example2');
 	sendPaymentDataToAnet([cardNumber, cardExpiry, cardCvc], 'example2');
