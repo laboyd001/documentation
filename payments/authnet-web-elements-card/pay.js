@@ -211,7 +211,7 @@ function sendPaymentDataToAnet(elements, example) {
 	}
 
 	// Listen for errors from each Element, and show error messages in the UI.
-	var savedErrors = {};
+/*	var savedErrors = {};
 	elements.forEach(function(element, idx) {
 		element.on('change', function(event) {
 			if (event.error) {
@@ -256,7 +256,7 @@ function sendPaymentDataToAnet(elements, example) {
 		// Resetting the form does not un-disable inputs, so we need to do it separately:
 		enableInputs();
 		example.classList.remove('submitted');
-	});
+	});*/
 
 	// Listen on the form's 'submit' handler - here's where all the magic happens
 	form.addEventListener('submit', function(e) {
@@ -303,8 +303,8 @@ function sendPaymentDataToAnet(elements, example) {
         authData.apiLoginID = apiLoginID;
 
     var cardData = {};
-		cardData.cardNumber = elements[0];
-		var cardExpiry = elements[1].split('/');
+		cardData.cardNumber = form.querySelector('#' + exampleName + '-card-number');
+		var cardExpiry = form.querySelector('#' + exampleName + '-card-expiry').split('/');
         cardData.month = cardExpiry[0];
         cardData.year = cardExpiry[1];
         cardData.cardCode = elements[2];
@@ -352,6 +352,7 @@ function sendPaymentDataToAnet(elements, example) {
 }
 
 function sendTokenBlackthornPaymentsAPI(authnetToken, example) {
+	console.log('authnetToken ==> ' + authnetToken);
 	console.log('authnetToken: ' + JSON.stringify(authnetToken));
 
 	// build the payload for the Payments Rest API - lots of attributes can be set here
