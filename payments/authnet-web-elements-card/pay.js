@@ -316,7 +316,7 @@ function sendPaymentDataToAnet(exampleName) {
         secureData.authData = authData;
         secureData.cardData = cardData;
 
-    Accept.dispatchData(secureData, responseHandler);
+    //Accept.dispatchData(secureData, responseHandler);
 
     function responseHandler(response) {
         if (response.messages.resultCode === "Error") {
@@ -425,7 +425,7 @@ function sendTokenBlackthornPaymentsAPI(authnetToken, example) {
 		});
 	});
 
-	var elementStyles = {
+	/*var elementStyles = {
 		base: {
 			color: '#32325D',
 			fontWeight: 500,
@@ -454,7 +454,7 @@ function sendTokenBlackthornPaymentsAPI(authnetToken, example) {
 		invalid: 'invalid',
 	};
 
-/*	var cardNumber = elements.create('cardNumber', {
+	var cardNumber = elements.create('cardNumber', {
 		style: elementStyles,
 		classes: elementClasses,
 	});
