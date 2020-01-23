@@ -297,6 +297,7 @@ function sendPaymentDataToAnet(elements, example) {
 			address_zip: zip ? zip.value : undefined,
 		};
 
+	});
     var authData = {};
         authData.clientKey = publishableKey;
         authData.apiLoginID = apiLoginID;
