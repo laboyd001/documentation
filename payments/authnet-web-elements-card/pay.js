@@ -169,7 +169,7 @@ function registerElements(elements, exampleName) {
 }
 
 
-function sendPaymentDataToAnet(elements, example) {
+function sendPaymentDataToAnet(example) {
 	var formClass = '.' + exampleName;
 	var example = document.querySelector(formClass);
 
@@ -473,5 +473,5 @@ function sendTokenBlackthornPaymentsAPI(authnetToken, example) {
 	cardCvc.mount('#example2-card-cvc');*/
 
 	//registerElements([cardNumber, cardExpiry, cardCvc], 'example2');
-	sendPaymentDataToAnet([cardNumber, cardExpiry, cardCvc], 'example2');
+	sendPaymentDataToAnet('example2');
 })();
