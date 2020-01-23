@@ -279,7 +279,7 @@ function sendPaymentDataToAnet(exampleName) {
 		example.classList.add('submitting');
 
 		// Disable all inputs.
-		disableInputs();
+		//disableInputs();
 
 		// Gather additional customer data we may have collected in our form.
 		var name = form.querySelector('#' + exampleName + '-name');
