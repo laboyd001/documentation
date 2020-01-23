@@ -304,10 +304,11 @@ function sendPaymentDataToAnet(exampleName) {
 
     var cardData = {};
 		cardData.cardNumber = form.querySelector('#' + exampleName + '-card-number');
-		var cardExpiry = form.querySelector('#' + exampleName + '-card-expiry').split('/');
-        cardData.month = cardExpiry[0];
-        cardData.year = cardExpiry[1];
-        cardData.cardCode = elements[2];
+		var cardExpiry = form.querySelector('#' + exampleName + '-card-expiry');
+		console.log('cardExpiry ==> ' + cardExpiry);
+        cardData.month = cardExpiry;
+        cardData.year = cardExpiry;
+        cardData.cardCode = form.querySelector('#' + exampleName + '-card-cvc');
 
 		console.log('cardData ===> ' + cardData);
 
