@@ -282,7 +282,7 @@ function sendPaymentDataToAnet(elements, example) {
 		disableInputs();
 
 		// Gather additional customer data we may have collected in our form.
-	/*	var name = form.querySelector('#' + exampleName + '-name');
+		var name = form.querySelector('#' + exampleName + '-name');
 		var email = form.querySelector('#' + exampleName + '-email');
 		var address1 = form.querySelector('#' + exampleName + '-address');
 		var city = form.querySelector('#' + exampleName + '-city');
@@ -295,10 +295,7 @@ function sendPaymentDataToAnet(elements, example) {
 			address_city: city ? city.value : undefined,
 			address_state: state ? state.value : undefined,
 			address_zip: zip ? zip.value : undefined,
-		};*/
-	});
-	// Show a loading screen...
-	example.classList.add('submitting');
+		};
 
     var authData = {};
         authData.clientKey = publishableKey;
