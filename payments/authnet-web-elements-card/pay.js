@@ -100,7 +100,7 @@ function sendPaymentDataToAnet(exampleName) {
 	
 		var cardData = {};
 			var cc = form.querySelector('#' + 'example2' + '-card-number').value;
-			cardData.cardNumber = cc.replace(' '/g, '');
+			cardData.cardNumber = cc.replace(/ /g,'');
 			var cardExpiry = form.querySelector('#' + 'example2' + '-card-expiry').value;
 			var	cardArray = cardExpiry.toString().split('/');
 			cardData.month = cardArray[0];
