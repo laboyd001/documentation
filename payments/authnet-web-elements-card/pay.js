@@ -99,7 +99,8 @@ function sendPaymentDataToAnet(exampleName) {
 			authData.apiLoginID = apiLoginID;
 	
 		var cardData = {};
-			cardData.cardNumber = form.querySelector('#' + 'example2' + '-card-number').value;
+			var cc = form.querySelector('#' + 'example2' + '-card-number').value;
+			cardData.cardNumber = cc.replace(' '/g, '');
 			var cardExpiry = form.querySelector('#' + 'example2' + '-card-expiry').value;
 			var	cardArray = cardExpiry.toString().split('/');
 			cardData.month = cardArray[0];
@@ -115,7 +116,6 @@ function sendPaymentDataToAnet(exampleName) {
 	}
 
 	function responseHandler(response) {
-		debugger;
 		var formClass = '.' + 'example2';
 		var example = document.querySelector(formClass);
 		var form = example.querySelector('form');
@@ -178,7 +178,7 @@ function sendPaymentDataToAnet(exampleName) {
 					} else {
 						msg = 'Error from Blackthorn Payments Rest API: ' + response.errorMessage;
 					}
-					console.log('msg ==> ' + msg);
+					alert(msg);
 	
 					document.getElementById('salesforce_message').innerText = msg;
 	
@@ -213,8 +213,40 @@ function sendPaymentDataToAnet(exampleName) {
 			} else {
 				input.classList.remove('empty');
 			}
+			document.getElementById('example2-card-number').value = cc_format(document.getElementById('example2-card-number').value);
+			document.getElementById('example2-card-expiry').value = cc_expiryMonthAndYear (document.getElementById('example2-card-expiry').value);
 		});
 	});
 
 	sendPaymentDataToAnet('example2');
 })();
+
+function cc_format(value) {
+	var v = value.replace(/\s+/g, '').replace(/[^0-9]/gi, '')
+	var matches = v.match(/\d{4,16}/g);
+	var match = matches && matches[0] || ''
+	var parts = []
+	for (var i=0, len=match.length; i<len; i+=4) {
+	  parts.push(match.substring(i, i+4))
+	}
+	if (parts.length) {
+	  return parts.join(' ')
+	} else {
+	  return value
+	}
+  }
+
+  function cc_expiryMonthAndYear(value) {
+	var v = value.replace(/\s+/g, '').replace(/[^0-9]/gi, '')
+	var matches = v.match(/\d{2,4}/g);
+	var match = matches && matches[0] || ''
+	var parts = []
+	for (var i=0, len=match.length; i<len; i+=2) {
+	  parts.push(match.substring(i, i+2))
+	}
+	if (parts.length) {
+	  return parts.join('/')
+	} else {
+	  return value
+	}
+  }
