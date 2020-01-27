@@ -12,12 +12,10 @@
 	is submitted directly to them for maximum PCI compliance. They then return a token
 	that can be use to capture a charge using the Blackthorn Payments Rest API.
 	-->
-	<script src="https://jstest.authorize.net/v1/Accept.js/"></script>
+	<!-- <script src="https://jstest.authorize.net/v1/Accept.js/"></script> -->
+	<script type="text/javascript" src="https://jstest.authorize.net/v1/Accept.js" charset="utf-8">
+	</script>
 
-	<!--
-	The css for this form is from Stripe's elements examples. More can be viewed here
-	https://stripe.dev/elements-examples
-	-->
 	<link rel="stylesheet" type="text/css" href="base.css" data-rel-css=""/>
 	<link rel="stylesheet" type="text/css" href="pay.css" data-rel-css=""/>
 </head>
@@ -26,12 +24,12 @@
 		<main>
 			<section class="container-lg">
 				<div class="cell intro">
-					<h1 data-tid="elements_examples.intro.title" class="common-SuperTitle">Authorize.net Elements + Blackthorn Payments Rest API Example</h1>
-					<p data-tid="elements_examples.intro.subtitle" class="common-IntroText">Authorize.net Elements are pre-built rich UI components that helps you tokenize card data in a PCI compliant manner.</p>
+					<h1 data-tid="elements_examples.intro.title" class="common-SuperTitle">Authorize.net (accept.js) + Blackthorn Payments Rest API Example</h1>
+					<p data-tid="elements_examples.intro.subtitle" class="common-IntroText">Authorize.net (accept.js) are pre-built rich UI components that helps you tokenize card data in a PCI compliant manner.</p>
 					<p data-tid="elements_examples.intro.subtitle" class="common-IntroText">The Blackthorn Payments Rest API accepts card tokens to capture charges and create Payment Method and Transaction records in Salesforce.</p>
 					<p class="common-ButtonGroup">
 						<a href="https://github.com/blackthornio/documentation/blob/master/payments/payments_rest_api.md" class="common-Button common-Button--default">Blackthorn Payments Rest API Doc</a>
-						<a href="https://developer.authorize.net/api/reference/features/acceptjs.html" class="common-Button">More Details on Authorize.net Element Example</a>
+						<a href="https://developer.authorize.net/api/reference/features/acceptjs.html" class="common-Button">More Details on Authorize.net (accept.js) Example</a>
 					</p>
 				</div>
 
@@ -56,36 +54,13 @@
 								</div>
 							</div>
 
-							<div class="row">
-								<div class="field">
-									<input id="example2-address" data-tid="elements_examples.form.address_placeholder" class="input empty" type="text" placeholder="831 7th Ave" required="" autocomplete="address-line1">
-									<label for="example2-address" data-tid="elements_examples.form.address_label">Address</label>
-									<div class="baseline"></div>
-								</div>
-							</div>
-
-							<div class="row" data-locale-reversible>
-								<div class="field half-width">
-									<input id="example2-city" data-tid="elements_examples.form.city_placeholder" class="input empty" type="text" placeholder="New York" required="" autocomplete="address-level2">
-									<label for="example2-city" data-tid="elements_examples.form.city_label">City</label>
-									<div class="baseline"></div>
-								</div>
-								<div class="field quarter-width">
-									<input id="example2-state" data-tid="elements_examples.form.state_placeholder" class="input empty" type="text" placeholder="NY" required="" autocomplete="address-level1">
-									<label for="example2-state" data-tid="elements_examples.form.state_label">State</label>
-									<div class="baseline"></div>
-								</div>
-								<div class="field quarter-width">
-									<input id="example2-zip" data-tid="elements_examples.form.postal_code_placeholder" class="input empty" type="text" placeholder="10019" required="" autocomplete="postal-code">
-									<label for="example2-zip" data-tid="elements_examples.form.postal_code_label">ZIP</label>
-									<div class="baseline"></div>
-								</div>
-							</div>
-						</div>
-
 						<div class="row">
 							<div class="field">
+<<<<<<< HEAD
 								<div id="example2-card-number" class="input empty" type="text" placeholder="0000 0000 0000 0000"></div>
+=======
+								<input id="example2-card-number" class="input empty" type="text" placeholder="0000 0000 0000 0000">
+>>>>>>> a421bd0c7f63987f3e8b7734bcdb5c174743774d
 								<label for="example2-card-number" data-tid="elements_examples.form.card_number_label">Card number</label>
 								<div class="baseline"></div>
 							</div>
@@ -93,19 +68,23 @@
 
 						<div class="row">
 							<div class="field half-width">
+<<<<<<< HEAD
 								<div id="example2-card-expiry" class="input empty" type="text" placeholder="MM/YY"></div>
+=======
+								<input id="example2-card-expiry" class="input empty" type="text" placeholder="MM/YY">
+>>>>>>> a421bd0c7f63987f3e8b7734bcdb5c174743774d
 								<label for="example2-card-expiry" data-tid="elements_examples.form.card_expiry_label">Expiration</label>
 								<div class="baseline"></div>
 							</div>
 
 							<div class="field half-width">
-								<div id="example2-card-cvc" class="input empty"></div>
+								<input id="example2-card-cvc" class="input empty">
 								<label for="example2-card-cvc" data-tid="elements_examples.form.card_cvc_label">CVC</label>
 								<div class="baseline"></div>
 							</div>
 						</div>
 
-						<button type="submit" data-tid="elements_examples.form.pay_button" id="pay_button">Pay Now</button>
+						<button type="submit" data-tid="elements_examples.form.pay_button" id="pay_button" onclick="sendDataToAuthNet();">Pay Now</button>
 
 						<div class="error" role="alert">
 							<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17">
