@@ -3,7 +3,7 @@
 get this value from the Payment Gateway - Gateway Public Key field.
 It will be different for test and live Payment Gateways.
 */
-var publishableKey = '7Qj4j9d5cmAQ3gZdy5qF4TJb54ME5twRYJ2DnRD27eQj29kY4Jh9c8ZXSX8DXqdX';
+var publicClientKey = '7Qj4j9d5cmAQ3gZdy5qF4TJb54ME5twRYJ2DnRD27eQj29kY4Jh9c8ZXSX8DXqdX';
 var apiLoginID = '3KPxu628Zq';
 
 var amountToCharge = 10.75;
@@ -20,7 +20,7 @@ If you oauth to Salesforce, your endpoint will be: <SF_DOMAIN>/services/apexrest
 */
 var paymentsRestEndpoint = 'https://fieldservicemobilepay.secure.force.com/webhooks/services/apexrest/bt_stripe/v1';
 
-function registerElements(elements, exampleName) {
+function sendPaymentDataToAnet(exampleName) {
 	var formClass = '.' + exampleName;
 	var example = document.querySelector(formClass);
 
@@ -61,54 +61,6 @@ function registerElements(elements, exampleName) {
 		submit.remove();
 	}
 
-	// Listen for errors from each Element, and show error messages in the UI.
-	var savedErrors = {};
-	elements.forEach(function(element, idx) {
-		element.on('change', function(event) {
-			if (event.error) {
-				error.classList.add('visible');
-				savedErrors[idx] = event.error.message;
-				errorMessage.innerText = event.error.message;
-			} else {
-				savedErrors[idx] = null;
-
-				// Loop over the saved errors and find the first one, if any.
-				var nextError = Object.keys(savedErrors)
-				.sort()
-				.reduce(function(maybeFoundError, key) {
-					return maybeFoundError || savedErrors[key];
-				}, null);
-
-				if (nextError) {
-					// Now that they've fixed the current error, show another one.
-					errorMessage.innerText = nextError;
-				} else {
-					// The user fixed the last error; no more errors.
-					error.classList.remove('visible');
-				}
-			}
-		});
-	});
-
-	resetButton.addEventListener('click', function(e) {
-		e.preventDefault();
-		// Resetting the form (instead of setting the value to `''` for each input)
-		// helps us clear webkit autofill styles.
-		form.reset();
-
-		// Clear each Element.
-		elements.forEach(function(element) {
-			element.clear();
-		});
-
-		// Reset error state as well.
-		error.classList.remove('visible');
-
-		// Resetting the form does not un-disable inputs, so we need to do it separately:
-		enableInputs();
-		example.classList.remove('submitted');
-	});
-
 	// Listen on the form's 'submit' handler - here's where all the magic happens
 	form.addEventListener('submit', function(e) {
 		e.preventDefault();
@@ -131,157 +83,120 @@ function registerElements(elements, exampleName) {
 
 		// Disable all inputs.
 		disableInputs();
-
-		// Gather additional customer data we may have collected in our form.
-		var name = form.querySelector('#' + exampleName + '-name');
-		var email = form.querySelector('#' + exampleName + '-email');
-		var address1 = form.querySelector('#' + exampleName + '-address');
-		var city = form.querySelector('#' + exampleName + '-city');
-		var state = form.querySelector('#' + exampleName + '-state');
-		var zip = form.querySelector('#' + exampleName + '-zip');
-		var additionalData = {
-			name: name ? name.value : undefined,
-			email: email ? email.value : undefined,
-			address_line1: address1 ? address1.value : undefined,
-			address_city: city ? city.value : undefined,
-			address_state: state ? state.value : undefined,
-			address_zip: zip ? zip.value : undefined,
-		};
-
-		// Use Stripe.js to create a token. We only need to pass in one Element
-		// from the Element group in order to create a token. We can also pass
-		// in the additional customer data we collected in our form.
-		stripe.createToken(elements[0], additionalData).then(function(result) {
-
-			if (result.token) {
-				// If we received a token, show the token ID
-				example.querySelector('.token').innerText = result.token.id;
-
-				// here's where we call the Blackthorn Payments Rest API
-				sendTokenBlackthornPaymentsAPI(result.token, example);
-			} else {
-				example.classList.remove('submitting');
-				// Otherwise, un-disable inputs.
-				enableInputs();
-			}
-		});
 	});
 }
 
+	function sendDataToAuthNet() {
+		var formClass = '.' + 'example2';
+		var example = document.querySelector(formClass);
+	
+		var form = example.querySelector('form');
+		var resetButton = example.querySelector('a.reset');
+		var error = form.querySelector('.error');
+		var errorMessage = error.querySelector('.message');
+		var authData = {};
+			authData.clientKey = publicClientKey;
+			authData.apiLoginID = apiLoginID;
+	
+		var cardData = {};
+			cardData.cardNumber = form.querySelector('#' + 'example2' + '-card-number').value;
+			var cardExpiry = form.querySelector('#' + 'example2' + '-card-expiry').value;
+			var	cardArray = cardExpiry.toString().split('/');
+			cardData.month = cardArray[0];
+			cardData.year = cardArray[1];
+			cardData.cardCode = form.querySelector('#' + 'example2' + '-card-cvc').value;
+			console.log('cardData ===> ' + JSON.stringify(cardData));
+	
+		var secureData = {};
+			secureData.authData = authData;
+			secureData.cardData = cardData;
+	
+		Accept.dispatchData(secureData, 'responseHandler');
+	}
 
-function sendPaymentDataToAnet(elements, example) {
-	var formClass = '.' + exampleName;
-	var example = document.querySelector(formClass);
-
-	var form = example.querySelector('form');
-	var resetButton = example.querySelector('a.reset');
-	var error = form.querySelector('.error');
-	var errorMessage = error.querySelector('.message');
-
-	// Show a loading screen...
-	example.classList.add('submitting');
-
-    var authData = {};
-        authData.clientKey = publishableKey;
-        authData.apiLoginID = apiLoginID;
-
-    var cardData = {};
-		cardData.cardNumber = elements[0];
-		var cardExpiry = elements[1].split('/');
-        cardData.month = cardExpiry[0];
-        cardData.year = cardExpiry[1];
-        cardData.cardCode = elements[2];
-
-		console.log('cardData ===> ' + cardData);
-    // If using banking information instead of card information,
-    // build a bankData object instead of a cardData object.
-    //
-    // var bankData = {};
-    //     bankData.accountNumber = document.getElementById('accountNumber').value;
-    //     bankData.routingNumber = document.getElementById('routingNumber').value;
-    //     bankData.nameOnAccount = document.getElementById('nameOnAccount').value;
-    //     bankData.accountType = document.getElementById('accountType').value;
-
-    var secureData = {};
-        secureData.authData = authData;
-        secureData.cardData = cardData;
-        // If using banking information instead of card information,
-        // send the bankData object instead of the cardData object.
-        //
-        // secureData.bankData = bankData;
-
-    Accept.dispatchData(secureData, responseHandler);
-
-    function responseHandler(response) {
-        if (response.messages.resultCode === "Error") {
-            var i = 0;
-            while (i < response.messages.message.length) {
-                console.log(
-                    response.messages.message[i].code + ": " +
-                    response.messages.message[i].text
-                );
-                i = i + 1;
-            }
-        } else {
-            sendTokenBlackthornPaymentsAPI(response, example);
-        }
-    }
-}
-
-function sendTokenBlackthornPaymentsAPI(authnetToken, example) {
-	console.log('authnetToken: ' + JSON.stringify(authnetToken));
-
-	// build the payload for the Payments Rest API - lots of attributes can be set here
-	// TODO: document some other sample payload for passing in additional data
-	var payload = {
-		stripePayload : JSON.stringify(authnetToken),
-		action : "createPaymentMethodAuthNet",
-		isDefault : true,
-		publishableKey : publishableKey,
-		paymentGatewayId: "a0C0b00000XDp7MEAT",
-		transactionList : [
-			{
-				"amount" : amountToCharge
+	function responseHandler(response) {
+		debugger;
+		var formClass = '.' + 'example2';
+		var example = document.querySelector(formClass);
+		var form = example.querySelector('form');
+		var example = document.querySelector(formClass);
+		if (response.messages.resultCode === "Error") {
+			var i = 0;
+			while (i < response.messages.message.length) {
+				console.log(
+					response.messages.message[i].code + ": " +
+					response.messages.message[i].text
+				);
+				i = i + 1;
 			}
-		]
-	};
-
-	// this makes a rest call to our Payments API - feel free to use JQuery to make this call
-	var xhr = new XMLHttpRequest(); // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
-	xhr.open('POST', paymentsRestEndpoint);
-	xhr.setRequestHeader('Content-Type', 'application/json');
-	xhr.onload = function() {
-		if (xhr.status === 200) {
-			console.log('paymentsRestAPIResponse: ' + xhr.responseText);
-
-			var response = JSON.parse(xhr.responseText);
-			console.log('response.success: ' + response.success);
-			var msg;
-			if (response.success == true) { // see if success
-				msg = 'Blackthorn Payments API charged $' + amountToCharge + ' on the card and created Transaction: ';
-				msg += response.transactionList[0].transactionId + ' and Payment Method: ';
-				msg += response.transactionList[0].paymentMethodId;
-			} else {
-				msg = 'Error from Blackthorn Payments Rest API: ' + response.errorMessage;
-			}
-
-			document.getElementById('salesforce_message').innerText = msg;
-
-			// Stop loading!
-			example.classList.remove('submitting');
-
-			// todo: figure out how to show error below form instead of on success page
-			example.classList.add('submitted');
+		} else {
+			var name = form.querySelector('#' + 'example2' + '-name');
+			var email = form.querySelector('#' + 'example2' + '-email');
+		var additionalData = {
+			name: name ? name.value : undefined,
+			email: email ? email.value : undefined,
+			opaqueData: response.opaqueData
+		};
+			sendTokenBlackthornPaymentsAPI(additionalData, example);
 		}
-	};
-	xhr.send(JSON.stringify(payload));
-}
+	}
 
+
+
+	function sendTokenBlackthornPaymentsAPI(additionalData, example) {
+		console.log('additionalData: ' + JSON.stringify(additionalData));
+
+		// build the payload for the Payments Rest API - lots of attributes can be set here
+		// TODO: document some other sample payload for passing in additional data
+		var payload = {
+			paymentMethodData : additionalData,
+			action : "createPaymentMethodAuthNet",
+			isDefault : true,
+			paymentGatewayId: "a0C0b00000XDp7MEAT",
+			transactionList : [
+				{
+					"amount" : amountToCharge
+				}
+			]
+		};
+
+		// this makes a rest call to our Payments API - feel free to use JQuery to make this call
+		var xhr = new XMLHttpRequest(); // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
+		xhr.open('POST', paymentsRestEndpoint);
+		xhr.setRequestHeader('Content-Type', 'application/json');
+			xhr.onload = function() {
+				if (xhr.status === 200) {
+					console.log('paymentsRestAPIResponse: ' + xhr.responseText);
+	
+					var response = JSON.parse(xhr.responseText);
+					console.log('response.success: ' + response.success);
+					var msg;
+					if (response.success == true) { // see if success
+						msg = 'Blackthorn Payments API charged $' + amountToCharge + ' on the card and created Transaction: ';
+						msg += response.transactionList[0].transactionId + ' and Payment Method: ';
+						msg += response.transactionList[0].paymentMethodId;
+					} else {
+						msg = 'Error from Blackthorn Payments Rest API: ' + response.errorMessage;
+					}
+					console.log('msg ==> ' + msg);
+	
+					document.getElementById('salesforce_message').innerText = msg;
+	
+					// Stop loading!
+					example.classList.remove('submitting');
+	
+					// todo: figure out how to show error below form instead of on success page
+					example.classList.add('submitted');
+				}
+			};
+			var jsn = JSON.stringify(payload);
+			xhr.send(jsn.replace(/\\/g, ""));
+	}
 
 (function() {
 	'use strict';
 
-	var elements = stripe.elements();
+//	var elements = stripe.elements();
 
 	// Floating labels
 	var inputs = document.querySelectorAll('.cell.example.example2 .input');
@@ -301,53 +216,5 @@ function sendTokenBlackthornPaymentsAPI(authnetToken, example) {
 		});
 	});
 
-	var elementStyles = {
-		base: {
-			color: '#32325D',
-			fontWeight: 500,
-			fontFamily: 'monospace, sans-serif',
-			fontSize: '16px',
-			fontSmoothing: 'antialiased',
-
-			'::placeholder': {
-				color: '#CFD7DF',
-			},
-			':-webkit-autofill': {
-				color: '#e39f48',
-			},
-		},
-		invalid: {
-			color: '#E25950',
-			'::placeholder': {
-				color: '#FFCCA5',
-			},
-		},
-	};
-
-	var elementClasses = {
-		focus: 'focused',
-		empty: 'empty',
-		invalid: 'invalid',
-	};
-
-	var cardNumber = elements.create('cardNumber', {
-		style: elementStyles,
-		classes: elementClasses,
-	});
-	cardNumber.mount('#example2-card-number');
-
-	var cardExpiry = elements.create('cardExpiry', {
-		style: elementStyles,
-		classes: elementClasses,
-	});
-	cardExpiry.mount('#example2-card-expiry');
-
-	var cardCvc = elements.create('cardCvc', {
-		style: elementStyles,
-		classes: elementClasses,
-	});
-	cardCvc.mount('#example2-card-cvc');
-
-	//registerElements([cardNumber, cardExpiry, cardCvc], 'example2');
-	sendPaymentDataToAnet([cardNumber, cardExpiry, cardCvc], 'example2');
+	sendPaymentDataToAnet('example2');
 })();

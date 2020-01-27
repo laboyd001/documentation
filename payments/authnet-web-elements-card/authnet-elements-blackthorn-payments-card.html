@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" href="favicon.png">
-	<title>Stripe Elements + Blackthorn Payments Rest API Example</title>
+	<title>Accept.js (Authorize.net) + Blackthorn Payments Rest API Example</title>
 
 	<!--
 	Stripe Elements js- they recommend loading it on every page on your shopping site
@@ -12,8 +12,9 @@
 	is submitted directly to them for maximum PCI compliance. They then return a token
 	that can be use to capture a charge using the Blackthorn Payments Rest API.
 	-->
-	<script src="https://jstest.authorize.net/v1/Accept.js/"></script>
-
+	<!-- <script src="https://jstest.authorize.net/v1/Accept.js/"></script> -->
+	<script type="text/javascript" src="https://jstest.authorize.net/v1/Accept.js" charset="utf-8">
+	</script>
 	<!--
 	The css for this form is from Stripe's elements examples. More can be viewed here
 	https://stripe.dev/elements-examples
@@ -56,36 +57,9 @@
 								</div>
 							</div>
 
-							<div class="row">
-								<div class="field">
-									<input id="example2-address" data-tid="elements_examples.form.address_placeholder" class="input empty" type="text" placeholder="831 7th Ave" required="" autocomplete="address-line1">
-									<label for="example2-address" data-tid="elements_examples.form.address_label">Address</label>
-									<div class="baseline"></div>
-								</div>
-							</div>
-
-							<div class="row" data-locale-reversible>
-								<div class="field half-width">
-									<input id="example2-city" data-tid="elements_examples.form.city_placeholder" class="input empty" type="text" placeholder="New York" required="" autocomplete="address-level2">
-									<label for="example2-city" data-tid="elements_examples.form.city_label">City</label>
-									<div class="baseline"></div>
-								</div>
-								<div class="field quarter-width">
-									<input id="example2-state" data-tid="elements_examples.form.state_placeholder" class="input empty" type="text" placeholder="NY" required="" autocomplete="address-level1">
-									<label for="example2-state" data-tid="elements_examples.form.state_label">State</label>
-									<div class="baseline"></div>
-								</div>
-								<div class="field quarter-width">
-									<input id="example2-zip" data-tid="elements_examples.form.postal_code_placeholder" class="input empty" type="text" placeholder="10019" required="" autocomplete="postal-code">
-									<label for="example2-zip" data-tid="elements_examples.form.postal_code_label">ZIP</label>
-									<div class="baseline"></div>
-								</div>
-							</div>
-						</div>
-
 						<div class="row">
 							<div class="field">
-								<div id="example2-card-number" class="input empty"></div>
+								<input id="example2-card-number" class="input empty" type="text" placeholder="0000 0000 0000 0000">
 								<label for="example2-card-number" data-tid="elements_examples.form.card_number_label">Card number</label>
 								<div class="baseline"></div>
 							</div>
@@ -93,19 +67,19 @@
 
 						<div class="row">
 							<div class="field half-width">
-								<div id="example2-card-expiry" class="input empty"></div>
+								<input id="example2-card-expiry" class="input empty" type="text" placeholder="MM/YY">
 								<label for="example2-card-expiry" data-tid="elements_examples.form.card_expiry_label">Expiration</label>
 								<div class="baseline"></div>
 							</div>
 
 							<div class="field half-width">
-								<div id="example2-card-cvc" class="input empty"></div>
+								<input id="example2-card-cvc" class="input empty">
 								<label for="example2-card-cvc" data-tid="elements_examples.form.card_cvc_label">CVC</label>
 								<div class="baseline"></div>
 							</div>
 						</div>
 
-						<button type="submit" data-tid="elements_examples.form.pay_button" id="pay_button">Pay Now</button>
+						<button type="submit" data-tid="elements_examples.form.pay_button" id="pay_button" onclick="sendDataToAuthNet();">Pay Now</button>
 
 						<div class="error" role="alert">
 							<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17">
