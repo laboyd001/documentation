@@ -111,7 +111,10 @@ function sendPaymentDataToAnet(exampleName) {
 		var secureData = {};
 			secureData.authData = authData;
 			secureData.cardData = cardData;
-	
+
+		// Show a loading screen...
+		example.classList.add('submitting');
+
 		Accept.dispatchData(secureData, 'responseHandler');
 	}
 
@@ -179,7 +182,7 @@ function sendPaymentDataToAnet(exampleName) {
 						msg = 'Error from Blackthorn Payments Rest API: ' + response.errorMessage;
 					}
 					alert(msg);
-	
+					console.log('msg ==> ' + msg);
 					document.getElementById('salesforce_message').innerText = msg;
 	
 					// Stop loading!
