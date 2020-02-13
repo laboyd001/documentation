@@ -89,7 +89,7 @@ function sendPaymentDataToAnet(exampleName) {
 	function sendDataToAuthNet() {
 		var formClass = '.' + 'example2';
 		var example = document.querySelector(formClass);
-	
+
 		var form = example.querySelector('form');
 		var resetButton = example.querySelector('a.reset');
 		var error = form.querySelector('.error');
@@ -97,7 +97,7 @@ function sendPaymentDataToAnet(exampleName) {
 		var authData = {};
 			authData.clientKey = publicClientKey;
 			authData.apiLoginID = apiLoginID;
-	
+
 		var cardData = {};
 			var cc = form.querySelector('#' + 'example2' + '-card-number').value;
 			cardData.cardNumber = cc.replace(/ /g,'');
@@ -107,7 +107,7 @@ function sendPaymentDataToAnet(exampleName) {
 			cardData.year = cardArray[1];
 			cardData.cardCode = form.querySelector('#' + 'example2' + '-card-cvc').value;
 			console.log('cardData ===> ' + JSON.stringify(cardData));
-	
+
 		var secureData = {};
 			secureData.authData = authData;
 			secureData.cardData = cardData;
@@ -222,7 +222,7 @@ function sendPaymentDataToAnet(exampleName) {
 		// Show a loading screen...
 		example.classList.add('submitting');
 
-		// Disable all inputs.
+		// Disable all inputs
 		//disableInputs();
 
 		// Gather additional customer data we may have collected in our form.
@@ -355,7 +355,7 @@ function sendPaymentDataToAnet(exampleName) {
 			xhr.onload = function() {
 				if (xhr.status === 200) {
 					console.log('paymentsRestAPIResponse: ' + xhr.responseText);
-	
+
 					var response = JSON.parse(xhr.responseText);
 					console.log('response.success: ' + response.success);
 					var msg;
@@ -369,10 +369,10 @@ function sendPaymentDataToAnet(exampleName) {
 					alert(msg);
 					console.log('msg ==> ' + msg);
 					document.getElementById('salesforce_message').innerText = msg;
-	
+
 					// Stop loading!
 					example.classList.remove('submitting');
-	
+
 					// todo: figure out how to show error below form instead of on success page
 					example.classList.add('submitted');
 				}
@@ -406,59 +406,9 @@ function sendPaymentDataToAnet(exampleName) {
 		});
 	});
 
-<<<<<<< HEAD
-	/*var elementStyles = {
-		base: {
-			color: '#32325D',
-			fontWeight: 500,
-			fontFamily: 'monospace, sans-serif',
-			fontSize: '16px',
-			fontSmoothing: 'antialiased',
-
-			'::placeholder': {
-				color: '#CFD7DF',
-			},
-			':-webkit-autofill': {
-				color: '#e39f48',
-			},
-		},
-		invalid: {
-			color: '#E25950',
-			'::placeholder': {
-				color: '#FFCCA5',
-			},
-		},
-	};
-
-	var elementClasses = {
-		focus: 'focused',
-		empty: 'empty',
-		invalid: 'invalid',
-	};
-
-	var cardNumber = elements.create('cardNumber', {
-		style: elementStyles,
-		classes: elementClasses,
-	});
-	cardNumber.mount('#example2-card-number');
-
-	var cardExpiry = elements.create('cardExpiry', {
-		style: elementStyles,
-		classes: elementClasses,
-	});
-	cardExpiry.mount('#example2-card-expiry');
-
-	var cardCvc = elements.create('cardCvc', {
-		style: elementStyles,
-		classes: elementClasses,
-	});
-	cardCvc.mount('#example2-card-cvc');*/
-
-	//registerElements([cardNumber, cardExpiry, cardCvc], 'example2');
-=======
->>>>>>> a421bd0c7f63987f3e8b7734bcdb5c174743774d
 	sendPaymentDataToAnet('example2');
 })();
+
 
 function cc_format(value) {
 	var v = value.replace(/\s+/g, '').replace(/[^0-9]/gi, '')
@@ -466,26 +416,26 @@ function cc_format(value) {
 	var match = matches && matches[0] || ''
 	var parts = []
 	for (var i=0, len=match.length; i<len; i+=4) {
-	  parts.push(match.substring(i, i+4))
+		parts.push(match.substring(i, i+4))
 	}
 	if (parts.length) {
-	  return parts.join(' ')
+		return parts.join(' ')
 	} else {
-	  return value
+		return value
 	}
-  }
+}
 
-  function cc_expiryMonthAndYear(value) {
+function cc_expiryMonthAndYear(value) {
 	var v = value.replace(/\s+/g, '').replace(/[^0-9]/gi, '')
 	var matches = v.match(/\d{2,4}/g);
 	var match = matches && matches[0] || ''
 	var parts = []
 	for (var i=0, len=match.length; i<len; i+=2) {
-	  parts.push(match.substring(i, i+2))
+		parts.push(match.substring(i, i+2))
 	}
 	if (parts.length) {
-	  return parts.join('/')
+		return parts.join('/')
 	} else {
-	  return value
+		return value
 	}
-  }
+}
