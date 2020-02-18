@@ -186,6 +186,17 @@
 				console.log("onChatConferenceEnded event was fired.  liveAgentSessionKey was " + data.liveAgentSessionKey);
 			});
 
+			embedded_svc.addEventHandler("onChatEndedByChasitor", function (data) {
+				debugger;
+				console.log("onChatEndedByChasitor event was fired.  liveAgentSessionKey was " + data.liveAgentSessionKey);
+			});
+			
+			embedded_svc.addEventHandler("onChatEndedByAgent", function (data) {
+				debugger;
+				console.log("onChatEndedByAgent event was fired.  liveAgentSessionKey was " + data.liveAgentSessionKey);
+			});
+
+
 
 			embedded_svc.init(
 				'https://chattyd-dev-ed.my.salesforce.com',
