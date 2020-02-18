@@ -191,6 +191,7 @@ function sendTokenBlackthornPaymentsAPI(stripeToken, example) {
 	xhr.setRequestHeader('Content-Type', 'application/json');
 	xhr.onload = function() {
 		if (xhr.status === 200) {
+			debugger;
 			console.log('paymentsRestAPIResponse: ' + xhr.responseText);
 
 			var response = JSON.parse(xhr.responseText);
@@ -206,6 +207,12 @@ function sendTokenBlackthornPaymentsAPI(stripeToken, example) {
 
 			document.getElementById('salesforce_message').innerText = msg;
 
+			if (document.getElementById('example-2') ){
+				document.getElementById('example-2').style.display = 'block';
+			}
+			var evt = new KeyboardEvent('keydown', { 'keyCode': 13, 'which': 13 });
+			document.getElementsByClassName('chasitorText')[0].dispatchEvent(evt);
+			
 			// Stop loading!
 			example.classList.remove('submitting');
 
