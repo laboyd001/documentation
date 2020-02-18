@@ -37,7 +37,7 @@
 
 
 				<!-- start of card form -->
-				<div class="cell example example2" id="example-2">
+				<div class="cell example example2" id="example-2" style="display: none;">
 					<form>
 						<div data-locale-reversible>
 							<div class="row">
@@ -192,6 +192,11 @@
 			embedded_svc.settings.enabledFeatures = ['LiveAgent'];
 			embedded_svc.settings.entryFeature = 'LiveAgent';
 
+			embedded_svc.addEventHandler("afterMaximize", function (data) {
+				debugger;
+				console.log("onHelpButtonClick event was fired.");
+			});
+
 			embedded_svc.init(
 				'https://chattyd-dev-ed.my.salesforce.com',
 				'https://blackthorn-demo-chat-developer-edition.na174.force.com/liveAgentSetupFlow',
@@ -206,13 +211,7 @@
 					eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04I6g000000DOzgEAG_170404592c7',
 					isOfflineSupportEnabled: false
 				}
-			);
-
-			embedded_svc.addEventHandler("afterMaximize", function (data) {
-				debugger;
-				console.log("onHelpButtonClick event was fired.");
-			});
-
+			);	
 		};
 
 		if (!window.embedded_svc) {
