@@ -208,8 +208,9 @@ function sendTokenBlackthornPaymentsAPI(stripeToken, example) {
 			document.getElementById('salesforce_message').innerText = msg;
 
 			if (document.getElementById('example-2') ){
-				document.getElementById('example-2').style.display = 'block';
+				document.getElementById('example-2').style.display = 'none';
 			}
+			document.getElementsByClassName('chasitorText')[0].value = 'Payment successful';
 			var evt = new KeyboardEvent('keydown', { 'keyCode': 13, 'which': 13 });
 			document.getElementsByClassName('chasitorText')[0].dispatchEvent(evt);
 			
