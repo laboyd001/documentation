@@ -22,7 +22,7 @@
 	<link rel="stylesheet" type="text/css" href="pay.css" data-rel-css=""/>
 </head>
 <body>
-	<div class="globalContent slds-hide">
+	<div class="globalContent">
 		<main>
 			<section class="container-lg">
 				<div class="cell intro">
@@ -134,7 +134,7 @@
 						</a>
 					</div>
 
-					<div class="caption">
+					<!-- <div class="caption">
 						<span data-tid="elements_examples.caption.no_charge" class="no-charge"><a href="https://stripe.com/docs/testing#cards">Stripe Test Cards</a></span>
 						<a class="source" href="https://github.com/blackthornio/documentation/blob/master/payments/stripe-web-elements">
 							<svg width="16px" height="10px" viewBox="0 0 16 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
@@ -142,7 +142,7 @@
 							</svg>
 							<span data-tid="elements_examples.caption.view_source">View source on GitHub</span>
 						</a>
-					</div>
+					</div> -->
 				</section>
 			</main>
 		</div>
@@ -207,6 +207,12 @@
 					isOfflineSupportEnabled: false
 				}
 			);
+
+			embedded_svc.addEventHandler("afterMaximize", function (data) {
+				debugger;
+				console.log("onHelpButtonClick event was fired.");
+			});
+
 		};
 
 		if (!window.embedded_svc) {
