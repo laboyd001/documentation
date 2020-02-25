@@ -111,60 +111,61 @@ function registerElements(elements, exampleName) {
 
 	// Listen on the form's 'submit' handler - here's where all the magic happens
 	form.addEventListener('submit', function(e) {
-		e.preventDefault();
+		debugger;
+		// e.preventDefault();
 
-		// Trigger HTML5 validation UI on the form if any of the inputs fail validation
-		var plainInputsValid = true;
-		Array.prototype.forEach.call(form.querySelectorAll('input'), function(input) {
-			if (input.checkValidity && !input.checkValidity()) {
-				plainInputsValid = false;
-				return;
-			}
-		});
-		if (!plainInputsValid) {
-			triggerBrowserValidation();
-			return;
-		}
+		// // Trigger HTML5 validation UI on the form if any of the inputs fail validation
+		// var plainInputsValid = true;
+		// Array.prototype.forEach.call(form.querySelectorAll('input'), function(input) {
+		// 	if (input.checkValidity && !input.checkValidity()) {
+		// 		plainInputsValid = false;
+		// 		return;
+		// 	}
+		// });
+		// if (!plainInputsValid) {
+		// 	triggerBrowserValidation();
+		// 	return;
+		// }
 
-		// Show a loading screen...
-		example.classList.add('submitting');
+		// // Show a loading screen...
+		// example.classList.add('submitting');
 
-		// Disable all inputs.
-		disableInputs();
+		// // Disable all inputs.
+		// disableInputs();
+		
 
-		// Gather additional customer data we may have collected in our form.
-		var name = form.querySelector('#' + exampleName + '-name');
-		var email = form.querySelector('#' + exampleName + '-email');
-		var address1 = form.querySelector('#' + exampleName + '-address');
-		var city = form.querySelector('#' + exampleName + '-city');
-		var state = form.querySelector('#' + exampleName + '-state');
-		var zip = form.querySelector('#' + exampleName + '-zip');
-		var additionalData = {
-			name: name ? name.value : undefined,
-			email: email ? email.value : undefined,
-			address_line1: address1 ? address1.value : undefined,
-			address_city: city ? city.value : undefined,
-			address_state: state ? state.value : undefined,
-			address_zip: zip ? zip.value : undefined,
-		};
+		// // Gather additional customer data we may have collected in our form.
+		// var name = form.querySelector('#' + exampleName + '-name');
+		// var email = form.querySelector('#' + exampleName + '-email');
+		// var routing_number = form.querySelector('#routing-number');
+		// var account_number = form.querySelector('#account-number');
 
-		// Use Stripe.js to create a token. We only need to pass in one Element
-		// from the Element group in order to create a token. We can also pass
-		// in the additional customer data we collected in our form.
-		stripe.createToken(elements[0], additionalData).then(function(result) {
+		// var bankAccountData = {
+		// 	country: 'US',
+		// 	currency: 'usd',
+		// 	routing_number: routing_number,
+		// 	account_number: account_number,
+		// 	account_holder_name: name,
+		// 	account_holder_type: document.getElementById('selectoptions').options[document.getElementById('selectoptions').selectedIndex].value !== 'Please select' ? document.getElementById('selectoptions').options[document.getElementById('selectoptions').selectedIndex].value : null,
+		// };
 
-			if (result.token) {
-				// If we received a token, show the token ID
-				example.querySelector('.token').innerText = result.token.id;
+		// // Use Stripe.js to create a token. We only need to pass in one Element
+		// // from the Element group in order to create a token. We can also pass
+		// // in the additional customer data we collected in our form.
+		// stripe.createToken('bank_account', bankAccountData).then(function(result) {
+		// 	debugger;
+		// 	if (result.token) {
+		// 		// If we received a token, show the token ID
+		// 		example.querySelector('.token').innerText = result.token.id;
 
-				// here's where we call the Blackthorn Payments Rest API
-				sendTokenBlackthornPaymentsAPI(result.token, example);
-			} else {
-				example.classList.remove('submitting');
-				// Otherwise, un-disable inputs.
-				enableInputs();
-			}
-		});
+		// 		// here's where we call the Blackthorn Payments Rest API
+		// 		sendTokenBlackthornPaymentsAPI(result.token, example);
+		// 	} else {
+		// 		example.classList.remove('submitting');
+		// 		// Otherwise, un-disable inputs.
+		// 		enableInputs();
+		// 	}
+		// });
 	});
 }
 
@@ -269,23 +270,30 @@ function sendTokenBlackthornPaymentsAPI(stripeToken, example) {
 		invalid: 'invalid',
 	};
 
-	var cardNumber = elements.create('cardNumber', {
-		style: elementStyles,
-		classes: elementClasses,
-	});
-	cardNumber.mount('#example2-card-number');
+	// var auBankAccountElement = elements.create('iban',{
+	// 	style: elementStyles,
+	// 	classes: elementClasses,
+	// });
+	// auBankAccountElement.mount('#example2-bank-account');
 
-	var cardExpiry = elements.create('cardExpiry', {
-		style: elementStyles,
-		classes: elementClasses,
-	});
-	cardExpiry.mount('#example2-card-expiry');
 
-	var cardCvc = elements.create('cardCvc', {
-		style: elementStyles,
-		classes: elementClasses,
-	});
-	cardCvc.mount('#example2-card-cvc');
+	// var cardNumber = elements.create('cardNumber', {
+	// 	style: elementStyles,
+	// 	classes: elementClasses,
+	// });
+	// cardNumber.mount('#example2-card-number');
 
-	registerElements([cardNumber, cardExpiry, cardCvc], 'example2');
+	// var cardExpiry = elements.create('cardExpiry', {
+	// 	style: elementStyles,
+	// 	classes: elementClasses,
+	// });
+	// cardExpiry.mount('#example2-card-expiry');
+
+	// var cardCvc = elements.create('cardCvc', {
+	// 	style: elementStyles,
+	// 	classes: elementClasses,
+	// });
+	// cardCvc.mount('#example2-card-cvc');
+
+	// registerElements([cardNumber, cardExpiry, cardCvc], 'example2');
 })();
