@@ -192,7 +192,7 @@ function sendTokenBlackthornPaymentsAPI(stripeToken, example) {
 			console.log('response.success: ' + response.success);
 			var msg;
 			if (response.success == true) { // see if success
-				msg = 'Blackthorn Payments API create a Payment Method: ' + response.transactionList[0].paymentMethodId;
+				msg = 'Blackthorn Payments API create a Payment Method: ' + response.paymentMethodList[0].paymentMethodId;
 			} else {
 				msg = 'Error from Blackthorn Payments Rest API: ' + response.errorMessage;
 			}
