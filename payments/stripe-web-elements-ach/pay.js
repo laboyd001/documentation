@@ -20,7 +20,7 @@ If you oauth to Salesforce, your endpoint will be: <SF_DOMAIN>/services/apexrest
 */
 var paymentsRestEndpoint = 'https://fieldservicemobilepay.secure.force.com/webhooks/services/apexrest/bt_stripe/v1';
 
-function registerElements(elements, exampleName) {
+function registerElements(exampleName) {
 	var formClass = '.' + exampleName;
 	var example = document.querySelector(formClass);
 
@@ -63,32 +63,32 @@ function registerElements(elements, exampleName) {
 
 	// Listen for errors from each Element, and show error messages in the UI.
 	var savedErrors = {};
-	elements.forEach(function(element, idx) {
-		element.on('change', function(event) {
-			if (event.error) {
-				error.classList.add('visible');
-				savedErrors[idx] = event.error.message;
-				errorMessage.innerText = event.error.message;
-			} else {
-				savedErrors[idx] = null;
+	// elements.forEach(function(element, idx) {
+	// 	element.on('change', function(event) {
+	// 		if (event.error) {
+	// 			error.classList.add('visible');
+	// 			savedErrors[idx] = event.error.message;
+	// 			errorMessage.innerText = event.error.message;
+	// 		} else {
+	// 			savedErrors[idx] = null;
 
-				// Loop over the saved errors and find the first one, if any.
-				var nextError = Object.keys(savedErrors)
-				.sort()
-				.reduce(function(maybeFoundError, key) {
-					return maybeFoundError || savedErrors[key];
-				}, null);
+	// 			// Loop over the saved errors and find the first one, if any.
+	// 			var nextError = Object.keys(savedErrors)
+	// 			.sort()
+	// 			.reduce(function(maybeFoundError, key) {
+	// 				return maybeFoundError || savedErrors[key];
+	// 			}, null);
 
-				if (nextError) {
-					// Now that they've fixed the current error, show another one.
-					errorMessage.innerText = nextError;
-				} else {
-					// The user fixed the last error; no more errors.
-					error.classList.remove('visible');
-				}
-			}
-		});
-	});
+	// 			if (nextError) {
+	// 				// Now that they've fixed the current error, show another one.
+	// 				errorMessage.innerText = nextError;
+	// 			} else {
+	// 				// The user fixed the last error; no more errors.
+	// 				error.classList.remove('visible');
+	// 			}
+	// 		}
+	// 	});
+	// });
 
 	resetButton.addEventListener('click', function(e) {
 		e.preventDefault();
@@ -112,60 +112,61 @@ function registerElements(elements, exampleName) {
 	// Listen on the form's 'submit' handler - here's where all the magic happens
 	form.addEventListener('submit', function(e) {
 		debugger;
-		// e.preventDefault();
+		e.preventDefault();
 
-		// // Trigger HTML5 validation UI on the form if any of the inputs fail validation
-		// var plainInputsValid = true;
-		// Array.prototype.forEach.call(form.querySelectorAll('input'), function(input) {
-		// 	if (input.checkValidity && !input.checkValidity()) {
-		// 		plainInputsValid = false;
-		// 		return;
-		// 	}
-		// });
-		// if (!plainInputsValid) {
-		// 	triggerBrowserValidation();
-		// 	return;
-		// }
+		// Trigger HTML5 validation UI on the form if any of the inputs fail validation
+		var plainInputsValid = true;
+		Array.prototype.forEach.call(form.querySelectorAll('input'), function(input) {
+			if (input.checkValidity && !input.checkValidity()) {
+				plainInputsValid = false;
+				return;
+			}
+		});
+		if (!plainInputsValid) {
+			triggerBrowserValidation();
+			return;
+		}
 
-		// // Show a loading screen...
-		// example.classList.add('submitting');
+		// Show a loading screen...
+		example.classList.add('submitting');
 
-		// // Disable all inputs.
-		// disableInputs();
+		// Disable all inputs.
+		disableInputs();
 		
 
-		// // Gather additional customer data we may have collected in our form.
-		// var name = form.querySelector('#' + exampleName + '-name');
-		// var email = form.querySelector('#' + exampleName + '-email');
-		// var routing_number = form.querySelector('#routing-number');
-		// var account_number = form.querySelector('#account-number');
+		// Gather additional customer data we may have collected in our form.
+		var name = form.querySelector('#' + exampleName + '-name');
+		var email = form.querySelector('#' + exampleName + '-email');
+		var routing_number = form.querySelector('#' + exampleName + '-routing-number');
+		var account_number = form.querySelector('#' + exampleName + '-account-number');
+		var account_holder_type = form.querySelector('#' + exampleName + '-selectoptions');
 
-		// var bankAccountData = {
-		// 	country: 'US',
-		// 	currency: 'usd',
-		// 	routing_number: routing_number,
-		// 	account_number: account_number,
-		// 	account_holder_name: name,
-		// 	account_holder_type: document.getElementById('selectoptions').options[document.getElementById('selectoptions').selectedIndex].value !== 'Please select' ? document.getElementById('selectoptions').options[document.getElementById('selectoptions').selectedIndex].value : null,
-		// };
+		var bankAccountData = {
+			country: 'US',
+			currency: 'usd',
+			routing_number: routing_number.value,
+			account_number: account_number.value,
+			account_holder_name: name.value,
+			account_holder_type: account_holder_type.value,
+		};
 
-		// // Use Stripe.js to create a token. We only need to pass in one Element
-		// // from the Element group in order to create a token. We can also pass
-		// // in the additional customer data we collected in our form.
-		// stripe.createToken('bank_account', bankAccountData).then(function(result) {
-		// 	debugger;
-		// 	if (result.token) {
-		// 		// If we received a token, show the token ID
-		// 		example.querySelector('.token').innerText = result.token.id;
+		// Use Stripe.js to create a token. We only need to pass in one Element
+		// from the Element group in order to create a token. We can also pass
+		// in the additional customer data we collected in our form.
+		stripe.createToken('bank_account', bankAccountData).then(function(result) {
+			debugger;
+			if (result.token) {
+				// If we received a token, show the token ID
+				example.querySelector('.token').innerText = result.token.id;
 
-		// 		// here's where we call the Blackthorn Payments Rest API
-		// 		sendTokenBlackthornPaymentsAPI(result.token, example);
-		// 	} else {
-		// 		example.classList.remove('submitting');
-		// 		// Otherwise, un-disable inputs.
-		// 		enableInputs();
-		// 	}
-		// });
+				// here's where we call the Blackthorn Payments Rest API
+				sendTokenBlackthornPaymentsAPI(result.token, example);
+			} else {
+				example.classList.remove('submitting');
+				// Otherwise, un-disable inputs.
+				enableInputs();
+			}
+		});
 	});
 }
 
@@ -295,5 +296,5 @@ function sendTokenBlackthornPaymentsAPI(stripeToken, example) {
 	// });
 	// cardCvc.mount('#example2-card-cvc');
 
-	// registerElements([cardNumber, cardExpiry, cardCvc], 'example2');
+	registerElements('example2');
 })();
