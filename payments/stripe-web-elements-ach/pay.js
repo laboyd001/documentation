@@ -97,9 +97,9 @@ function registerElements(exampleName) {
 		form.reset();
 
 		// Clear each Element.
-		elements.forEach(function(element) {
-			element.clear();
-		});
+		// elements.forEach(function(element) {
+		// 	element.clear();
+		// });
 
 		// Reset error state as well.
 		error.classList.remove('visible');
@@ -111,7 +111,6 @@ function registerElements(exampleName) {
 
 	// Listen on the form's 'submit' handler - here's where all the magic happens
 	form.addEventListener('submit', function(e) {
-		debugger;
 		e.preventDefault();
 
 		// Trigger HTML5 validation UI on the form if any of the inputs fail validation
@@ -154,7 +153,6 @@ function registerElements(exampleName) {
 		// from the Element group in order to create a token. We can also pass
 		// in the additional customer data we collected in our form.
 		stripe.createToken('bank_account', bankAccountData).then(function(result) {
-			debugger;
 			if (result.token) {
 				// If we received a token, show the token ID
 				example.querySelector('.token').innerText = result.token.id;
