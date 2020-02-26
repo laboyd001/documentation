@@ -6,11 +6,6 @@ It will be different for test and live Payment Gateways.
 var publishableKey = 'pk_test_JaW3gRm7yo57hInDNH4mREYR00JgVjOstq';
 var stripe = Stripe(publishableKey);
 
-var amountToCharge = 19.75;
-
-// changing button to show amount to charge
-// document.getElementById('pay_button').innerHTML = 'Pay $' + amountToCharge;
-
 /*
 This is setup to submit to a Salesforce Site. The recommended approach is to oauth to Salesforce
 and call our Payments Rest API as an authenticated user. It adds an extra layer of security to
@@ -27,7 +22,6 @@ function registerElements(exampleName) {
 	var form = example.querySelector('form');
 	var resetButton = example.querySelector('a.reset');
 	var error = form.querySelector('.error');
-	var errorMessage = error.querySelector('.message');
 
 	function enableInputs() {
 		Array.prototype.forEach.call(
@@ -61,45 +55,11 @@ function registerElements(exampleName) {
 		submit.remove();
 	}
 
-	// Listen for errors from each Element, and show error messages in the UI.
-	var savedErrors = {};
-	// elements.forEach(function(element, idx) {
-	// 	element.on('change', function(event) {
-	// 		if (event.error) {
-	// 			error.classList.add('visible');
-	// 			savedErrors[idx] = event.error.message;
-	// 			errorMessage.innerText = event.error.message;
-	// 		} else {
-	// 			savedErrors[idx] = null;
-
-	// 			// Loop over the saved errors and find the first one, if any.
-	// 			var nextError = Object.keys(savedErrors)
-	// 			.sort()
-	// 			.reduce(function(maybeFoundError, key) {
-	// 				return maybeFoundError || savedErrors[key];
-	// 			}, null);
-
-	// 			if (nextError) {
-	// 				// Now that they've fixed the current error, show another one.
-	// 				errorMessage.innerText = nextError;
-	// 			} else {
-	// 				// The user fixed the last error; no more errors.
-	// 				error.classList.remove('visible');
-	// 			}
-	// 		}
-	// 	});
-	// });
-
 	resetButton.addEventListener('click', function(e) {
 		e.preventDefault();
 		// Resetting the form (instead of setting the value to `''` for each input)
 		// helps us clear webkit autofill styles.
 		form.reset();
-
-		// Clear each Element.
-		// elements.forEach(function(element) {
-		// 	element.clear();
-		// });
 
 		// Reset error state as well.
 		error.classList.remove('visible');
@@ -135,7 +95,7 @@ function registerElements(exampleName) {
 
 		// Gather additional customer data we may have collected in our form.
 		var name = form.querySelector('#' + exampleName + '-name');
-		var email = form.querySelector('#' + exampleName + '-email');
+		// var email = form.querySelector('#' + exampleName + '-email');
 		var routing_number = form.querySelector('#' + exampleName + '-routing-number');
 		var account_number = form.querySelector('#' + exampleName + '-account-number');
 		var account_holder_type = form.querySelector('#' + exampleName + '-selectoptions');
@@ -209,11 +169,8 @@ function sendTokenBlackthornPaymentsAPI(stripeToken, example) {
 	xhr.send(JSON.stringify(payload));
 }
 
-
 (function() {
 	'use strict';
-
-	var elements = stripe.elements();
 
 	// Floating labels
 	var inputs = document.querySelectorAll('.cell.example.example2 .input');
@@ -232,60 +189,6 @@ function sendTokenBlackthornPaymentsAPI(stripeToken, example) {
 			}
 		});
 	});
-
-	var elementStyles = {
-		base: {
-			color: '#32325D',
-			fontWeight: 500,
-			fontFamily: 'monospace, sans-serif',
-			fontSize: '16px',
-			fontSmoothing: 'antialiased',
-
-			'::placeholder': {
-				color: '#CFD7DF',
-			},
-			':-webkit-autofill': {
-				color: '#e39f48',
-			},
-		},
-		invalid: {
-			color: '#E25950',
-			'::placeholder': {
-				color: '#FFCCA5',
-			},
-		},
-	};
-
-	var elementClasses = {
-		focus: 'focused',
-		empty: 'empty',
-		invalid: 'invalid',
-	};
-
-	// var auBankAccountElement = elements.create('iban',{
-	// 	style: elementStyles,
-	// 	classes: elementClasses,
-	// });
-	// auBankAccountElement.mount('#example2-bank-account');
-
-
-	// var cardNumber = elements.create('cardNumber', {
-	// 	style: elementStyles,
-	// 	classes: elementClasses,
-	// });
-	// cardNumber.mount('#example2-card-number');
-
-	// var cardExpiry = elements.create('cardExpiry', {
-	// 	style: elementStyles,
-	// 	classes: elementClasses,
-	// });
-	// cardExpiry.mount('#example2-card-expiry');
-
-	// var cardCvc = elements.create('cardCvc', {
-	// 	style: elementStyles,
-	// 	classes: elementClasses,
-	// });
-	// cardCvc.mount('#example2-card-cvc');
 
 	registerElements('example2');
 })();
