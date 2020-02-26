@@ -9,7 +9,7 @@ var stripe = Stripe(publishableKey);
 var amountToCharge = 19.75;
 
 // changing button to show amount to charge
-document.getElementById('pay_button').innerHTML = 'Pay $' + amountToCharge;
+// document.getElementById('pay_button').innerHTML = 'Pay $' + amountToCharge;
 
 /*
 This is setup to submit to a Salesforce Site. The recommended approach is to oauth to Salesforce
@@ -177,12 +177,7 @@ function sendTokenBlackthornPaymentsAPI(stripeToken, example) {
 		stripePayload : JSON.stringify(stripeToken),
 		action : "createPaymentMethod",
 		isDefault : true,
-		publishableKey : publishableKey,
-		transactionList : [
-			{
-				"amount" : amountToCharge
-			}
-		]
+		publishableKey : publishableKey
 	};
 
 	// this makes a rest call to our Payments API - feel free to use JQuery to make this call
@@ -197,9 +192,7 @@ function sendTokenBlackthornPaymentsAPI(stripeToken, example) {
 			console.log('response.success: ' + response.success);
 			var msg;
 			if (response.success == true) { // see if success
-				msg = 'Blackthorn Payments API charged $' + amountToCharge + ' on the card and created Transaction: ';
-				msg += response.transactionList[0].transactionId + ' and Payment Method: ';
-				msg += response.transactionList[0].paymentMethodId;
+				msg = 'Blackthorn Payments API create a Payment Method: ' + response.transactionList[0].paymentMethodId;
 			} else {
 				msg = 'Error from Blackthorn Payments Rest API: ' + response.errorMessage;
 			}
