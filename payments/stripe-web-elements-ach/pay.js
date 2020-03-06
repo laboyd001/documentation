@@ -91,11 +91,9 @@ function registerElements(exampleName) {
 
 		// Disable all inputs.
 		disableInputs();
-		
 
 		// Gather additional customer data we may have collected in our form.
 		var name = form.querySelector('#' + exampleName + '-name');
-		// var email = form.querySelector('#' + exampleName + '-email');
 		var routing_number = form.querySelector('#' + exampleName + '-routing-number');
 		var account_number = form.querySelector('#' + exampleName + '-account-number');
 		var account_holder_type = form.querySelector('#' + exampleName + '-selectoptions');
@@ -132,13 +130,16 @@ function sendTokenBlackthornPaymentsAPI(stripeToken, example) {
 	console.log('stripeToken: ' + JSON.stringify(stripeToken));
 
 	// build the payload for the Payments Rest API - lots of attributes can be set here
-	// TODO: document some other sample payload for passing in additional data
+	// we're only creating a Payment Method for the Bank Account because Stripe requires
+	// the customer verify with micro deposits before the Bank Account can be charged
 	var payload = {
 		stripePayload : JSON.stringify(stripeToken),
+		email : form.querySelector('#' + exampleName + '-email'),
 		action : "createPaymentMethod",
 		isDefault : true,
 		publishableKey : publishableKey
 	};
+
 
 	// this makes a rest call to our Payments API - feel free to use JQuery to make this call
 	var xhr = new XMLHttpRequest(); // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
