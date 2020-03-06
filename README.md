@@ -9,10 +9,9 @@ Here are recommended working examples on how to use Stripe Elements with the Bla
 
 [Stripe Elements for Card](https://blackthornio.github.io/documentation/payments/stripe-web-elements-card/stripe-elements-blackthorn-payments-card.html) - source is viewable from the example
 
-<!-- uncomment these once they're done
 [Stripe Elements for ACH](https://blackthornio.github.io/documentation/payments/stripe-web-elements-ach/stripe-elements-blackthorn-payments-ach.html) - source is viewable from the example
 
-
+<!-- uncomment these once they're done
 ### Authorize.net Accept Hosted + Payments Rest API
 Here are recommended working examples on how to use Accept Hosted with the Blackthorn Payments Rest API to ensure a **SAQ A** PCI Compliance Level.
 
