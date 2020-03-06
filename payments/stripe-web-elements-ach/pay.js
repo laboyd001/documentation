@@ -129,14 +129,12 @@ function registerElements(exampleName) {
 function sendTokenBlackthornPaymentsAPI(stripeToken, example) {
 	console.log('stripeToken: ' + JSON.stringify(stripeToken));
 
-	var form = example.querySelector('form');
-
 	// build the payload for the Payments Rest API - lots of attributes can be set here
 	// we're only creating a Payment Method for the Bank Account because Stripe requires
 	// the customer verify with micro deposits before the Bank Account can be charged
 	var payload = {
 		stripePayload : JSON.stringify(stripeToken),
-		email : form.querySelector('#' + exampleName + '-email'),
+		email : document.getElementById('example2-email').value,
 		action : "createPaymentMethod",
 		isDefault : true,
 		publishableKey : publishableKey
