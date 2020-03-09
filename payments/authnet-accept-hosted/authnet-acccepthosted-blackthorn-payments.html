@@ -1,77 +1,71 @@
 <!DOCTYPE html>
 <html>
+<head>
+	<title>Sample form</title>
+	<script type="text/javascript" charset="utf-8" src="https://jstest.authorize.net/v3/AcceptUI.js"></script>
 
 <!--
-    This file is a standalone HTML page demonstrating usage of the Authorize.net
-    Accept JavaScript library using the integrated payment information form.
+This file is a standalone HTML page demonstrating usage of the Authorize.net
+Accept JavaScript library using the integrated payment information form.
 
-    For complete documentation for the Accept JavaScript library, see
-    https://developer.authorize.net/api/reference/features/acceptjs.html
+For complete documentation for the Accept JavaScript library, see
+https://developer.authorize.net/api/reference/features/acceptjs.html
 -->
-
-<head>
-    <title>Sample form</title>
 </head>
-
 <body>
-
-<script type="text/javascript"
-    src="https://jstest.authorize.net/v3/AcceptUI.js"
-    charset="utf-8">
-</script>
 
 <form id="paymentForm">
     <input type="hidden" name="dataValue" id="dataValue" />
     <input type="hidden" name="dataDescriptor" id="dataDescriptor" />
     <button type="button" id="payBtn"
         class="AcceptUI"
-        data-billingAddressOptions='{"show":true, "required":false}' 
-        data-apiLoginID="3KPxu628Zq" 
+        data-billingAddressOptions='{"show":true, "required":false}'
+        data-apiLoginID="3KPxu628Zq"
         data-clientKey="7Qj4j9d5cmAQ3gZdy5qF4TJb54ME5twRYJ2DnRD27eQj29kY4Jh9c8ZXSX8DXqdX"
-        data-acceptUIFormBtnTxt="Submit" 
-        data-acceptUIFormHeaderTxt="Card Information" 
+        data-acceptUIFormBtnTxt="Submit"
+        data-acceptUIFormHeaderTxt="Card Information"
         data-responseHandler="responseHandler"></button>
 </form>
 
 <body onload="callPopupModel()"></body>
 <script type="text/javascript">
-	function callPopupModel() {
-		var btn = document.getElementById('payBtn');
-		btn.click();
-		btn.style.display = 'None'; // Hide the button as the popup model is open on the page load
-	}
+function callPopupModel() {
+//	var btn = document.getElementById('payBtn');
+//	btn.click();
+//	btn.style.display = 'None'; // Hide the button as the popup model is open on the page load
+}
+
+
 function responseHandler(response) {
-    if (response.messages.resultCode === "Error") {
-        var i = 0;
-        while (i < response.messages.message.length) {
-            console.log(
-                response.messages.message[i].code + ": " +
-                response.messages.message[i].text
-            );
-            i = i + 1;
-        }
-    } else {
-        paymentFormUpdate(response);
-    }
+	if (response.messages.resultCode === "Error") {
+		var i = 0;
+		while (i < response.messages.message.length) {
+			console.log(
+				response.messages.message[i].code + ": " +
+				response.messages.message[i].text
+			);
+			i = i + 1;
+		}
+	} else {
+		paymentFormUpdate(response);
+	}
 }
 
 
 function paymentFormUpdate(response) {
-	debugger;
 	console.log('response ==> ' + response);
 	var additionalData = {
 		name: response.customerInformation.firstName + ' ' + response.customerInformation.lastName,
 		opaqueData: response.opaqueData
 	};
-		sendTokenBlackthornPaymentsAPI(additionalData);
+	sendTokenBlackthornPaymentsAPI(additionalData);
 }
-
 
 
 function sendTokenBlackthornPaymentsAPI(additionalData) {
 	console.log('additionalData: ' + JSON.stringify(additionalData));
 
-var paymentsRestEndpoint = 'https://fieldservicemobilepay.secure.force.com/webhooks/services/apexrest/bt_stripe/v1';
+	var paymentsRestEndpoint = 'https://fieldservicemobilepay.secure.force.com/webhooks/services/apexrest/bt_stripe/v1';
 
 	// build the payload for the Payments Rest API - lots of attributes can be set here
 	// TODO: document some other sample payload for passing in additional data
@@ -92,29 +86,28 @@ var paymentsRestEndpoint = 'https://fieldservicemobilepay.secure.force.com/webho
 	var xhr = new XMLHttpRequest(); // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
 	xhr.open('POST', paymentsRestEndpoint);
 	xhr.setRequestHeader('Content-Type', 'application/json');
-		xhr.onload = function() {
-			if (xhr.status === 200) {
-				console.log('paymentsRestAPIResponse: ' + xhr.responseText);
+	xhr.onload = function() {
+		if (xhr.status === 200) {
+			console.log('paymentsRestAPIResponse: ' + xhr.responseText);
 
-				var response = JSON.parse(xhr.responseText);
-				console.log('response.success: ' + response.success);
-				var msg;
-				if (response.success == true) { // see if success
-					msg = 'Blackthorn Payments API charged $' + amountToCharge + ' on the card and created Transaction: ';
-					msg += response.transactionList[0].transactionId + ' and Payment Method: ';
-					msg += response.transactionList[0].paymentMethodId;
-				} else {
-					msg = 'Error from Blackthorn Payments Rest API: ' + response.errorMessage;
-				}
-				alert(msg);
-				console.log('msg ==> ' + msg);
-				document.getElementById('salesforce_message').innerText = msg;
+			var response = JSON.parse(xhr.responseText);
+			console.log('response.success: ' + response.success);
+			var msg;
+			if (response.success == true) { // see if success
+				msg = 'Blackthorn Payments API charged $' + amountToCharge + ' on the card and created Transaction: ';
+				msg += response.transactionList[0].transactionId + ' and Payment Method: ';
+				msg += response.transactionList[0].paymentMethodId;
+			} else {
+				msg = 'Error from Blackthorn Payments Rest API: ' + response.errorMessage;
 			}
-		};
-		var jsn = JSON.stringify(payload);
-		xhr.send(jsn.replace(/\\/g, ""));
+			alert(msg);
+			console.log('msg ==> ' + msg);
+			document.getElementById('salesforce_message').innerText = msg;
+		}
+	};
+	var jsn = JSON.stringify(payload);
+	xhr.send(jsn.replace(/\\/g, ""));
 }
 </script>
-
 </body>
 </html>
