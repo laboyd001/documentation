@@ -69,11 +69,11 @@ sessionAttendeeId | root | No | String | Id of the related Session Attendee.
 sessionId | root | No | String | Id of the related Session.
 formElements | root | No | Form Element Array | Array of Form Elements.
 formElementId | formElement | On Submit | String | Id of the related Form Element.
-answer | formElement | No | String | Text answer that's 255 characters or less for a Form Element. This can also be used to set a selected Picklist value (separated multiple by semicolon) or the answer to a checkbox form field.
+answer | formElement | No | String | Text answer that's 255 characters or less for a Form Element. This can also be used to set a selected Picklist value (separated multiple with a semicolon) or the answer to a checkbox form field.
 answerLong | formElement | No | String | Text answer that's greater than 255 characters but less than 10,000 characters for a Form Element.
 answerDate | formElement | No | Date | Date formatted answer for a Form Element.
 answerNumber | formElement | No | Decimal | Decimal formatted answer for a Form Element.
-fileUploadKey | formElement | No | String | Key of a File that was uploaded to [Salesforce as a ContentVersion record using the Salesforce Rest API](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_sobject_insert_update_blob.htm#inserting_a_contentversion). Use the same key here that you set on the ContentVersion - `Related_Key__c` field the relate the ContentVersion (File) record to the Form Submission.
+fileUploadKey | formElement | No | String | Key of a File that was uploaded to [Salesforce as a ContentVersion record using the Salesforce Rest API](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_sobject_insert_update_blob.htm#inserting_a_contentversion). Use the same key here that you set on the ContentVersion - `Related_Key__c` field to relate the ContentVersion (File) record to the Form Submission.
 bigListGroupOptionId | formElement | No | String | Id of the related Big List Group Option selected as an answer.
 
 
