@@ -36,9 +36,16 @@ The Checkout API can be used to create a shopping cart to capture relevant data 
 
 ## Events
 
-* [Events Data Rest API](/events/events_data_api.md). A service for querying Event records from Salesforce.
+### Events Data Rest API
+The Events Data API can be used to retrieve Event records in a format that is convienent to use in a custom implementation. [More information is available in the documentation](/events/events_data_api.md).
 
-* [Events Waitlist Rest API](/events/events_addtowaitlist_api.md). A service for checking waitlists and adding attendees to waitlists.
+### Events Form Submission Rest API
+Save, Retrieve and Submit Form Submission data for custom questions and surveys.
+ [More information is available in the documentation](/events/events_form_api.md).
 
-* [Events Checkout Rest API](/events/events_checkout_api.md). A service to submit event checkouts.
+### Events Waitlist Rest API
+Add Attendees to ticket or session waitlists. [More information is available in the documentation](/events/events_addtowaitlist_api.md).
+
+### Events Checkout Rest API
+Save, Retrieve and Submit Event specific checkouts data. [More information is available in the documentation](/events/events_checkout_api.md).
 
