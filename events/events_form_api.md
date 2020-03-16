@@ -63,13 +63,13 @@ key | root | On Submit | String | Generate or have it generated for you.
 formId | root | On Submit | String | Id of the Form record.
 eventId | root | On Submit | String | Id of the related Event.
 attendeeId | root | No | String | Id of the related Attendee.
-attendeeKey | root | No | String | Key of the yet to be created Attendee. Use the same key here that you use in the Event Checkout API to relate the records.
+attendeeKey | root | No | String | Key of the yet to be created Attendee. Use the same key here that you use in the Event Checkout API to relate the Form Submission to an Attendee record created by the Checkout API.
 relatedId | root | No | String | Id of the related Account, Contact, Lead or User.
 sessionAttendeeId | root | No | String | Id of the related Session Attendee.
 sessionId | root | No | String | Id of the related Session.
 formElements | root | No | Form Element Array | Array of Form Elements.
-formElementId | formElements | No | String | Id of the related Form Element.
-answer | formElement | No | String | Text answer that's 255 characters or less for a Form Element. This can also be used to set selected Picklist value or the answer to a checkbox.
+formElementId | formElement | On Submit | String | Id of the related Form Element.
+answer | formElement | No | String | Text answer that's 255 characters or less for a Form Element. This can also be used to set a selected Picklist value (separated multiple by semicolon) or the answer to a checkbox form field.
 answerLong | formElement | No | String | Text answer that's greater than 255 characters but less than 10,000 characters for a Form Element.
 answerDate | formElement | No | Date | Date formatted answer for a Form Element.
 answerNumber | formElement | No | Decimal | Decimal formatted answer for a Form Element.
