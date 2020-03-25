@@ -85,9 +85,9 @@ pretty | No | set to `true` to output pretty JSON
 
 **examples**
 
-[https://blackthorndemo1-developer-edition.na112.force.com/services/apexrest/conference360/data/v1/attendees?eventId=a12f4000003vFaa](https://blackthorndemo1-developer-edition.na112.force.com/services/apexrest/conference360/data/v1/attendees?eventId=a12f4000003vFaa&pretty=true)
+[https://blackthorndemo1-developer-edition.na112.force.com/services/apexrest/conference360/data/v1/attendees?eventId=a0w3i0000005TEg](https://blackthorndemo1-developer-edition.na112.force.com/services/apexrest/conference360/data/v1/attendees?eventId=a0w3i0000005TEg&pretty=true)
 
-[https://blackthorndemo1-developer-edition.na112.force.com/services/apexrest/conference360/data/v1/attendees?key=qeZgrsYqBa](https://blackthorndemo1-developer-edition.na112.force.com/services/apexrest/conference360/data/v1/attendees?key=qeZgrsYqBa&pretty=true)
+[https://blackthorndemo1-developer-edition.na112.force.com/services/apexrest/conference360/data/v1/attendees?key=h8yPVaATX1](https://blackthorndemo1-developer-edition.na112.force.com/services/apexrest/conference360/data/v1/attendees?key=h8yPVaATX1&pretty=true)
 
 
 ***
@@ -108,7 +108,7 @@ pretty | No | set to `true` to output pretty JSON
 
 [https://blackthorndemo1-developer-edition.na112.force.com/services/apexrest/conference360/data/v1/forms](https://blackthorndemo1-developer-edition.na112.force.com/services/apexrest/conference360/data/v1/forms?pretty=true)
 
-[https://blackthorndemo1-developer-edition.na112.force.com/services/apexrest/conference360/data/v1/forms?id=a1Uf4000001Yoj4EAC](https://blackthorndemo1-developer-edition.na112.force.com/services/apexrest/conference360/data/v1/forms?id=a1Uf4000001Yoj4EAC&pretty=true)
+[https://blackthorndemo1-developer-edition.na112.force.com/services/apexrest/conference360/data/v1/forms?id=a113i000000MaqK](https://blackthorndemo1-developer-edition.na112.force.com/services/apexrest/conference360/data/v1/forms?id=a113i000000MaqK&pretty=true)
 
 
 ***
@@ -246,7 +246,7 @@ Get Event Notifications for one or more Events.
 
 Parameter | Required? | Value
 --------- | --------- | -----
-eventId | Yes | value is Event__c on Event Ad. can pass multiple separated by commas
+eventId | Yes | value is Event__c on Event Notification. can pass multiple separated by commas
 pretty | No | set to `true` to output pretty JSON
 
 **example**
