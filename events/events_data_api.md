@@ -23,9 +23,9 @@ pretty | No | set to `true` to output pretty JSON
 
 **examples**
 
-[https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/events](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/events?pretty=true)
+[https://blackthorndemo1-developer-edition.na112.force.com/services/apexrest/conference360/data/v1/events](https://blackthorndemo1-developer-edition.na112.force.com/services/apexrest/conference360/data/v1/events?pretty=true)
 
-[https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/events?key=67yd9G08EP](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/events?key=67yd9G08EP&pretty=true)
+[https://blackthorndemo1-developer-edition.na112.force.com/services/apexrest/conference360/data/v1/events?key=WN2bx4JyXn](https://blackthorndemo1-developer-edition.na112.force.com/services/apexrest/conference360/data/v1/events?key=WN2bx4JyXn&pretty=true)
 
 
 ***
@@ -43,9 +43,9 @@ pretty | No | set to `true` to output pretty JSON
 
 **examples**
 
-[https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/events/lite](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/events/lite?pretty=true)
+[https://blackthorndemo1-developer-edition.na112.force.com/services/apexrest/conference360/data/v1/events/lite](https://blackthorndemo1-developer-edition.na112.force.com/services/apexrest/conference360/data/v1/events/lite?pretty=true)
 
-[https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/events/lite?key=67yd9G08EP](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/events/lite?key=67yd9G08EP&pretty=true)
+[https://blackthorndemo1-developer-edition.na112.force.com/services/apexrest/conference360/data/v1/events/lite?key=WN2bx4JyXn](https://blackthorndemo1-developer-edition.na112.force.com/services/apexrest/conference360/data/v1/events/lite?key=WN2bx4JyXn&pretty=true)
 
 
 ***
@@ -64,9 +64,9 @@ pretty | No | set to `true` to output pretty JSON
 
 **examples**
 
-[https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/groups](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/groups?pretty=true)
+[https://blackthorndemo1-developer-edition.na112.force.com/services/apexrest/conference360/data/v1/groups](https://blackthorndemo1-developer-edition.na112.force.com/services/apexrest/conference360/data/v1/groups?pretty=true)
 
-[https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/groups?key=3MM1sP47b8](https://qfevt-developer-edition.na59.force.com/services/apexrest/data/v1/groups?key=3MM1sP47b8&pretty=true)
+[https://blackthorndemo1-developer-edition.na112.force.com/services/apexrest/conference360/data/v1/groups?key=blackthorn](https://blackthorndemo1-developer-edition.na112.force.com/services/apexrest/conference360/data/v1/groups?key=blackthorn&pretty=true)
 
 
 ***
