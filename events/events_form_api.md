@@ -21,7 +21,7 @@ Call this endpoint to save Form Submission data as a Form Submission record in S
 The save form does not really require any data and does not do a lot of validations so you can submit as little or as much data as you want. Once the submission is saved, the form submission payload is returned.
 
 - **Method:** POST
-- **Endpoint:** `{sf_domain}/services/apexrest/bt_stripe/form/v1/save`
+- **Endpoint:** `{sf_domain}/services/apexrest/conference360/form/v1/save`
 - **Request Body Payload:** See the API Request and Response Payload section below
 - **Response Body Payload:** See the API Request and Response Payload section below
 
@@ -30,7 +30,7 @@ The save form does not really require any data and does not do a lot of validati
 Call this endpoint to retrieve an existing Form Submission record from Salesforce by key. The response returned is the output of the last valid form save or final submit. If a record is not found for the key, an error is returned.
 
 - **Method:** GET
-- **Endpoint:** `{sf_domain}/services/apexrest/bt_stripe/form/v1/retrieve?key={key}`
+- **Endpoint:** `{sf_domain}/services/apexrest/conference360/form/v1/retrieve?key={key}`
 - **Request Body Payload:** None - just set the `key` parameter on the request url
 - **Response Body Payload:** See the API Request and Response Payload section below
 
@@ -39,7 +39,7 @@ Call this endpoint to retrieve an existing Form Submission record from Salesforc
 Call this endpoint to do a final submit of Form Submission data. This updates the Form Submission record as Complete in Salesforce. Once the Form Submission record is complete, it cannot be saved or submitted again.
 
 - **Method:** POST
-- **Endpoint:** `{sf_domain}/services/apexrest/bt_stripe/form/v1/submit`
+- **Endpoint:** `{sf_domain}/services/apexrest/conference360/form/v1/submit`
 - **Request Body Payload:** See the API Request and Response Payload section below
 - **Response Body Payload:** See the API Request and Response Payload section below
 
