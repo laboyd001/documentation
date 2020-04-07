@@ -69,11 +69,15 @@ sessionAttendeeId | root | No | String | Id of the related Session Attendee.
 sessionId | root | No | String | Id of the related Session.
 formElements | root | No | Form Element Array | Array of Form Elements.
 formElementId | formElement | On Submit | String | Id of the related Form Element.
-answer | formElement | No | String | The answer submitted by the user. Use the following format for these data types: * Boolean = "true" or "false"
+answer | formElement | No | String | The answer submitted by the user.
+
+
+## Answer Data Format
+To make our request payload simple, we have only one String `answer` attribute even though we support multiple non-String formats. Be sure to use the following format when setting the `answer` attribute for these data types:
+* Boolean = "true" or "false"
 * Date = "YYYY-M-D"
 * Multi-Select Picklist = "Values;Separated;By Semicolons"
 * Number = "15.5"
-
 
 
 ## Sample Form Save Request Payload
