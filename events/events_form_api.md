@@ -88,11 +88,11 @@ answer | formElement | No | String | The answer submitted by the user.
     "formElementId" : "a100b0000084YgiMNM"
   },
   {
-    "answer" : null,
+    "answer" : 45,
     "formElementId" : "a100b0000084YgiMNM"
   },
   {
-    "answer" : null,
+    "answer" : "2009-02-08",
     "formElementId" : "a100b0000084YgiMNM"
   },
   {
