@@ -69,8 +69,10 @@ sessionAttendeeId | root | No | String | Id of the related Session Attendee.
 sessionId | root | No | String | Id of the related Session.
 formElements | root | No | Form Element Array | Array of Form Elements.
 formElementId | formElement | On Submit | String | Id of the related Form Element.
-answer | formElement | No | String | The answer submitted by the user.
-
+answer | formElement | No | String | The answer submitted by the user. Use the following format for these data types: * Boolean = "true" or "false"
+* Date = "YYYY-M-D"
+* Multi-Select Picklist = "Values;Separated;By Semicolons"
+* Number = "15.5"
 
 
 
@@ -88,12 +90,20 @@ answer | formElement | No | String | The answer submitted by the user.
     "formElementId" : "a100b0000084YgiMNM"
   },
   {
-    "answer" : 45,
+    "answer" : "45",
     "formElementId" : "a100b0000084YgiMNM"
+  },
+  {
+    "answer" : "Option 1;Option 3",
+    "formElementId" : "a100b0000084YgiMNM",
   },
   {
     "answer" : "2009-02-08",
     "formElementId" : "a100b0000084YgiMNM"
+  },
+  {
+    "answer" : "true",
+    "formElementId" : "a100b0000084YgiMNM",
   },
   {
     "answer" : "bt_na6expakpbBJVxq1",
