@@ -483,15 +483,12 @@ For Contact:
 * __paymentGatewayId__ Id of the Payment Gateway associated with the Schedule. Required.
 * __currencyISO__ 3-letter ISO code of the used currency. If not set, default Payment Gateway currency is used.
 * __initialAmount__ Amount of the first transaction.Optional
+* __captureFirst__ Boolean flag indicating if the first transaction should be captured immediately.
+* __autoCapture__ Boolean flag indicating if the  transaction should be auto captured on the due date.
 
 #### Either of these fields will determine the amount of each Transaction. 
 * __eachAmount__ Decimal number representing the transaction amount to capture.
 * __totalAmount__ Total amount of the schedule.If each mount is not set, Please set this value.
-
-
-* __captureFirst__ Boolean flag indicating if the first transaction should be captured immediately.
-* __autoCapture__ Boolean flag indicating if the  transaction should be auto captured on the due date.
-
 
 #### Recurrence Method
 * __recurrenceMethod__ Possible values Keep One Open/Auto Renew/None.
