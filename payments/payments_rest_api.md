@@ -495,9 +495,9 @@ For Contact:
 
 The Recurrence Method field defines the type of open-ended payment schedule you want.
 
-  None = Payment Schedule is not open-ended and will end after the number of completed transactions match Count.
-  Keep One Open = After 1 Transaction is completed, another open transaction is generated on the same frequency.
-  Auto-renew = After all initial transactions are completed, the Payment Schedule will generate the full Count again, such as 12 original, now 12 new future transactions.
+  * None = Payment Schedule is not open-ended and will end after the number of completed transactions match Count.
+  * Keep One Open = After 1 Transaction is completed, another open transaction is generated on the same frequency.
+  * Auto-renew = After all initial transactions are completed, the Payment Schedule will generate the full Count again, such as 12 original, now 12 new future transactions.
 
 #### Advance Schedule
 if your Payment Schedule needs to capture a payment once every three weeks, you would use our advanced schedule fields.
