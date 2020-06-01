@@ -472,3 +472,95 @@ For Contact:
     ]
 ```
 
+# Payment Schedules API -- REST
+
+### Properties
+
+* __preset__ This field determines the frequency of each Transaction with their Due Date. Possible values could be Daily,Weekly,Monthlu,Quaterly,Annually.
+* __count__ Integer number representing how many transaction to be created.
+* __startDate__ This date determines when the Payment Schedule should start. Start of the first trasanction in the schedule. Optional.
+* __endDate__ End date of the schdule.
+* __paymentGatewayId__ Id of the Payment Gateway associated with the Schedule. Required.
+* __currencyISO__ 3-letter ISO code of the used currency. If not set, default Payment Gateway currency is used.
+* __initialAmount__ Amount of the first transaction.Optional
+
+#### Either of these fields will determine the amount of each Transaction. 
+* __eachAmount__ Decimal number representing the transaction amount to capture.
+* __totalAmount__ Total amount of the schedule.If each mount is not set, Please set this value.
+
+
+* __captureFirst__ Boolean flag indicating if the first transaction should be captured immediately.
+* __autoCapture__ Boolean flag indicating if the  transaction should be auto captured on the due date.
+
+
+#### Recurrence Method
+* __recurrenceMethod__ Possible values Keep One Open/Auto Renew/None.
+
+The Recurrence Method field defines the type of open-ended payment schedule you want.
+
+  None = Payment Schedule is not open-ended and will end after the number of completed transactions match Count.
+  Keep One Open = After 1 Transaction is completed, another open transaction is generated on the same frequency.
+  Auto-renew = After all initial transactions are completed, the Payment Schedule will generate the full Count again, such as 12 original, now 12 new future transactions.
+
+#### Advance Schedule
+if your Payment Schedule needs to capture a payment once every three weeks, you would use our advanced schedule fields.
+
+* __repeat__ Frequency for each transaction. Same as preset 
+* __frequency__ Duration between two transaction due date. 
+
+
+1. Creating a new Payment Method with Payment Schedule with first transaction captured
+
+```
+{
+    "action": "createPaymentMethodWithPaymentSchedules",
+    "paymentGatewayId": "a003600000AjOeL",
+    "paymentSchedule": [
+        {
+            "preset": "Daily",
+            "eachamount": 100,
+            "count": 3,
+            "captureFirst" : true
+        }
+    ],
+    "stripePayload": "{\"id\":\"tok_19NftaDXJoGaqeOAt1pllkR3\",\"object\":\"token\",\"card\":{\"id\":\"card_19NftaDXJoGaqeOAzjXPWPu9\",\"object\":\"card\",\"address_city\":\"Budapest\",\"address_country\":\"Hungary\",\"address_line1\":\"Add l. 1\",\"address_line1_check\":\"unchecked\",\"address_line2\":null,\"address_state\":null,\"address_zip\":\"1234\",\"address_zip_check\":\"unchecked\",\"brand\":\"Visa\",\"country\":\"US\",\"cvc_check\":\"unchecked\",\"dynamic_last4\":null,\"exp_month\":5,\"exp_year\":2019,\"funding\":\"credit\",\"last4\":\"4242\",\"metadata\":{},\"name\":\"Holder Maki\",\"tokenization_method\":null},\"client_ip\":\"94.21.254.28\",\"created\":1481018998,\"livemode\":false,\"type\":\"card\",\"used\":false}"
+}
+```
+
+
+
+2. Creating a new Payment Method with Payment Schedule - With Monthly Preset , all open transaction different initial amount
+
+```
+{
+    "action": "createPaymentMethodWithPaymentSchedules",
+    "paymentGatewayId": "a003600000AjOeL",
+    "paymentSchedule": [
+        {
+            "preset": "Daily",
+            "eachamount": 100,
+            "count": 6,
+            "initialAmount" : 120
+        }
+    ],
+    "stripePayload": "{\"id\":\"tok_19NftaDXJoGaqeOAt1pllkR3\",\"object\":\"token\",\"card\":{\"id\":\"card_19NftaDXJoGaqeOAzjXPWPu9\",\"object\":\"card\",\"address_city\":\"Budapest\",\"address_country\":\"Hungary\",\"address_line1\":\"Add l. 1\",\"address_line1_check\":\"unchecked\",\"address_line2\":null,\"address_state\":null,\"address_zip\":\"1234\",\"address_zip_check\":\"unchecked\",\"brand\":\"Visa\",\"country\":\"US\",\"cvc_check\":\"unchecked\",\"dynamic_last4\":null,\"exp_month\":5,\"exp_year\":2019,\"funding\":\"credit\",\"last4\":\"4242\",\"metadata\":{},\"name\":\"Holder Maki\",\"tokenization_method\":null},\"client_ip\":\"94.21.254.28\",\"created\":1481018998,\"livemode\":false,\"type\":\"card\",\"used\":false}"
+}
+```
+
+3. Creating a new Payment Method with Payment Schedule which needs to capture a payment once every three weeks
+
+```
+{
+    "action": "createPaymentMethodWithPaymentSchedules",
+    "paymentGatewayId": "a003600000AjOeL",
+    "paymentSchedule": [
+        {
+            "repeat": "Weekly",
+            "eachamount": 100,
+            "count": 3,
+            "frequency" : 3
+        }
+    ],
+    "stripePayload": "{\"id\":\"tok_19NftaDXJoGaqeOAt1pllkR3\",\"object\":\"token\",\"card\":{\"id\":\"card_19NftaDXJoGaqeOAzjXPWPu9\",\"object\":\"card\",\"address_city\":\"Budapest\",\"address_country\":\"Hungary\",\"address_line1\":\"Add l. 1\",\"address_line1_check\":\"unchecked\",\"address_line2\":null,\"address_state\":null,\"address_zip\":\"1234\",\"address_zip_check\":\"unchecked\",\"brand\":\"Visa\",\"country\":\"US\",\"cvc_check\":\"unchecked\",\"dynamic_last4\":null,\"exp_month\":5,\"exp_year\":2019,\"funding\":\"credit\",\"last4\":\"4242\",\"metadata\":{},\"name\":\"Holder Maki\",\"tokenization_method\":null},\"client_ip\":\"94.21.254.28\",\"created\":1481018998,\"livemode\":false,\"type\":\"card\",\"used\":false}"
+}
+```
