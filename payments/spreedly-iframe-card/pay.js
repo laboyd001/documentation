@@ -31,12 +31,11 @@ function sendTokenBlackthornPaymentsAPI(publicToken,example) {
 	// we're only creating a Payment Method for the Bank Account because Stripe requires
 	// the customer verify with micro deposits before the Bank Account can be charged
 	var payload = {
-		plaidPublicToken : publicToken,
-		plaidAccountId : accountId,
+		token : publicToken,
 		email : document.getElementById('example2-email').value,
 		action : "createPaymentMethodSpreedly",
 		isDefault : true,
-		publishableKey : publishableKey
+		paymentGatewayId : 'a0K4T0000003LoN'
 	};
 
 
