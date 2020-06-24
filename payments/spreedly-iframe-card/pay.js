@@ -167,6 +167,9 @@ function register(exampleName) {
 	  	options['state'] = document.getElementById('example2-state').value;
 	  	options['zip'] = document.getElementById('example2-zip').value;
 	  	//options['country'] = document.getElementById('example2-month').value;
+
+	  	console.log(options);
+
 	  	Spreedly.tokenizeCreditCard(options);
 	};
 
