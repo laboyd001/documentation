@@ -16,7 +16,7 @@ If you oauth to Salesforce, your endpoint will be: <SF_DOMAIN>/services/apexrest
 */
 //var paymentsRestEndpoint = 'https://fieldservicemobilepay.secure.force.com/webhooks/services/apexrest/bt_stripe/v1';
 
-var paymentsRestEndpoint = 'http://paydev7-developer-edition.na136.force.com/gateway/services/apexrest/v1';
+var paymentsRestEndpoint = 'https://paydev7-developer-edition.na136.force.com/gateway/services/apexrest/v1';
 
 
 function sendTokenBlackthornPaymentsAPI(publicToken,example) {
