@@ -26,13 +26,13 @@ function sendTokenBlackthornPaymentsAPI(publicToken,example) {
 	console.log('publicToken: ' + publicToken);
 
 	document.getElementById('example-2').style.display = 'none';
-	document.getElementById('example-3').style.display = 'visible';
+	//document.getElementById('example-3').style.display = 'visible';
 	// build the payload for the Payments Rest API - lots of attributes can be set here
 	// we're only creating a Payment Method for the Bank Account because Stripe requires
 	// the customer verify with micro deposits before the Bank Account can be charged
 	var payload = {
 		token : publicToken,
-		email : document.getElementById('example2-email').value,
+		email : document.getElementById('customer_email').value,
 		action : "createPaymentMethodSpreedly",
 		isDefault : true,
 		paymentGatewayId : 'a0K4T0000003LoN'
@@ -44,8 +44,8 @@ function sendTokenBlackthornPaymentsAPI(publicToken,example) {
 	xhr.open('POST', paymentsRestEndpoint);
 	xhr.setRequestHeader('Content-Type', 'application/json');
 	xhr.onload = function() {
-		document.getElementById('example-3').style.display = 'none';
-		document.getElementById('example-2').style.display = '';
+		//document.getElementById('example-3').style.display = 'none';
+		//document.getElementById('example-2').style.display = '';
 		if (xhr.status === 200) {
 			console.log('paymentsRestAPIResponse: ' + xhr.responseText);
 
@@ -103,8 +103,8 @@ function register(exampleName) {
 
 	var form = example.querySelector('form');
 	var resetButton = example.querySelector('a.reset');
-	var error = form.querySelector('.error');
-	var errorMessage = error.querySelector('.message');
+	//var error = form.querySelector('.error');
+	//var errorMessage = error.querySelector('.message');
 
 	function enableInputs() {
 		Array.prototype.forEach.call(
@@ -162,15 +162,16 @@ function register(exampleName) {
 	  	options['last_name'] = document.getElementById('example2-last-name').value;
 	  	options['year'] = document.getElementById('example2-year').value;
 	  	options['month'] = document.getElementById('example2-month').value;
-	  	options['address1'] = document.getElementById('example2-address').value;
-	  	options['city'] = document.getElementById('example2-city').value;
-	  	options['state'] = document.getElementById('example2-state').value;
-	  	options['zip'] = document.getElementById('example2-zip').value;
+	  	//options['address1'] = document.getElementById('example2-address').value;
+	  	//options['city'] = document.getElementById('example2-city').value;
+	  //	options['state'] = document.getElementById('example2-state').value;
+	  	//xoptions['zip'] = document.getElementById('example2-zip').value;
 	  	//options['country'] = document.getElementById('example2-month').value;
 
 	  	console.log(options);
 
 	  	Spreedly.tokenizeCreditCard(options);
+	  	return false;
 	};
 
 }
@@ -202,10 +203,12 @@ function register(exampleName) {
     Spreedly.on('paymentMethod', function(token, pmData) {
     	var formClass = '.example2';
 		var example = document.querySelector(formClass);
+		console.log('===token ==='+token);
     	sendTokenBlackthornPaymentsAPI(token,example);
     });
 
     Spreedly.on('errors', function(errors) {
+      console.log(errors);
       var messageEl = document.getElementById('errors');
       var errorBorder = "1px solid red";
       for(var i = 0; i < errors.length; i++) {
@@ -218,7 +221,7 @@ function register(exampleName) {
             Spreedly.setStyle(error["attribute"], "border: " + errorBorder + ";");
           }
         }
-        messageEl.innerHTML += error["message"] + "<br/>";
+        messageEl.innerHTML = error["message"] + "<br/>";
       }
     });
 

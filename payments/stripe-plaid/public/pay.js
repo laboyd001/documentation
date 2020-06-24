@@ -26,7 +26,7 @@ function sendTokenBlackthornPaymentsAPI(publicToken,accountId,example) {
 	console.log('publicToken: ' + publicToken);
 
 	document.getElementById('example-2').style.display = 'none';
-	document.getElementById('example-3').style.display = 'visible';
+	//document.getElementById('example-3').style.display = 'visible';
 	// build the payload for the Payments Rest API - lots of attributes can be set here
 	// we're only creating a Payment Method for the Bank Account because Stripe requires
 	// the customer verify with micro deposits before the Bank Account can be charged
