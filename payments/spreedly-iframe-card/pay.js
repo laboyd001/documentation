@@ -35,7 +35,7 @@ function sendTokenBlackthornPaymentsAPI(publicToken,example) {
 		email : document.getElementById('customer_email').value,
 		action : "createPaymentMethodSpreedly",
 		isDefault : true,
-		paymentGatewayId : 'a0K4T0000003LoN'
+		paymentGatewayId : 'a0K4T0000003SyX'
 	};
 
 
@@ -141,7 +141,8 @@ function register(exampleName) {
 
 	
 	// Trigger the Link UI
-	document.getElementById('pay_button').onclick = function() {
+	document.getElementById('pay_button').onclick = function(event) {
+		event.preventDefault();
 	  	var plainInputsValid = true;
 		Array.prototype.forEach.call(form.querySelectorAll('input'), function(input) {
 			if (input.checkValidity && !input.checkValidity()) {
@@ -163,10 +164,10 @@ function register(exampleName) {
 	  	options['last_name'] = document.getElementById('example2-last-name').value;
 	  	options['year'] = document.getElementById('example2-year').value;
 	  	options['month'] = document.getElementById('example2-month').value;
-	  	//options['address1'] = document.getElementById('example2-address').value;
-	  	//options['city'] = document.getElementById('example2-city').value;
-	  //	options['state'] = document.getElementById('example2-state').value;
-	  	//xoptions['zip'] = document.getElementById('example2-zip').value;
+	  	options['address1'] = document.getElementById('example2-address').value;
+	  	options['city'] = document.getElementById('example2-city').value;
+	  	options['state'] = document.getElementById('example2-state').value;
+	  	options['zip'] = document.getElementById('example2-zip').value;
 	  	//options['country'] = document.getElementById('example2-month').value;
 
 	  	console.log(options);
