@@ -28,7 +28,7 @@ function sendTokenBlackthornPaymentsAPI(publicToken,example) {
 	document.getElementById('example-2').style.display = 'none';
 	//document.getElementById('example-3').style.display = 'visible';
 	
-	
+
 	var payload = {
 		token : publicToken,
 		email : document.getElementById('customer_email').value,
@@ -59,7 +59,7 @@ function sendTokenBlackthornPaymentsAPI(publicToken,example) {
 			}
 
 			document.getElementById('salesforce_message').innerText = msg;
-
+			document.getElementById('spreedlyToken').innerText = publicToken;
 			// Stop loading!
 			example.classList.remove('submitting');
 	
