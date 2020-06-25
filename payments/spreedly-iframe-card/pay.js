@@ -27,9 +27,8 @@ function sendTokenBlackthornPaymentsAPI(publicToken,example) {
 
 	document.getElementById('example-2').style.display = 'none';
 	//document.getElementById('example-3').style.display = 'visible';
-	// build the payload for the Payments Rest API - lots of attributes can be set here
-	// we're only creating a Payment Method for the Bank Account because Stripe requires
-	// the customer verify with micro deposits before the Bank Account can be charged
+	
+	
 	var payload = {
 		token : publicToken,
 		email : document.getElementById('customer_email').value,
@@ -45,7 +44,7 @@ function sendTokenBlackthornPaymentsAPI(publicToken,example) {
 	xhr.setRequestHeader('Content-Type', 'application/json');
 	xhr.onload = function() {
 		//document.getElementById('example-3').style.display = 'none';
-		//document.getElementById('example-2').style.display = '';
+		document.getElementById('example-2').style.display = '';
 		console.log(xhr.status);
 		if (xhr.status === 200) {
 			console.log('paymentsRestAPIResponse: ' + xhr.responseText);
