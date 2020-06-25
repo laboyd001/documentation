@@ -46,6 +46,7 @@ function sendTokenBlackthornPaymentsAPI(publicToken,example) {
 	xhr.onload = function() {
 		//document.getElementById('example-3').style.display = 'none';
 		//document.getElementById('example-2').style.display = '';
+		console.log(xhr.status);
 		if (xhr.status === 200) {
 			console.log('paymentsRestAPIResponse: ' + xhr.responseText);
 
