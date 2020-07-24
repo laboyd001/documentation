@@ -36,8 +36,10 @@ The Checkout API can be used to create a shopping cart to capture relevant data 
 
 ## Events
 
+<!-- not supporting this anymore - needs a big update and is still in flux. customers should use the SF Rest API instead
 ### Events Data Rest API
 The Events Data API can be used to retrieve Event records in a format that is convienent to use in a custom implementation. [More information is available in the documentation](/events/events_data_api.md).
+-->
 
 ### Events Form Submission Rest API
 Save, Retrieve and Submit Form Submission data for custom questions and surveys.
