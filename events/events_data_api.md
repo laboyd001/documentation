@@ -1,4 +1,8 @@
 ## Events Data Rest API
+No Longer supported - returning in late 2021. We recommend you use the Salesforce Rest API to query Event data.
+
+<!-- not supporting this anymore - needs a big update and is still in flux. customers should use the SF Rest API instead
+
 The Events Data API is designed to return data by GET calls from Rest formatted Urls. All data is returned in JSON format. Your application must [oauth to a Salesforce org](https://help.salesforce.com/articleView?id=connected_app_create_api_integration.htm&type=5) that contains our Events package before making calls to the API. This API can also be called from a SF Site that's setup correctly. The Data API supports getting multiple records in one call and is mainly segregated by SF object.
 
 ### Rest Url Format
@@ -288,3 +292,4 @@ pretty | No | set to `true` to output pretty JSON
 
 [https://blackthorndemo1-developer-edition.na112.force.com/services/apexrest/conference360/data/v1/picklists](https://blackthorndemo1-developer-edition.na112.force.com/services/apexrest/conference360/data/v1/picklists?pretty=true)
 
+-->
