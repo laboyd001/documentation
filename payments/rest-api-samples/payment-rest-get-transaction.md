@@ -1,6 +1,6 @@
 # Payments Rest API - Get Transactions Example
 This sample sets the params that allows to fetch the transaction details. 
-You can also set `transactionStatus` to filter transaction by Status ,`paymentStatus` to filter by Payment Status `paymentMethodId` to fetch fetch transaction for that payment method Id. `dueDate` filter trasaction whose dueDate is the date passed.
+You can also set `transactionStatus` to filter transaction by Status ,`paymentStatus` to filter by Payment Status `paymentMethodId` to fetch  transaction for that payment method Id. `dueDate` filter trasaction whose dueDate is the date passed.
 
 - **Method:** POST
 - **Endpoint:** `{sf_domain}/services/apexrest/bt_stripe/checkout/v1`
