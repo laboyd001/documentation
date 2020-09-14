@@ -1,7 +1,7 @@
 # Blackthorn | Payments REST API Documentation
 
 
-This is a documentation for the generic usage of the API and the `createPaymentMethod` action (create Payment Methods with or without Transactions).
+This is a documentation for the generic usage of the API and the `createPaymentMethod` action (create Payment Methods with or without Transactions). You can view more [Rest API examples](/payments/rest-api-samples) for different scenarios.
 
 -------------------------------------
   Blackthorn | Payments provides REST API for developers in subscriber orgs to create applications and public websites that use Blackthorn | Payments functionality for custom web applications. To keep things simple, our API is structured on simple REST based POST calls with action based JSON payloads. The API consists of two kinds of actions:
