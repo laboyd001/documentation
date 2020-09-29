@@ -457,14 +457,12 @@ if your Payment Schedule needs to capture a payment once every three weeks, you 
 {
     "action": "createPaymentMethodWithPaymentSchedules",
     "paymentGatewayId": "a003600000AjOeL",
-    "paymentSchedule": [
-        {
-            "preset": "Daily",
-            "eachamount": 100,
-            "count": 3,
-            "captureFirst" : true
-        }
-    ],
+    "paymentSchedule": {
+        "preset": "Daily",
+        "eachamount": 100,
+        "count": 3,
+        "captureFirst" : true
+    },
     "stripePayload": "{\"id\":\"tok_19NftaDXJoGaqeOAt1pllkR3\",\"object\":\"token\",\"card\":{\"id\":\"card_19NftaDXJoGaqeOAzjXPWPu9\",\"object\":\"card\",\"address_city\":\"Budapest\",\"address_country\":\"Hungary\",\"address_line1\":\"Add l. 1\",\"address_line1_check\":\"unchecked\",\"address_line2\":null,\"address_state\":null,\"address_zip\":\"1234\",\"address_zip_check\":\"unchecked\",\"brand\":\"Visa\",\"country\":\"US\",\"cvc_check\":\"unchecked\",\"dynamic_last4\":null,\"exp_month\":5,\"exp_year\":2019,\"funding\":\"credit\",\"last4\":\"4242\",\"metadata\":{},\"name\":\"Holder Maki\",\"tokenization_method\":null},\"client_ip\":\"94.21.254.28\",\"created\":1481018998,\"livemode\":false,\"type\":\"card\",\"used\":false}"
 }
 ```
@@ -477,14 +475,12 @@ if your Payment Schedule needs to capture a payment once every three weeks, you 
 {
     "action": "createPaymentMethodWithPaymentSchedules",
     "paymentGatewayId": "a003600000AjOeL",
-    "paymentSchedule": [
-        {
-            "preset": "Daily",
-            "eachamount": 100,
-            "count": 6,
-            "initialAmount" : 120
-        }
-    ],
+    "paymentSchedule": {
+        "preset": "Daily",
+        "eachamount": 100,
+        "count": 6,
+        "initialAmount" : 120
+    },
     "stripePayload": "{\"id\":\"tok_19NftaDXJoGaqeOAt1pllkR3\",\"object\":\"token\",\"card\":{\"id\":\"card_19NftaDXJoGaqeOAzjXPWPu9\",\"object\":\"card\",\"address_city\":\"Budapest\",\"address_country\":\"Hungary\",\"address_line1\":\"Add l. 1\",\"address_line1_check\":\"unchecked\",\"address_line2\":null,\"address_state\":null,\"address_zip\":\"1234\",\"address_zip_check\":\"unchecked\",\"brand\":\"Visa\",\"country\":\"US\",\"cvc_check\":\"unchecked\",\"dynamic_last4\":null,\"exp_month\":5,\"exp_year\":2019,\"funding\":\"credit\",\"last4\":\"4242\",\"metadata\":{},\"name\":\"Holder Maki\",\"tokenization_method\":null},\"client_ip\":\"94.21.254.28\",\"created\":1481018998,\"livemode\":false,\"type\":\"card\",\"used\":false}"
 }
 ```
@@ -495,14 +491,12 @@ if your Payment Schedule needs to capture a payment once every three weeks, you 
 {
     "action": "createPaymentMethodWithPaymentSchedules",
     "paymentGatewayId": "a003600000AjOeL",
-    "paymentSchedule": [
-        {
-            "repeat": "Weekly",
-            "eachamount": 100,
-            "count": 3,
-            "frequency" : 3
-        }
-    ],
+    "paymentSchedule": {
+        "repeat": "Weekly",
+        "eachamount": 100,
+        "count": 3,
+        "frequency" : 3
+    },
     "stripePayload": "{\"id\":\"tok_19NftaDXJoGaqeOAt1pllkR3\",\"object\":\"token\",\"card\":{\"id\":\"card_19NftaDXJoGaqeOAzjXPWPu9\",\"object\":\"card\",\"address_city\":\"Budapest\",\"address_country\":\"Hungary\",\"address_line1\":\"Add l. 1\",\"address_line1_check\":\"unchecked\",\"address_line2\":null,\"address_state\":null,\"address_zip\":\"1234\",\"address_zip_check\":\"unchecked\",\"brand\":\"Visa\",\"country\":\"US\",\"cvc_check\":\"unchecked\",\"dynamic_last4\":null,\"exp_month\":5,\"exp_year\":2019,\"funding\":\"credit\",\"last4\":\"4242\",\"metadata\":{},\"name\":\"Holder Maki\",\"tokenization_method\":null},\"client_ip\":\"94.21.254.28\",\"created\":1481018998,\"livemode\":false,\"type\":\"card\",\"used\":false}"
 }
 ```
