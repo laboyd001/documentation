@@ -29,22 +29,7 @@ This is a documentation for the generic usage of the API and the `createPaymentM
 
 **Setup guest user permissions**
 
-**Objects**
-
-  Your guest user should have permissions to use all the Blackthorn | Payments objects.
-
-  * Click the __Public Access Settings__ button
-  * Go to __Object Settings__
-  * Grant read access to __Payment Gateways__ and to all its fields
-  * Grant read/write/edit access to __Stripe Customer__, __Payment Method__ and __Transaction__ objects and all fields.
-  * Grant access to all __Transaction__ record types.
-
-**Apex Class Access**
-
-  On the guest user profile go to __Apex Class Access__ section.
-  Click __Edit__ and grant access to the __bt_stripe.REST_API_v1__ class.
-
-  ![Apex Class Access](class_access.png)
+You can assign the correct Object, Field and Class permissions by assigning the `Blackthorn | Payments (Site Guest User)` permission set to the Site Guest User. This permission set is in Payments v5.7 and later.
 
 **Test your endpoint**
 
