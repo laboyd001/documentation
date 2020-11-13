@@ -31,6 +31,9 @@ This is a documentation for the generic usage of the API and the `createPaymentM
 
 You can assign the correct Object, Field and Class permissions by assigning the `Blackthorn | Payments (Site Guest User)` permission set to the Site Guest User. This permission set is in Payments v5.7 and later.
 
+If you want our Payments Rest API to work with the standard `Account` and `Contact` objects, you'll need to edit the Salesforce Profile of the Site guest user to give Read access to both the Account and Contact object. Once the read access has been granted, you can pass in values for the Account and/or Contact api request attributes and use our built in Account/Contact matching and creation rules.
+
+
 **Test your endpoint**
 
   Test your endpoint by 'pinging' it with a dummy request. This way you can make sure the Apex Class is available for your guest user.
