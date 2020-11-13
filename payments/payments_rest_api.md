@@ -33,7 +33,7 @@ Our `createPaymentMethod` action can be accessed through a Salesforce Site with 
 
 To give the Salesforce Site User the correct Object, Field and Class permissions, assign it the `Blackthorn | Payments (Site Guest User)` permission set. This permission set is in Payments v5.7 and later.
 
-If you want our Payments Rest API to work with the standard `Account` and `Contact` objects, you'll need to edit the Salesforce Profile of the Site guest user to give Read access to both the Account and Contact object. Once read access has been granted, you can set values for the `accountId` and `contactId` attributes in the request payload to set these values or use our built in Account/Contact matching and creation rules.
+If you want our Payments Rest API to work with the standard `Account` and `Contact` objects, you'll need to edit the Salesforce Profile of the Site guest user to give Read access to both the Account and Contact object. Once read access has been granted, you can set values for the `accountId` and `contactId` attributes in the request payload to set these values on the Payment Method and Payment Gateway Customer records or use our built in Account/Contact matching and creation rules.
 
 
 **Test your endpoint**
