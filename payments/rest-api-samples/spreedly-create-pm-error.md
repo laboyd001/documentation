@@ -14,9 +14,9 @@ This sample sets the bare minimum fields to create a card (debit or credit) Paym
  	"token":"MyqAcmraqhTGOAyVTM6qGJAjInN",
  	"transactionList":[
  					{
- 						"transactionSource":"Mobile",
- 						"amount":15.0,
- 						"transactionId":""
+      
+ 						"amount":15.0
+ 					
  					}
  				]
  }
@@ -31,10 +31,10 @@ This sample sets the bare minimum fields to create a card (debit or credit) Paym
     "paypalLinks": null,
     "paymentScheduleId": null,
     "paymentMethodList": null,
-    "errorParam": "cvc",
-    "errorMessage": "Your card's security code is incorrect.",
-    "defaultPublishableKey": "pk_publishable_key",
-    "defaultGatewayId": "a0K4T0000001NdeUAE",
+    "errorParam": null,
+    "errorMessage": "Unable to process the purchase transaction.",
+    "defaultPublishableKey": "pk_test_yugB58g3DdrCLyT2vsu4GnhZ00lCBmNYl8",
+    "defaultGatewayId": "a0M54000005RL0HEAW",
     "customerList": null,
     "clientSecret": null
 }
